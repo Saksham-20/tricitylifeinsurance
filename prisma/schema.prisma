@@ -9,14 +9,20 @@ datasource db {
   provider = "postgresql"
 }
 
+enum InterestType {
+  agent
+  bima_sakhi      @map("bima-sakhi")
+  development_officer      @map("development-officer")
+}
+
 model Lead {
-  id            String   @id @default(uuid())
+  id            String        @id @default(uuid())
   name          String
   phone         String
   city          String
   qualification String
-  interest      String
-  created_at    DateTime @default(now())
+  interest      InterestType
+  created_at    DateTime      @default(now())
 
   @@map("leads")
 }

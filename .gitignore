@@ -40,4 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# playwright tests
+/tests/
+/playwright-report/
+test-output.log
+playwright.config.ts
+
 /app/generated/prisma

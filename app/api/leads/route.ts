@@ -1,23 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
+import { InterestType } from '@prisma/client';
 
-const normalizeInterest = (interest: string): 'agent' | 'bima-sakhi' | 'development-officer' => {
-  const value = interest.trim().toLowerCase();
-
-  if (value === 'lic agent' || value === 'agent') {
-    return 'agent';
-  }
-
-  if (value === 'bima sakhi' || value === 'bima-sakhi') {
-    return 'bima-sakhi';
-  }
-
-  if (value === 'development officer' || value === 'development-officer') {
-    return 'development-officer';
-  }
-
-  return value as 'agent' | 'bima-sakhi' | 'development-officer';
+const interestMap: Record<string, InterestType> = {
+  'agent': InterestType.agent,
+  'lic agent': InterestType.agent,
+  'bima-sakhi': InterestType.bima_sakhi,
+  'bima sakhi': InterestType.bima_sakhi,
+  'development-officer': InterestType.development_officer,
+  'development officer': InterestType.development_officer,
 };
 
 const LeadSchema = z.object({
@@ -31,14 +23,12 @@ const LeadSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-
-    const payload = {
-      ...body,
-      interest: normalizeInterest(String(body?.interest ?? '')),
-    };
     
     // Validate input
-    const validatedData = LeadSchema.parse(payload);
+    const validatedData = LeadSchema.parse(body);
+    
+    // Map string interest to Prisma enum
+    const interestType = interestMap[validatedData.interest.toLowerCase()] || InterestType.agent;
     
     // Insert into database
     const lead = await prisma.lead.create({
@@ -47,7 +37,7 @@ export async function POST(request: NextRequest) {
         phone: validatedData.phone,
         city: validatedData.city,
         qualification: validatedData.qualification,
-        interest: validatedData.interest,
+        interest: interestType,
       },
     });
     
