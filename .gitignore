@@ -33,6 +33,11 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Hostinger/API configuration with sensitive tokens
+hostinger.json
+.cline_mcp_config.json
+mcp.json
+
 # vercel
 .vercel
 
