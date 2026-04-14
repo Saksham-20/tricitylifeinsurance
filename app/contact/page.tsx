@@ -15,7 +15,7 @@ export default function ContactPage() {
       <div className="mx-auto max-w-7xl grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
         <section className="rounded-[2rem] border border-primary/15 bg-gradient-to-br from-[#f8fbff] to-white p-7 md:p-10">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Contact Desk</p>
-          <h1 className="mt-4 font-headline text-4xl font-extrabold tracking-tight text-on-surface md:text-5xl">Join Tricity's Top Agents</h1>
+          <h1 className="mt-4 font-headline text-4xl font-extrabold tracking-tight text-on-surface md:text-5xl">Join Tricity&apos;s Top Agents</h1>
           <p className="mt-4 text-base leading-relaxed text-on-surface-variant md:text-lg">
             Ready to start your LIC career? Connect with our team to discuss recruitment, earnings potential, and your first steps to unlimited income.
           </p>

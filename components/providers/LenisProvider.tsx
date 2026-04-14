@@ -2,9 +2,7 @@
 
 import { ReactNode } from 'react';
 import { useEffect } from 'react';
-
-// Dynamic import to avoid SSR issues
-const Lenis = require('lenis').default;
+import Lenis from 'lenis';
 
 export default function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {

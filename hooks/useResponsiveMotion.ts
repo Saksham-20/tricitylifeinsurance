@@ -4,40 +4,30 @@ import { useEffect, useState } from 'react';
 
 type MotionIntensity = 'full' | 'reduced' | 'minimal';
 
+const getMotionIntensity = (): MotionIntensity => {
+  if (typeof window === 'undefined') {
+    return 'full';
+  }
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    return 'minimal';
+  }
+
+  return window.innerWidth < 768 ? 'reduced' : 'full';
+};
+
 export const useResponsiveMotion = (): MotionIntensity => {
-  const [intensity, setIntensity] = useState<MotionIntensity>('full');
+  const [intensity, setIntensity] = useState<MotionIntensity>(getMotionIntensity);
 
   useEffect(() => {
-    // Check if prefers-reduced-motion is set
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-      setIntensity('minimal');
-      return;
-    }
-
-    // Check device type via viewport width
-    const width = window.innerWidth;
-    if (width < 768) {
-      // Mobile: reduced animations
-      setIntensity('reduced');
-    } else {
-      // Desktop: full animations
-      setIntensity('full');
-    }
-
-    // Listen for resize and reduced-motion changes
     const handleResize = () => {
-      const w = window.innerWidth;
-      if (w < 768) {
-        setIntensity('reduced');
-      } else {
-        setIntensity('full');
-      }
+      setIntensity(getMotionIntensity());
     };
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleMotionChange = (e: MediaQueryListEvent) => {
-      setIntensity(e.matches ? 'minimal' : intensity);
+    const handleMotionChange = () => {
+      setIntensity(getMotionIntensity());
     };
 
     window.addEventListener('resize', handleResize);
@@ -47,7 +37,7 @@ export const useResponsiveMotion = (): MotionIntensity => {
       window.removeEventListener('resize', handleResize);
       mediaQuery.removeEventListener('change', handleMotionChange);
     };
-  }, [intensity]);
+  }, []);
 
   return intensity;
 };
