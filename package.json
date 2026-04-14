@@ -1,6 +1,7 @@
 {
-  "name": "lic-recruitment",
-  "version": "0.1.0",
+  "name": "tricitylifeinsurance",
+  "version": "1.0.0",
+  "description": "Tricity Life Insurance Recruitment Portal",
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS=\"--max-old-space-size=2048\" next dev",
