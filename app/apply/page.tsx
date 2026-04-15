@@ -226,7 +226,7 @@ export default function ApplyPage() {
 
               <Image
                 src="/images/mentor/mentor-portrait-2.jpg"
-                alt="Subhash Chand Panjla — Your Personal Mentor for Career Guidance"
+                alt="Subhash  Panjla — Your Personal Mentor for Career Guidance"
                 width={700}
                 height={460}
                 className="mt-8 h-48 md:h-52 w-full rounded-2xl object-cover"
@@ -234,7 +234,7 @@ export default function ApplyPage() {
               />
               <div className="mt-4 rounded-2xl bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 p-4 text-center">
                 <p className="text-xs font-bold uppercase tracking-widest text-primary">Application Reviewed By</p>
-                <p className="font-headline text-lg font-bold text-on-surface mt-2">Subhash Chand Panjla</p>
+                <p className="font-headline text-lg font-bold text-on-surface mt-2">Subhash  Panjla</p>
                 <p className="text-sm text-on-surface-variant mt-1">Founder & Lead Mentor</p>
               </div>
             </div>

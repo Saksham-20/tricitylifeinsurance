@@ -9,14 +9,6 @@ import { GraduationCap, Clock, Heart } from 'lucide-react';
 
 const pathways = [
   {
-    title: 'Fresh Graduates',
-    copy: 'Structured onboarding with practical scripts, guided client meetings, and IRDAI certification support.',
-    icon: GraduationCap,
-    iconBg: 'bg-blue-500/10',
-    iconColor: 'text-blue-600',
-    barColor: 'bg-blue-500',
-  },
-  {
     title: 'Working Professionals',
     copy: 'Build a second income with flexible hours, digital support tools, and ongoing mentorship.',
     icon: Clock,
@@ -26,7 +18,7 @@ const pathways = [
   },
   {
     title: 'Homemakers (Bima Sakhi)',
-    copy: 'Grow an independent career with family-compatible workflows, coaching, and full training.',
+    copy: 'Exclusively for Women earning independent income with flexible hours and comprehensive support. Min qualification: 10th onwards.',
     icon: Heart,
     iconBg: 'bg-amber-500/10',
     iconColor: 'text-amber-600',

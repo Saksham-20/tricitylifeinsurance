@@ -57,12 +57,12 @@ export default function BimaSakhiPage() {
               </p>
             </div>
             <Image
-              src="/images/events/event-award-2.jpg"
+              src="/images/events/event-award-4.jpg"
               alt="Professional recognition moment"
               width={900}
               height={600}
               priority
-              className="h-64 w-full rounded-[1.75rem] object-cover md:h-80"
+              className="h-64 md:h-80 w-full rounded-[1.75rem] object-cover"
               sizes="(max-width: 1024px) 100vw, 45vw"
             />
           </div>
@@ -90,15 +90,15 @@ export default function BimaSakhiPage() {
 
             <div className="mt-6 rounded-2xl bg-gradient-to-r from-amber-50 to-white border border-amber-200 p-4 text-center">
               <p className="text-xs font-bold uppercase tracking-widest text-amber-600 mb-2">Mentor Support</p>
-              <p className="font-headline text-sm font-bold text-on-surface">Led by Subhash Chand Panjla</p>
+              <p className="font-headline text-sm font-bold text-on-surface">Led by Subhash  Panjla</p>
               <p className="text-xs text-on-surface-variant mt-1">28+ Years LIC Experience | Women Career Specialist</p>
             </div>
           </article>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <Image src="/images/events/event-award-4.jpg" alt="Advisor recognition moment" width={700} height={520} className="h-48 w-full rounded-3xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, 25vw" />
-            <Image src="/images/events/event-award-5.jpg" alt="Mentor and advisor with achievement kit" width={700} height={520} className="h-48 w-full rounded-3xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, 25vw" />
-            <Image src="/images/events/event-audience.jpg" alt="Audience listening in seminar" width={700} height={520} className="h-48 w-full rounded-3xl object-cover md:col-span-2 md:h-64" sizes="(max-width: 768px) 100vw, 50vw" />
+            <Image src="/images/events/event-award-1.jpg" alt="Advisor recognition moment" width={700} height={520} className="h-52 w-full rounded-3xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, 25vw" />
+            <Image src="/images/events/event-award-2.jpg" alt="Mentor and advisor with achievement kit" width={700} height={520} className="h-52 w-full rounded-3xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, 25vw" />
+            <Image src="/images/team/team-group-office.jpg" alt="Team celebrating achievements" width={700} height={520} className="h-52 w-full rounded-3xl object-cover md:col-span-2 md:h-64" sizes="(max-width: 768px) 100vw, 50vw" />
           </div>
         </div>
       </section>

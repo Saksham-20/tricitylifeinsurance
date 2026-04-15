@@ -2,9 +2,8 @@
 
 import HeroSection from '@/components/sections/HeroSection';
 import StatsSection from '@/components/sections/StatsSection';
-import PathwaySection from '@/components/sections/PathwaySection';
 import AchievementPathSection from '@/components/sections/AchievementPathSection';
-import BenefitsSection from '@/components/sections/BenefitsSection';
+import WhatYouGetSection from '@/components/sections/WhatYouGetSection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
 
 export default function Home() {
@@ -13,8 +12,7 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
       <AchievementPathSection />
-      <PathwaySection />
-      <BenefitsSection />
+      <WhatYouGetSection />
       <TestimonialsSection />
     </main>
   );

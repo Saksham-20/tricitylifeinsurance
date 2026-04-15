@@ -85,7 +85,6 @@ export default function HeroSection() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="hidden lg:block"
             >
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
                 <Image
@@ -101,7 +100,7 @@ export default function HeroSection() {
 
                 {/* Floating badge */}
                 <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/90 backdrop-blur-md p-4 shadow-elevation-2 border border-white/50">
-                  <p className="text-xs font-bold uppercase tracking-widest text-primary">Subhash Chand Panjla</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-primary">Subhash  Panjla</p>
                   <p className="text-sm font-semibold text-on-surface mt-1">Founder & Lead Mentor</p>
                   <p className="text-xs text-on-surface-variant mt-2">25+ Years Experience • 300+ Advisors Trained</p>
                 </div>

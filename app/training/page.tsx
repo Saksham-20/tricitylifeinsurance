@@ -48,7 +48,7 @@ export default function TrainingPage() {
                   <span className="text-sm font-bold text-primary">SC</span>
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-on-surface">Led by Subhash Chand Panjla</p>
+                  <p className="text-sm font-bold text-on-surface">Led by Subhash  Panjla</p>
                   <p className="text-xs text-on-surface-variant">25+ Years Industry Expert</p>
                 </div>
               </div>
@@ -59,7 +59,7 @@ export default function TrainingPage() {
               width={800}
               height={520}
               priority
-              className="h-60 w-full rounded-[1.75rem] object-cover md:h-72"
+              className="h-64 md:h-80 w-full rounded-[1.75rem] object-cover"
               sizes="(max-width: 1024px) 100vw, 40vw"
             />
           </div>
@@ -82,10 +82,10 @@ export default function TrainingPage() {
       </section>
 
       <section className="mt-14 px-6 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
-          <Image src="/images/events/event-award-1.jpg" alt="Professional recognition ceremony" width={700} height={480} className="h-52 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-          <Image src="/images/events/event-award-3.jpg" alt="Professional certification recognition" width={700} height={480} className="h-52 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-          <Image src="/images/events/event-award-5.jpg" alt="Mentor with advisor during recognition" width={700} height={480} className="h-52 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+        <div className="mx-auto grid max-w-7xl gap-4 grid-cols-1 md:grid-cols-3">
+          <Image src="/images/events/event-award-2.jpg" alt="Professional recognition ceremony" width={700} height={480} className="h-56 md:h-72 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+          <Image src="/images/events/event-award-3.jpg" alt="Professional certification recognition" width={700} height={480} className="h-56 md:h-72 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+          <Image src="/images/events/event-award-5.jpg" alt="Mentor with advisor during recognition" width={700} height={480} className="h-56 md:h-72 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
         </div>
       </section>
 

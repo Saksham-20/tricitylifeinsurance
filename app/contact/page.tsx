@@ -27,11 +27,11 @@ export default function ContactPage() {
                 alt="Subhash Panjla profile photo"
                 width={110}
                 height={110}
-                className="h-24 w-24 rounded-2xl object-cover"
+                className="h-24 w-24 sm:h-28 sm:w-28 lg:h-32 lg:w-32 rounded-2xl object-cover"
                 sizes="96px"
               />
               <div>
-                <p className="font-headline text-2xl font-bold text-on-surface">Subhash Chand Panjla</p>
+                <p className="font-headline text-2xl font-bold text-on-surface">Subhash  Panjla</p>
                 <p className="text-sm text-primary font-semibold">Founder & Lead Mentor</p>
                 <p className="text-xs text-on-surface-variant mt-0.5">25+ Years LIC Advisory Experience</p>
               </div>
@@ -83,9 +83,9 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="mt-8 grid grid-cols-2 gap-4">
-            <Image src="/images/events/event-award-1.jpg" alt="Team interaction moment" width={620} height={460} className="h-40 w-full rounded-2xl object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
-            <Image src="/images/events/event-audience.jpg" alt="Team group at event" width={620} height={460} className="h-40 w-full rounded-2xl object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Image src="/images/events/event-award-1.jpg" alt="Team interaction moment" width={620} height={460} className="h-44 w-full rounded-2xl object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
+            <Image src="/images/events/event-award-3.jpg" alt="Team group at event" width={620} height={460} className="h-44 w-full rounded-2xl object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
           </div>
         </section>
       </div>
