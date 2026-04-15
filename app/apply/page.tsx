@@ -226,7 +226,7 @@ export default function ApplyPage() {
 
               <Image
                 src="/images/mentor/mentor-portrait-2.jpg"
-                alt="Subhash  Panjla — Your Personal Mentor for Career Guidance"
+                alt="Subhash Panjla — Your Personal Mentor for Career Guidance"
                 width={700}
                 height={460}
                 className="mt-8 h-48 md:h-52 w-full rounded-2xl object-cover"
