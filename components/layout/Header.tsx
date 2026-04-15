@@ -33,7 +33,7 @@ export default function Header() {
       cta_type: 'whatsapp',
       page: pathname,
     });
-    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+919876543210';
+    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
     const message = encodeURIComponent('Hi, I would like to know more about LIC career opportunities.');
     window.open(`https://wa.me/${whatsappNumber.replace('+', '')}?text=${message}`, '_blank');
   };

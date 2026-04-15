@@ -30,14 +30,14 @@ const benefits = [
   {
     icon: Handshake,
     title: 'Lifetime Mentorship',
-    description: 'Get coached by mentors with 25+ years of experience. Ongoing support for your entire career.',
+    description: 'Get coached by mentors with 28+ years of experience. Ongoing support for your entire career with advancement towards club tiers.',
     iconBg: 'bg-purple-500/10',
     iconColor: 'text-purple-600',
   },
   {
     icon: Shield,
-    title: 'Job Security & Growth',
-    description: 'Stable income with LIC backing. Clear promotion path from Agent to Development Officer.',
+    title: 'Career Growth Tiers',
+    description: 'Advance from Agent to Distinguished Club, Branch Manager & beyond. Housing loans, bonuses, and premium benefits await.',
     iconBg: 'bg-amber-500/10',
     iconColor: 'text-amber-600',
   },

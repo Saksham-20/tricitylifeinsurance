@@ -10,7 +10,7 @@ type FormData = {
   phone: string;
   city: string;
   qualification: string;
-  interest: 'agent' | 'bima-sakhi' | 'development-officer' | '';
+  interest: 'agent' | 'bima-sakhi' | '';
 };
 
 type Errors = Partial<Record<keyof FormData, string>>;
@@ -26,7 +26,6 @@ const initialData: FormData = {
 const interestLabelMap: Record<Exclude<FormData['interest'], ''>, string> = {
   agent: 'LIC Agent',
   'bima-sakhi': 'Bima Sakhi',
-  'development-officer': 'Development Officer',
 };
 
 const steps = [
@@ -134,7 +133,7 @@ export default function ApplyPage() {
       location: 'apply_success',
       cta_type: 'whatsapp',
     });
-    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+919876543210';
+    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
     const message = encodeURIComponent(
       `Hi, I submitted my application (${leadId || 'pending ID'}) for ${formData.interest ? interestLabelMap[formData.interest] : 'LIC opportunity'}. Please guide me for next steps.`
     );
@@ -373,7 +372,6 @@ export default function ApplyPage() {
                         <option value="">Select your preferred role</option>
                         <option value="agent">LIC Agent</option>
                         <option value="bima-sakhi">Bima Sakhi</option>
-                        <option value="development-officer">Development Officer</option>
                       </select>
                       {errors.interest ? <p className="mt-2 text-sm text-error">{errors.interest}</p> : null}
                     </div>

@@ -81,7 +81,7 @@ Value: postgresql://...your-connection-string...
 
 ```
 NEXT_PUBLIC_WHATSAPP_NUMBER
-Value: +919876543210
+Value: +918872364673
 ```
 
 ```

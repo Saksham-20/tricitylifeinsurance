@@ -3,7 +3,7 @@
 import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
 
 const stats = [
-  { number: '25+', label: 'Years of Mentorship' },
+  { number: '28+', label: 'Years of Mentorship' },
   { number: '300+', label: 'Advisors Trained' },
   { number: '60+', label: 'Active Team Strength' },
   { number: '6', label: 'Days of Weekly Support' },

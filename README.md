@@ -52,7 +52,7 @@ Edit `.env`:
 DATABASE_URL="postgresql://username:password@localhost:5432/lic_recruitment?schema=public"
 
 # WhatsApp Number (with country code)
-NEXT_PUBLIC_WHATSAPP_NUMBER="+919876543210"
+NEXT_PUBLIC_WHATSAPP_NUMBER="+918872364673"
 
 # Google Analytics (optional)
 NEXT_PUBLIC_GA_ID="G-XXXXXXXXXX"
@@ -137,7 +137,7 @@ Submit a new lead application.
 ```json
 {
   "name": "John Doe",
-  "phone": "9876543210",
+  "phone": "8872364673",
   "city": "Chandigarh",
   "qualification": "Graduate",
   "interest": "agent" // or "bima-sakhi"

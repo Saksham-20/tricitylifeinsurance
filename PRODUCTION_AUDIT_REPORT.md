@@ -69,7 +69,7 @@ All critical production requirements have been verified and fixed. The applicati
   ```
   DATABASE_URL="postgresql://localhost:5432/lic_recruitment"
   NEXT_PUBLIC_GA_ID="G-XXXXXXXXXX"
-  NEXT_PUBLIC_WHATSAPP_NUMBER="+919876543210"
+  NEXT_PUBLIC_WHATSAPP_NUMBER="+918872364673"
   NODE_ENV="development"
   ```
 - ⚠️ NOTE: GA_ID placeholder - needs real Google Analytics ID before deployment

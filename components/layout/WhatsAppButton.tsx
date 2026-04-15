@@ -3,7 +3,7 @@
 import { trackEvent } from '@/lib/analytics';
 
 export default function WhatsAppButton() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+919876543210';
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
   const message = encodeURIComponent('Hi, I want to know more about LIC Agent opportunities.');
   
   const handleClick = () => {

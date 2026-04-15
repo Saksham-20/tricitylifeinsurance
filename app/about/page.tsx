@@ -20,8 +20,8 @@ export default function AboutPage() {
               Built on Trust, Trained for Professional Excellence.
             </h1>
             <p className="text-base leading-relaxed text-on-surface-variant md:text-lg">
-              This platform is led by Subhash Panjla, with over 25 years of practical advisory experience and a long-standing
-              focus on disciplined, ethical career growth.
+              This platform is led by Subhash Panjla, with over 28 years of practical advisory experience and a long-standing
+              focus on disciplined, ethical career growth. As a Development Officer with LIC since 1997, he has personally trained 300+ insurance professionals and built a thriving team of 60+ active members across Chandigarh Tricity.
             </p>
 
             <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white/70 backdrop-blur-sm p-4 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
@@ -36,8 +36,8 @@ export default function AboutPage() {
               />
               <div className="mt-4 text-center space-y-1">
                 <p className="font-headline text-lg font-bold text-on-surface">Subhash Chand Panjla</p>
-                <p className="text-sm text-primary font-semibold">Founder & Lead Mentor</p>
-                <p className="text-xs text-on-surface-variant">25+ Years LIC Advisory Experience</p>
+                <p className="text-sm text-primary font-semibold">Development Officer & Lead Mentor</p>
+                <p className="text-xs text-on-surface-variant">28+ Years LIC Advisory Experience (Since 1997)</p>
               </div>
             </div>
           </div>
@@ -85,6 +85,54 @@ export default function AboutPage() {
                   className="h-36 w-full rounded-xl object-cover"
                   sizes="(max-width: 768px) 50vw, 20vw"
                 />
+              </div>
+            </article>
+
+            <article className="rounded-[2rem] border border-primary/20 bg-gradient-to-br from-blue-50 to-indigo-50 p-7 md:p-9">
+              <h3 className="font-headline text-3xl font-bold text-on-surface">LIC Club Membership Progression</h3>
+              <p className="mt-3 text-on-surface-variant">
+                As you grow with us, unlock exclusive tiers and premium benefits:
+              </p>
+              <div className="mt-6 space-y-3">
+                <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
+                  <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">1</div>
+                  <div>
+                    <p className="font-semibold text-on-surface">Distinguished Club</p>
+                    <p className="text-xs text-on-surface-variant">Entry-level achievement milestone</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
+                  <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">2</div>
+                  <div>
+                    <p className="font-semibold text-on-surface">Branch Manager Club</p>
+                    <p className="text-xs text-on-surface-variant">Housing loan @5.5%, office allowance, foreign tours</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
+                  <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">3</div>
+                  <div>
+                    <p className="font-semibold text-on-surface">Divisional Manager Club</p>
+                    <p className="text-xs text-on-surface-variant">Enhanced commission, recognition, leadership opportunities</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
+                  <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">4</div>
+                  <div>
+                    <p className="font-semibold text-on-surface">Zonal Manager Club</p>
+                    <p className="text-xs text-on-surface-variant">Premium benefits, hereditary commission, gratuity</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
+                  <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">5</div>
+                  <div>
+                    <p className="font-semibold text-on-surface">Chairman's Club</p>
+                    <p className="text-xs text-on-surface-variant">Highest tier with maximum benefits and recognition</p>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 p-4 rounded-xl bg-white border-l-4 border-primary">
+                <p className="text-xs text-primary font-bold uppercase tracking-widest mb-1">Our Motto</p>
+                <p className="font-headline text-xl font-bold text-on-surface">"Performance Today… Prestige Tomorrow"</p>
               </div>
             </article>
           </div>

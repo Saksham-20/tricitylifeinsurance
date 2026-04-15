@@ -69,7 +69,7 @@
    ```bash
    # Edit .env with your PostgreSQL credentials
    DATABASE_URL="postgresql://user:password@localhost:5432/lic_recruitment"
-   NEXT_PUBLIC_WHATSAPP_NUMBER="+919876543210"
+   NEXT_PUBLIC_WHATSAPP_NUMBER="+918872364673"
    ```
 
 2. **Run Database Migrations**

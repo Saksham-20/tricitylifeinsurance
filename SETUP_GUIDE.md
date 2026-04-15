@@ -20,7 +20,7 @@ Edit `.env` file with your PostgreSQL credentials:
 
 ```env
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/lic_recruitment?schema=public"
-NEXT_PUBLIC_WHATSAPP_NUMBER="+919876543210"
+NEXT_PUBLIC_WHATSAPP_NUMBER="+918872364673"
 ```
 
 ### 3. Run Migrations

@@ -54,11 +54,12 @@ export default function Footer() {
             <div className="space-y-3">
               <div>
                 <p className="text-sm font-semibold text-white/80">Phone</p>
-                <p className="text-sm text-white/50">+91 98765 43210</p>
+                <p className="text-sm text-white/50">+91 88723 64673</p>
               </div>
               <div>
-                <p className="text-sm font-semibold text-white/80">Location</p>
-                <p className="text-sm text-white/50">Chandigarh, India</p>
+                <p className="text-sm font-semibold text-white/80">Locations</p>
+                <p className="text-sm text-white/50">Chandigarh, Sector 7</p>
+                <p className="text-sm text-white/50">Mohali, Sector 68</p>
               </div>
               <div>
                 <p className="text-sm font-semibold text-white/80">Office Hours</p>

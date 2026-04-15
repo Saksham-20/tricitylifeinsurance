@@ -5,7 +5,7 @@ import { Phone, MapPin, Clock, ArrowRight } from 'lucide-react';
 
 export default function ContactPage() {
   const handleWhatsAppClick = () => {
-    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+919876543210';
+    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
     const message = encodeURIComponent('Hi, I want to explore LIC agent recruitment opportunities in Tricity. Can you share more details?');
     window.open(`https://wa.me/${whatsappNumber.replace('+', '')}?text=${message}`, '_blank');
   };
@@ -40,10 +40,10 @@ export default function ContactPage() {
 
           <button
             onClick={handleWhatsAppClick}
-            className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-[#25D366] px-7 py-4 font-headline text-lg font-bold text-white shadow-[0_4px_20px_rgba(37,211,102,0.3)] hover:shadow-[0_6px_30px_rgba(37,211,102,0.45)] transition-all duration-200"
+            className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-[#25D366] px-8 py-5 md:px-7 md:py-4 font-headline text-xl md:text-lg font-bold text-white shadow-[0_4px_20px_rgba(37,211,102,0.3)] hover:shadow-[0_6px_30px_rgba(37,211,102,0.45)] transition-all duration-200"
           >
             Contact on WhatsApp
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-5 h-5 md:w-4 md:h-4" />
           </button>
         </section>
 
@@ -57,7 +57,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <p className="font-headline text-xl font-bold text-on-surface">Phone</p>
-                <p className="text-on-surface-variant">+91 98765 43210</p>
+                <p className="text-on-surface-variant">+91 88723 64673</p>
               </div>
             </div>
 
@@ -66,8 +66,9 @@ export default function ContactPage() {
                 <MapPin className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <p className="font-headline text-xl font-bold text-on-surface">Location</p>
-                <p className="text-on-surface-variant">Chandigarh, India</p>
+                <p className="font-headline text-xl font-bold text-on-surface">Locations</p>
+                <p className="text-on-surface-variant">Chandigarh, Sector 7</p>
+                <p className="text-on-surface-variant">Mohali, Sector 68</p>
               </div>
             </div>
 
