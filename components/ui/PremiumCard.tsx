@@ -20,7 +20,14 @@ export default function PremiumCard({
   className = '',
   onClick,
 }: PremiumCardProps) {
-  const baseClasses = `rounded-2xl transition-all duration-200 ${border ? 'border border-primary/10' : ''} shadow-${shadow}`;
+  const shadowClasses = {
+    'elevation-1': 'shadow-elevation-1',
+    'elevation-2': 'shadow-elevation-2',
+    'elevation-3': 'shadow-elevation-3',
+    'elevation-4': 'shadow-elevation-4',
+  };
+
+  const baseClasses = `rounded-2xl transition-all duration-200 ${border ? 'border border-primary/10' : ''} ${shadowClasses[shadow]}`;
 
   return (
     <motion.div

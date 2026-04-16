@@ -30,17 +30,17 @@ export default function PremiumButton({
   disabled = false,
 }: PremiumButtonProps) {
   const baseClasses =
-    'relative inline-flex items-center justify-center font-headline font-bold rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group';
+    'group relative inline-flex items-center justify-center rounded-2xl font-headline font-bold transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50';
 
   const variantClasses = {
-    primary: 'bg-gradient-to-r from-primary to-[#1a6fff] text-white shadow-[0_6px_24px_rgba(2,83,205,0.35)] hover:shadow-[0_8px_36px_rgba(2,83,205,0.5)] hover:brightness-105',
-    secondary: 'bg-primary/5 text-primary border border-primary/20 hover:bg-primary/10 hover:border-primary/30',
+    primary: 'bg-gradient-to-r from-primary to-[#1a6fff] text-white shadow-[0_14px_30px_rgba(2,83,205,0.32)] hover:shadow-[0_18px_42px_rgba(2,83,205,0.42)] hover:brightness-105',
+    secondary: 'border border-primary/20 bg-primary/[0.05] text-primary hover:border-primary/30 hover:bg-primary/[0.1]',
   };
 
   const sizeClasses = {
     sm: 'px-5 py-2.5 text-sm gap-2',
-    md: 'px-10 py-4.5 text-base md:text-lg gap-2.5 font-bold',
-    lg: 'px-14 py-6 text-lg md:text-xl gap-3 font-bold',
+    md: 'gap-2.5 px-8 py-4 text-base font-bold md:text-lg',
+    lg: 'gap-3 px-10 py-[1.125rem] text-lg font-bold md:px-14 md:py-5 md:text-xl',
   };
 
   return (

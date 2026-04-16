@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import { Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import BottomNav from "@/components/layout/BottomNav";
@@ -12,12 +12,14 @@ const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const sora = Sora({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta",
+  variable: "--font-sora",
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -32,8 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${manrope.variable} ${plusJakarta.variable} min-h-full flex flex-col`}>
+    <html lang="en" className={`${manrope.variable} ${sora.variable}`}>
+      <body className="min-h-full flex flex-col overflow-x-hidden">
         <LenisProvider>
           <GoogleAnalytics />
           <Header />

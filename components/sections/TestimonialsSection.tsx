@@ -3,11 +3,12 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
+import SectionHeading from '@/components/ui/SectionHeading';
 import { containerVariants, containerVariantsMobile, itemVariants } from '@/lib/animationVariants';
 import { useResponsiveMotion } from '@/hooks/useResponsiveMotion';
 import { trackEvent } from '@/lib/analytics';
 import PremiumButton from '@/components/ui/PremiumButton';
-import { Quote, Star } from 'lucide-react';
+import { Quote, Sparkles, Star } from 'lucide-react';
 
 const testimonials = [
   {
@@ -26,7 +27,7 @@ const testimonials = [
     tenure: '2 years with team',
     rating: 5,
     initials: 'RV',
-    color: 'from-violet-500 to-violet-600',
+    color: 'from-emerald-500 to-emerald-600',
   },
   {
     quote: "The Bima Sakhi program gave me confidence and financial independence. The coaching is practical, supportive, and designed for our schedules.",
@@ -44,26 +45,22 @@ export default function TestimonialsSection() {
   const containerVar = intensity === 'full' ? containerVariants : containerVariantsMobile;
 
   return (
-    <section className="py-16 md:py-24 px-6 md:px-10">
+    <section className="page-section">
       <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
         <FadeInOnScroll className="mb-10 md:mb-14 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-3">Testimonials</p>
-          <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface mb-4">
-            What Our Advisors Say
-          </h2>
-          <p className="text-base md:text-lg text-on-surface-variant max-w-2xl mx-auto">
-            Hear from professionals who transformed their careers through our mentorship program.
-          </p>
+          <SectionHeading
+            eyebrow="Testimonials"
+            title="What Our Advisors Say"
+            description="Real experiences from professionals who grew with structured mentoring, flexibility, and day-to-day support."
+          />
         </FadeInOnScroll>
 
-        {/* Testimonials Grid */}
         <motion.div
           variants={containerVar}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="grid gap-6 md:grid-cols-3 mb-16 md:mb-20"
+          className="mb-16 grid gap-6 md:mb-20 md:grid-cols-3"
         >
           {testimonials.map((testimonial) => (
             <motion.div
@@ -71,26 +68,28 @@ export default function TestimonialsSection() {
               variants={itemVariants}
               className="group"
             >
-              <div className="h-full rounded-2xl border border-white/60 bg-white/80 backdrop-blur-sm p-8 shadow-elevation-1 hover:shadow-elevation-3 transition-all duration-300 flex flex-col">
-                {/* Rating */}
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
-                  ))}
+              <div className="surface-panel flex h-full flex-col rounded-[1.75rem] p-8 transition-all duration-300 hover:-translate-y-1">
+                <div className="mb-5 flex items-center justify-between">
+                  <div className="flex gap-1">
+                    {Array.from({ length: testimonial.rating }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <Quote className="h-4 w-4" />
+                  </div>
                 </div>
 
-                {/* Quote text */}
-                <p className="text-base leading-relaxed text-on-surface-variant flex-1 mb-6">
+                <p className="mb-6 flex-1 text-base leading-relaxed text-on-surface-variant">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
 
-                {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t border-surface-variant/30">
-                  <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${testimonial.color} flex items-center justify-center text-white text-sm font-bold`}>
+                <div className="flex items-center gap-3 border-t border-surface-variant/30 pt-4">
+                  <div className={`flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br ${testimonial.color} text-sm font-bold text-white`}>
                     {testimonial.initials}
                   </div>
                   <div>
-                    <p className="font-headline font-bold text-on-surface text-sm">{testimonial.name}</p>
+                    <p className="font-headline text-sm font-bold text-on-surface">{testimonial.name}</p>
                     <p className="text-xs text-on-surface-variant">{testimonial.role} · {testimonial.tenure}</p>
                   </div>
                 </div>
@@ -99,32 +98,41 @@ export default function TestimonialsSection() {
           ))}
         </motion.div>
 
-        {/* Final CTA — consolidated */}
         <FadeInOnScroll>
-          <div className="rounded-3xl bg-gradient-to-br from-[#0f1829] via-[#162040] to-[#1a2744] p-10 md:p-16 text-center relative overflow-hidden">
-            {/* Subtle decorative element */}
-            <div className="absolute top-0 right-0 w-60 h-60 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="surface-panel-strong relative overflow-hidden rounded-[2.5rem] p-8 text-center md:p-14">
+            <div className="absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_top_right,rgba(92,139,255,0.18),transparent_55%)]" />
 
-            <div className="relative">
-              <h3 className="font-headline text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
-                Ready to Start Your Journey?
+            <div className="relative mx-auto max-w-3xl">
+              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-secondary-container">
+                <Sparkles className="h-6 w-6" />
+              </div>
+              <h3 className="font-headline text-2xl font-bold text-white md:text-4xl">
+                Ready to start your journey with a mentor-led team?
               </h3>
-              <p className="text-base text-white/60 max-w-xl mx-auto mb-8">
-                Apply today and take the first step towards a rewarding career in life insurance. Our team will guide you through every step.
+              <p className="mx-auto mb-8 mt-4 max-w-2xl text-base leading-relaxed text-white/68">
+                Apply today and take the first step toward a rewarding career in life insurance. We&apos;ll guide you through training, expectations, and the right pathway for your goals.
               </p>
-              <Link
-                href="/apply"
-                onClick={() =>
-                  trackEvent('cta_click', {
-                    location: 'final_cta',
-                    cta_type: 'apply',
-                  })
-                }
-              >
-                <PremiumButton variant="primary" size="lg" showArrow>
-                  Apply Now
-                </PremiumButton>
-              </Link>
+              <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Link
+                  href="/apply"
+                  onClick={() =>
+                    trackEvent('cta_click', {
+                      location: 'final_cta',
+                      cta_type: 'apply',
+                    })
+                  }
+                >
+                  <PremiumButton variant="primary" size="lg" showArrow>
+                    Apply Now
+                  </PremiumButton>
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] px-6 py-4 font-headline text-base font-bold text-white transition-colors hover:bg-white/10"
+                >
+                  Contact the Team
+                </Link>
+              </div>
             </div>
           </div>
         </FadeInOnScroll>

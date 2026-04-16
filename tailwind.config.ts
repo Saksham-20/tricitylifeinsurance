@@ -71,7 +71,7 @@ const config: Config = {
         full: "9999px",
       },
       fontFamily: {
-        headline: ["var(--font-plus-jakarta)", "sans-serif"],
+        headline: ["var(--font-sora)", "sans-serif"],
         body: ["var(--font-manrope)", "sans-serif"],
         label: ["var(--font-manrope)", "sans-serif"],
       },

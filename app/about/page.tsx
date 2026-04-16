@@ -78,8 +78,8 @@ export default function AboutPage() {
                   sizes="(max-width: 768px) 50vw, 20vw"
                 />
                 <Image
-                  src="/images/events/event-award-1.jpg"
-                  alt="Professional team achievement moment"
+                  src="/images/events/about-team-group.jpg"
+                  alt="Team members in professional achievement celebration"
                   width={420}
                   height={420}
                   className="h-48 md:h-56 w-full rounded-xl object-cover"
@@ -125,14 +125,14 @@ export default function AboutPage() {
                 <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
                   <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">5</div>
                   <div>
-                    <p className="font-semibold text-on-surface">Chairman's Club</p>
+                    <p className="font-semibold text-on-surface">Chairman&apos;s Club</p>
                     <p className="text-xs text-on-surface-variant">Highest tier with maximum benefits and recognition</p>
                   </div>
                 </div>
               </div>
               <div className="mt-6 p-4 rounded-xl bg-white border-l-4 border-primary">
                 <p className="text-xs text-primary font-bold uppercase tracking-widest mb-1">Our Motto</p>
-                <p className="font-headline text-xl font-bold text-on-surface">"Performance Today… Prestige Tomorrow"</p>
+                <p className="font-headline text-xl font-bold text-on-surface">&ldquo;Performance Today… Prestige Tomorrow&rdquo;</p>
               </div>
             </article>
           </div>

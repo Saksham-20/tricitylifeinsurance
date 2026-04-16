@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
-import { ArrowRight, Award, TrendingUp, Crown } from 'lucide-react';
+import SectionHeading from '@/components/ui/SectionHeading';
+import { Award, TrendingUp, Crown } from 'lucide-react';
 
 const achievementMilestones = [
   {
@@ -37,98 +38,73 @@ const achievementMilestones = [
     role: 'Agent - Level 3+',
     earnings: '₹1.25L–₹2L+/month',
     benefits: ['Premium benefits', 'Hereditary commission', 'Leadership roles'],
-    color: 'from-purple-500 to-pink-500',
-    bgLight: 'bg-purple-50',
+    color: 'from-slate-700 to-slate-900',
+    bgLight: 'bg-slate-50',
     icon: Crown,
   },
 ];
 
 export default function AchievementPathSection() {
   return (
-    <section className="py-16 md:py-24 px-6 md:px-10">
+    <section className="page-section">
       <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
         <FadeInOnScroll className="mb-10 md:mb-14">
-          <div className="text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-3">Growth Path</p>
-            <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface mb-4">
-              What You Can Achieve
-            </h2>
-            <p className="text-base md:text-lg text-on-surface-variant max-w-2xl mx-auto">
-              Performance today leads to prestige tomorrow. Clear pathways and tangible rewards at each level.
-            </p>
-          </div>
+          <SectionHeading
+            eyebrow="Growth Path"
+            title="What Progress Can Look Like"
+            description="Performance today leads to prestige tomorrow. Each stage unlocks greater income potential, recognition, and practical career advantages."
+          />
         </FadeInOnScroll>
 
-        {/* Achievement Progression */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {achievementMilestones.map((milestone, idx) => {
-            const IconComponent = milestone.icon;
-            return (
-              <motion.div
-                key={milestone.tier}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <div className={`h-full rounded-2xl ${milestone.bgLight} border-2 border-transparent hover:border-primary/30 p-6 md:p-8 transition-all duration-300`}>
-                  {/* Icon & Tier Badge */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${milestone.color} flex items-center justify-center text-white`}>
-                      <IconComponent className="w-6 h-6" />
+        <div className="surface-panel rounded-[2.5rem] p-6 md:p-8 lg:p-10">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {achievementMilestones.map((milestone, idx) => {
+              const IconComponent = milestone.icon;
+              return (
+                <motion.div
+                  key={milestone.tier}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <div className={`h-full rounded-[1.75rem] ${milestone.bgLight} border border-white/70 p-6 shadow-[0_16px_34px_rgba(15,24,41,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_22px_42px_rgba(15,24,41,0.08)]`}>
+                    <div className="mb-4 flex items-start justify-between">
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${milestone.color} text-white shadow-[0_14px_24px_rgba(15,24,41,0.14)]`}>
+                        <IconComponent className="h-6 w-6" />
+                      </div>
+                      <span className="rounded-full bg-white/80 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-on-surface">
+                        Level {idx + 1}
+                      </span>
                     </div>
-                    <span className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-white/60 text-on-surface">
-                      Level {idx + 1}
-                    </span>
-                  </div>
 
-                  {/* Tier Name */}
-                  <h3 className="font-headline text-xl font-bold text-on-surface mb-1">
-                    {milestone.tier}
-                  </h3>
-                  <p className="text-sm text-on-surface-variant font-semibold mb-3">
-                    {milestone.role}
-                  </p>
+                    <h3 className="font-headline text-xl font-bold text-on-surface">{milestone.tier}</h3>
+                    <p className="mt-1 text-sm font-semibold text-on-surface-variant">{milestone.role}</p>
 
-                  {/* Earnings */}
-                  <div className="mb-4 p-3 rounded-lg bg-white/50 border border-white">
-                    <p className="text-xs text-on-surface-variant mb-1">Typical Monthly Earnings</p>
-                    <p className="font-headline text-lg font-bold text-on-surface">
-                      {milestone.earnings}
-                    </p>
-                  </div>
-
-                  {/* Benefits List */}
-                  <ul className="space-y-2">
-                    {milestone.benefits.map((benefit) => (
-                      <li key={benefit} className="flex items-start gap-2 text-sm text-on-surface-variant">
-                        <span className="text-primary font-bold mt-0.5">✓</span>
-                        <span>{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Arrow (except last) */}
-                  {idx < achievementMilestones.length - 1 && (
-                    <div className="hidden lg:flex justify-center mt-6">
-                      <ArrowRight className="w-5 h-5 text-primary/50 rotate-90" />
+                    <div className="mb-5 mt-5 rounded-2xl border border-white/75 bg-white/70 p-4">
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary/80">Typical Monthly Earnings</p>
+                      <p className="mt-2 font-headline text-2xl font-bold text-on-surface">{milestone.earnings}</p>
                     </div>
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-12 text-center">
-          <p className="text-base md:text-lg text-on-surface-variant mb-4 max-w-2xl mx-auto">
-            Start as an agent and progress based on your performance. Our proven system supports every step of your journey.
-          </p>
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/30">
-            <span className="text-sm font-semibold text-primary">Performance Today → Prestige Tomorrow</span>
+                    <ul className="space-y-2">
+                      {milestone.benefits.map((benefit) => (
+                        <li key={benefit} className="flex items-start gap-2 text-sm leading-relaxed text-slate-600">
+                          <span className="mt-0.5 font-bold text-primary">✓</span>
+                          <span>{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <div className="mt-10 text-center">
+            <p className="mx-auto max-w-2xl text-base text-slate-600 md:text-lg">
+              Start as an agent and grow based on performance. The structure is designed to help you build momentum instead of figuring everything out alone.
+            </p>
           </div>
         </div>
       </div>

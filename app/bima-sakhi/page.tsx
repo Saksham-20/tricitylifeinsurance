@@ -96,9 +96,39 @@ export default function BimaSakhiPage() {
           </article>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <Image src="/images/events/event-award-1.jpg" alt="Advisor recognition moment" width={700} height={520} className="h-52 w-full rounded-3xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, 25vw" />
-            <Image src="/images/events/event-award-2.jpg" alt="Mentor and advisor with achievement kit" width={700} height={520} className="h-52 w-full rounded-3xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, 25vw" />
-            <Image src="/images/team/team-group-office.jpg" alt="Team celebrating achievements" width={700} height={520} className="h-52 w-full rounded-3xl object-cover md:col-span-2 md:h-64" sizes="(max-width: 768px) 100vw, 50vw" />
+            <Image src="/images/events/recognition-award-individual.jpg" alt="Individual achievement recognition" width={700} height={520} className="h-52 w-full rounded-3xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, 25vw" />
+            <Image src="/images/events/recognition-event-group.jpg" alt="Community recognition celebration" width={700} height={520} className="h-52 w-full rounded-3xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, 25vw" />
+          </div>
+        </div>
+      </section>
+
+      {/* Success Stories & Recognition Gallery */}
+      <section className="mt-14 px-6 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="rounded-[2rem] border border-amber-200/50 bg-gradient-to-br from-amber-50/50 to-white p-8 md:p-10">
+            <h2 className="font-headline text-3xl font-bold text-on-surface">Success Stories & Recognition</h2>
+            <p className="mt-3 text-on-surface-variant max-w-2xl">
+              Meet our community members as they reach milestones and celebrate their achievements in the Bima Sakhi program.
+            </p>
+            
+            <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <Image src="/images/events/recognition-1.jpg" alt="Success celebration event" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <Image src="/images/events/recognition-2.jpg" alt="LIC celebration event with team members" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <Image src="/images/events/recognition-3.jpg" alt="Individual achievement award presentation" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <Image src="/images/events/recognition-4.jpg" alt="Recognition moment with team" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <Image src="/images/events/recognition-5.jpg" alt="Achievement award ceremony" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <Image src="/images/events/recognition-6.jpg" alt="Success milestone celebration" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <Image src="/images/events/recognition-7.jpg" alt="Community recognition event" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <Image src="/images/events/recognition-8.jpg" alt="Women achiever recognition moment" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <Image src="/images/events/recognition-9.jpg" alt="Team member success celebration" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <Image src="/images/events/recognition-10.jpg" alt="Achievement recognition event" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              <Image src="/images/events/recognition-11.jpg" alt="Bima Sakhi success milestone" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+            </div>
+
+            <div className="mt-8 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 p-5 text-center">
+              <p className="text-sm font-bold uppercase tracking-widest text-amber-700 mb-2">Real Success Stories</p>
+              <p className="text-on-surface font-semibold">These women have transformed their careers and earned recognition through dedication and the Bima Sakhi program support system.</p>
+            </div>
           </div>
         </div>
       </section>
