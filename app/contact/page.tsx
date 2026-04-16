@@ -23,7 +23,7 @@ export default function ContactPage() {
           <div className="mt-8 overflow-hidden rounded-3xl border border-outline-variant/30 bg-white p-4">
             <div className="flex items-center gap-4">
               <Image
-                src="/images/mentor/mentor-portrait-2.jpg"
+                src="/images/contact/mentor-portrait-2.jpg"
                 alt="Subhash Panjla profile photo"
                 width={110}
                 height={110}
@@ -84,8 +84,8 @@ export default function ContactPage() {
           </div>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Image src="/images/events/event-award-1.jpg" alt="Team interaction moment" width={620} height={460} className="h-44 w-full rounded-2xl object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
-            <Image src="/images/events/event-award-3.jpg" alt="Team group at event" width={620} height={460} className="h-44 w-full rounded-2xl object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
+            <Image src="/images/contact/event-award-1.jpg" alt="Team interaction moment" width={620} height={460} className="h-44 w-full rounded-2xl object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
+            <Image src="/images/training/event-award-3.jpg" alt="Team group at event" width={620} height={460} className="h-44 w-full rounded-2xl object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
           </div>
         </section>
       </div>

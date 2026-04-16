@@ -54,7 +54,7 @@ export default function TrainingPage() {
               </div>
             </div>
             <Image
-              src="/images/events/event-audience.jpg"
+              src="/images/training/event-audience.jpg"
               alt="Audience at professional training session"
               width={800}
               height={520}
@@ -83,9 +83,9 @@ export default function TrainingPage() {
 
       <section className="mt-14 px-6 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-4 grid-cols-1 md:grid-cols-3">
-          <Image src="/images/events/event-award-2.jpg" alt="Professional recognition ceremony" width={700} height={480} className="h-56 md:h-72 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-          <Image src="/images/events/event-award-3.jpg" alt="Professional certification recognition" width={700} height={480} className="h-56 md:h-72 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
-          <Image src="/images/events/event-award-5.jpg" alt="Mentor with advisor during recognition" width={700} height={480} className="h-56 md:h-72 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+          <Image src="/images/training/event-award-2.jpg" alt="Professional recognition ceremony" width={700} height={480} className="h-56 md:h-72 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+          <Image src="/images/training/event-award-3.jpg" alt="Professional certification recognition" width={700} height={480} className="h-56 md:h-72 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+          <Image src="/images/training/event-award-5.jpg" alt="Mentor with advisor during recognition" width={700} height={480} className="h-56 md:h-72 w-full rounded-3xl object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
         </div>
       </section>
 

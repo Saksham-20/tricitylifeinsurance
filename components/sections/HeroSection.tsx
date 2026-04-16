@@ -137,7 +137,7 @@ export default function HeroSection() {
                 <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white p-3 shadow-[0_20px_60px_rgba(15,24,41,0.1)]">
                   <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem]">
                     <Image
-                      src="/images/mentor/mentor-portrait-1.jpg"
+                      src="/images/home/mentor-portrait-1.jpg"
                       alt="Subhash Panjla — LIC Career Mentor with 25+ years experience"
                       fill
                       className="object-cover object-top"

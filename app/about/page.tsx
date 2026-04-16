@@ -26,12 +26,12 @@ export default function AboutPage() {
 
             <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white/70 backdrop-blur-sm p-4 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
               <Image
-                src="/images/mentor/mentor-portrait-1.jpg"
+                src="/images/home/mentor-portrait-1.jpg"
                 alt="Subhash Panjla — Founder & Lead Mentor with 25+ years LIC advisory experience"
                 width={800}
                 height={1000}
                 priority
-                className="h-64 md:h-80 lg:h-[440px] w-full rounded-[1.5rem] object-cover object-top"
+                className="h-80 md:h-96 lg:h-[600px] w-full rounded-[1.5rem] object-cover object-top"
                 sizes="(max-width: 1024px) 100vw, 45vw"
               />
               <div className="mt-4 text-center space-y-1">
@@ -70,7 +70,7 @@ export default function AboutPage() {
               </p>
               <div className="mt-7 grid grid-cols-2 gap-4">
                 <Image
-                  src="/images/events/event-audience.jpg"
+                  src="/images/training/event-audience.jpg"
                   alt="Team collaboration and group mentoring session"
                   width={420}
                   height={420}
@@ -78,7 +78,7 @@ export default function AboutPage() {
                   sizes="(max-width: 768px) 50vw, 20vw"
                 />
                 <Image
-                  src="/images/events/about-team-group.jpg"
+                  src="/images/about/about-team-group.jpg"
                   alt="Team members in professional achievement celebration"
                   width={420}
                   height={420}

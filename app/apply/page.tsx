@@ -225,7 +225,7 @@ export default function ApplyPage() {
               </div>
 
               <Image
-                src="/images/mentor/mentor-portrait-2.jpg"
+                src="/images/contact/mentor-portrait-2.jpg"
                 alt="Subhash Panjla — Your Personal Mentor for Career Guidance"
                 width={700}
                 height={460}
