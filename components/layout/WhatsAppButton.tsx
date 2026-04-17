@@ -1,10 +1,33 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { trackEvent } from '@/lib/analytics';
 
 export default function WhatsAppButton() {
+  const [attention, setAttention] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    const key = 'floating-whatsapp-attention';
+    if (window.sessionStorage.getItem(key)) {
+      return false;
+    }
+
+    window.sessionStorage.setItem(key, 'shown');
+    return true;
+  });
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
   const message = encodeURIComponent('Hi, I want to know more about LIC Agent opportunities.');
+
+  useEffect(() => {
+    if (!attention) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => setAttention(false), 1800);
+    return () => window.clearTimeout(timer);
+  }, [attention]);
   
   const handleClick = () => {
     trackEvent('cta_click', {
@@ -18,7 +41,7 @@ export default function WhatsAppButton() {
     <div className="fixed bottom-[88px] right-5 z-30 lg:bottom-8 lg:right-8">
       <button 
         onClick={handleClick}
-        className="group flex h-12 w-12 lg:h-14 lg:w-auto items-center justify-center gap-2 rounded-full bg-[#25D366] lg:px-4 text-white shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_30px_rgba(37,211,102,0.5)] transition-all duration-300 hover:scale-105"
+        className={`group flex h-12 w-12 lg:h-14 lg:w-auto items-center justify-center gap-2 rounded-full bg-[#25D366] text-white shadow-[0_4px_20px_rgba(37,211,102,0.4)] transition-all duration-300 lg:px-4 hover:scale-[1.01] hover:shadow-[0_6px_26px_rgba(37,211,102,0.45)] ${attention ? 'animate-pulse-subtle' : ''}`}
         aria-label="Contact on WhatsApp"
       >
         <svg className="w-6 h-6 lg:w-7 lg:h-7 fill-current flex-shrink-0" viewBox="0 0 24 24">

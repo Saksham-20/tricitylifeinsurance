@@ -1,94 +1,57 @@
-'use client';
-
-import Image from 'next/image';
-import { Phone, MapPin, Clock, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { MessageCircle, PhoneCall, Clock3, MapPin, ArrowRight } from 'lucide-react';
 
 export default function ContactPage() {
-  const handleWhatsAppClick = () => {
-    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
-    const message = encodeURIComponent('Hi, I want to explore LIC agent recruitment opportunities in Tricity. Can you share more details?');
-    window.open(`https://wa.me/${whatsappNumber.replace('+', '')}?text=${message}`, '_blank');
-  };
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
+  const whatsappHref = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hi, I want to discuss LIC career opportunities.')}`;
 
   return (
-    <main className="pt-20 md:pt-28 lg:pt-32 pb-28 lg:pb-0 px-6 md:px-10">
-      <div className="mx-auto max-w-7xl grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-        <section className="rounded-[2rem] border border-primary/15 bg-gradient-to-br from-[#f8fbff] to-white p-7 md:p-10">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Contact Desk</p>
-          <h1 className="mt-4 font-headline text-4xl font-extrabold tracking-tight text-on-surface md:text-5xl">Join Tricity&apos;s Top Agents</h1>
-          <p className="mt-4 text-base leading-relaxed text-on-surface-variant md:text-lg">
-            Ready to start your LIC career? Connect with our team to discuss recruitment, earnings potential, and your first steps to unlimited income.
+    <main className="pb-28 pt-20 lg:pb-0 lg:pt-32">
+      <section className="px-6 md:px-10">
+        <div className="mx-auto max-w-7xl rounded-[2.5rem] border border-primary/10 bg-white p-8 shadow-[0_20px_60px_rgba(15,24,41,0.08)] md:p-12">
+          <p className="section-tag">Contact & Support</p>
+          <h1 className="mt-4 font-headline text-4xl font-extrabold tracking-tight text-on-surface md:text-6xl">
+            Talk to our recruitment support team
+          </h1>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-on-surface-variant md:text-lg">
+            Reach out for role clarity, eligibility guidance, and onboarding steps. We typically respond within one business day.
           </p>
-
-          <div className="mt-8 overflow-hidden rounded-3xl border border-outline-variant/30 bg-white p-4">
-            <div className="flex items-center gap-4">
-              <Image
-                src="/images/contact/mentor-portrait-2.jpg"
-                alt="Subhash Panjla profile photo"
-                width={110}
-                height={110}
-                className="h-24 w-24 sm:h-28 sm:w-28 lg:h-32 lg:w-32 rounded-2xl object-cover"
-                sizes="96px"
-              />
-              <div>
-                <p className="font-headline text-2xl font-bold text-on-surface">Subhash  Panjla</p>
-                <p className="text-sm text-primary font-semibold">Founder & Lead Mentor</p>
-                <p className="text-xs text-on-surface-variant mt-0.5">25+ Years LIC Advisory Experience</p>
-              </div>
-            </div>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-[#25D366] px-6 py-3 font-headline font-bold text-white transition-all duration-200 hover:scale-[1.01]">
+              <MessageCircle className="h-4 w-4" />
+              WhatsApp Now
+            </a>
+            <a href="tel:+918872364673" className="inline-flex items-center gap-2 rounded-2xl border border-primary/20 px-6 py-3 font-headline font-bold text-primary transition-all duration-200 hover:scale-[1.01]">
+              <PhoneCall className="h-4 w-4" />
+              Call Now
+            </a>
+            <Link href="/apply" className="inline-flex items-center gap-2 rounded-2xl border border-primary/20 px-6 py-3 font-headline font-bold text-primary transition-all duration-200 hover:scale-[1.01]">
+              Apply for Callback
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
+        </div>
+      </section>
 
-          <button
-            onClick={handleWhatsAppClick}
-            className="mt-8 inline-flex items-center gap-3 rounded-2xl bg-[#25D366] px-8 py-5 md:px-7 md:py-4 font-headline text-xl md:text-lg font-bold text-white shadow-[0_4px_20px_rgba(37,211,102,0.3)] hover:shadow-[0_6px_30px_rgba(37,211,102,0.45)] transition-all duration-200"
-          >
-            Contact on WhatsApp
-            <ArrowRight className="w-5 h-5 md:w-4 md:h-4" />
-          </button>
-        </section>
-
-        <section className="rounded-[2rem] border border-outline-variant/35 bg-white p-7 shadow-elevation-2 md:p-10">
-          <h2 className="font-headline text-3xl font-bold text-on-surface">Contact Information</h2>
-
-          <div className="mt-8 space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Phone className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <p className="font-headline text-xl font-bold text-on-surface">Phone</p>
-                <p className="text-on-surface-variant">+91 88723 64673</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <p className="font-headline text-xl font-bold text-on-surface">Locations</p>
-                <p className="text-on-surface-variant">Chandigarh, Sector 7</p>
-                <p className="text-on-surface-variant">Mohali, Sector 68</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Clock className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <p className="font-headline text-xl font-bold text-on-surface">Office Hours</p>
-                <p className="text-on-surface-variant">Monday to Saturday, 10:00 AM to 6:00 PM</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Image src="/images/contact/event-award-1.jpg" alt="Team interaction moment" width={620} height={460} className="h-44 w-full rounded-2xl object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
-            <Image src="/images/training/event-award-3.jpg" alt="Team group at event" width={620} height={460} className="h-44 w-full rounded-2xl object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
-          </div>
-        </section>
-      </div>
+      <section className="mt-12 px-6 pb-16 md:px-10">
+        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
+          <article className="rounded-2xl border border-outline-variant/30 bg-white p-6">
+            <Clock3 className="h-5 w-5 text-primary" />
+            <h2 className="mt-3 font-headline text-xl font-bold text-on-surface">Response timeline</h2>
+            <p className="mt-2 text-sm text-on-surface-variant">Most profile discussions are scheduled within one business day.</p>
+          </article>
+          <article className="rounded-2xl border border-outline-variant/30 bg-white p-6">
+            <MapPin className="h-5 w-5 text-primary" />
+            <h2 className="mt-3 font-headline text-xl font-bold text-on-surface">Service area</h2>
+            <p className="mt-2 text-sm text-on-surface-variant">Chandigarh, Mohali, and Panchkula candidates are supported actively.</p>
+          </article>
+          <article className="rounded-2xl border border-outline-variant/30 bg-white p-6">
+            <MessageCircle className="h-5 w-5 text-primary" />
+            <h2 className="mt-3 font-headline text-xl font-bold text-on-surface">Privacy assurance</h2>
+            <p className="mt-2 text-sm text-on-surface-variant">Your details are used only for recruitment communication and role guidance.</p>
+          </article>
+        </div>
+      </section>
     </main>
   );
 }

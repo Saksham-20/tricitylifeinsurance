@@ -1,16 +1,17 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import { trackEvent } from '@/lib/analytics';
-import { Rocket, Phone, GraduationCap, BadgeCheck, CheckCircle, ArrowRight, Lock } from 'lucide-react';
+import { Rocket, Phone, GraduationCap, BadgeCheck, CheckCircle, ArrowRight, Lock, ShieldCheck } from 'lucide-react';
 
 type FormData = {
   name: string;
   phone: string;
   city: string;
   qualification: string;
-  interest: 'agent' | 'bima-sakhi' | '';
+  interest: 'agent' | 'bima-sakhi' | 'development-officer' | '';
+  currentRole: string;
+  preferredTime: string;
 };
 
 type Errors = Partial<Record<keyof FormData, string>>;
@@ -21,11 +22,14 @@ const initialData: FormData = {
   city: '',
   qualification: '',
   interest: '',
+  currentRole: '',
+  preferredTime: '',
 };
 
 const interestLabelMap: Record<Exclude<FormData['interest'], ''>, string> = {
   agent: 'LIC Agent',
   'bima-sakhi': 'Bima Sakhi',
+  'development-officer': 'Development Officer Track',
 };
 
 const steps = [
@@ -54,7 +58,7 @@ export default function ApplyPage() {
   }, [formData]);
 
   const validateField = (name: keyof FormData, value: string) => {
-    if (!value.trim()) {
+    if (!value.trim() && name !== 'currentRole' && name !== 'preferredTime') {
       return 'This field is required.';
     }
 
@@ -224,14 +228,23 @@ export default function ApplyPage() {
                 })}
               </div>
 
-              <Image
-                src="/images/contact/mentor-portrait-2.jpg"
-                alt="Subhash Panjla — Your Personal Mentor for Career Guidance"
-                width={700}
-                height={460}
-                className="mt-8 h-48 md:h-52 w-full rounded-2xl object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 45vw"
-              />
+              <div className="mt-8 rounded-2xl border border-primary/15 bg-white p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Application Confidence</p>
+                <ul className="mt-3 space-y-2 text-sm text-on-surface-variant">
+                  <li className="flex items-start gap-2">
+                    <ShieldCheck className="mt-0.5 h-4 w-4 text-primary" />
+                    <span>Your details are used only for recruitment communication.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <ShieldCheck className="mt-0.5 h-4 w-4 text-primary" />
+                    <span>Most applicants receive a response within one business day.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <ShieldCheck className="mt-0.5 h-4 w-4 text-primary" />
+                    <span>You can choose WhatsApp or phone support after submission.</span>
+                  </li>
+                </ul>
+              </div>
               <div className="mt-4 rounded-2xl bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 p-4 text-center">
                 <p className="text-xs font-bold uppercase tracking-widest text-primary">Application Reviewed By</p>
                 <p className="font-headline text-lg font-bold text-on-surface mt-2">Subhash  Panjla</p>
@@ -278,12 +291,19 @@ export default function ApplyPage() {
               </div>
             ) : (
               <>
-                <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">Application Form</h2>
+                <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">Application form</h2>
                 <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">
-                  Please provide accurate details. All fields are required. We use this information only for recruitment communication.
+                  This takes around 2-3 minutes. Required fields help us match the right role; optional fields help us call at a convenient time.
                 </p>
+                <div className="mt-4 rounded-2xl border border-primary/15 bg-primary/5 p-4 text-sm text-on-surface-variant">
+                  <p className="font-semibold text-on-surface">What happens next:</p>
+                  <p>1) Profile review, 2) role-fit discussion, 3) guidance on onboarding and training timeline.</p>
+                </div>
 
                 <form onSubmit={handleSubmit} className="mt-8 space-y-6" noValidate>
+                  <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-low p-4">
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Step 1: Personal basics</p>
+                  </div>
                   <div className="grid gap-6 md:grid-cols-2">
                     <div>
                       <label htmlFor="name" className={labelClasses}>
@@ -316,6 +336,7 @@ export default function ApplyPage() {
                         inputMode="numeric"
                       />
                       <p className="mt-2 text-xs text-on-surface-variant">{formData.phone.length}/10 digits</p>
+                      <p className="mt-1 text-xs text-on-surface-variant">We use this only for recruitment updates.</p>
                       {errors.phone ? <p className="mt-1 text-sm text-error">{errors.phone}</p> : null}
                     </div>
 
@@ -334,7 +355,26 @@ export default function ApplyPage() {
                       />
                       {errors.city ? <p className="mt-2 text-sm text-error">{errors.city}</p> : null}
                     </div>
+                    <div>
+                      <label htmlFor="currentRole" className={labelClasses}>
+                        Current Occupation (Optional)
+                      </label>
+                      <input
+                        id="currentRole"
+                        name="currentRole"
+                        value={formData.currentRole}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        className={inputClasses}
+                        placeholder="e.g. Homemaker, Sales Executive, Student"
+                      />
+                    </div>
+                  </div>
 
+                  <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-low p-4">
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Step 2: Qualification and role preference</p>
+                  </div>
+                  <div className="grid gap-6 md:grid-cols-2">
                     <div>
                       <label htmlFor="qualification" className={labelClasses}>
                         Qualification
@@ -372,8 +412,28 @@ export default function ApplyPage() {
                         <option value="">Select your preferred role</option>
                         <option value="agent">LIC Agent</option>
                         <option value="bima-sakhi">Bima Sakhi</option>
+                        <option value="development-officer">Development Officer Track</option>
                       </select>
+                      <p className="mt-2 text-xs text-on-surface-variant">Not sure? Pick your best fit now. Final role can be discussed on call.</p>
                       {errors.interest ? <p className="mt-2 text-sm text-error">{errors.interest}</p> : null}
+                    </div>
+                    <div className="md:col-span-2">
+                      <label htmlFor="preferredTime" className={labelClasses}>
+                        Preferred Callback Time (Optional)
+                      </label>
+                      <select
+                        id="preferredTime"
+                        name="preferredTime"
+                        value={formData.preferredTime}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        className={`${inputClasses} appearance-none`}
+                      >
+                        <option value="">Select preferred time</option>
+                        <option value="morning">Morning (10 AM - 1 PM)</option>
+                        <option value="afternoon">Afternoon (1 PM - 4 PM)</option>
+                        <option value="evening">Evening (4 PM - 7 PM)</option>
+                      </select>
                     </div>
                   </div>
 

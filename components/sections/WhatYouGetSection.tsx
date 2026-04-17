@@ -6,28 +6,7 @@ import PremiumCard from '@/components/ui/PremiumCard';
 import SectionHeading from '@/components/ui/SectionHeading';
 import { useResponsiveMotion } from '@/hooks/useResponsiveMotion';
 import { containerVariants, containerVariantsMobile, itemVariants } from '@/lib/animationVariants';
-import { Clock, Heart, CircleDollarSign, BookOpen, Handshake, Shield } from 'lucide-react';
-
-const pathways = [
-  {
-    title: 'Working Professionals',
-    copy: 'Build a second income with flexible hours, digital support tools, and ongoing mentorship.',
-    icon: Clock,
-    iconBg: 'bg-blue-500/10',
-    iconColor: 'text-blue-600',
-    barColor: 'bg-blue-500',
-    type: 'pathway',
-  },
-  {
-    title: 'Homemakers (Bima Sakhi)',
-    copy: 'Exclusively for Women earning independent income with flexible hours and comprehensive support. Min qualification: 10th onwards.',
-    icon: Heart,
-    iconBg: 'bg-amber-500/10',
-    iconColor: 'text-amber-600',
-    barColor: 'bg-amber-500',
-    type: 'pathway',
-  },
-];
+import { CircleDollarSign, BookOpen, Handshake, Shield } from 'lucide-react';
 
 const benefits = [
   {
@@ -40,7 +19,7 @@ const benefits = [
   },
   {
     icon: BookOpen,
-    title: 'Free IRDAI Training',
+    title: 'Training for IRDAI Exam',
     description: 'Complete your certification at zero cost. All study materials and mentoring included.',
     iconBg: 'bg-blue-500/10',
     iconColor: 'text-blue-600',
@@ -80,60 +59,6 @@ export default function WhatYouGetSection() {
         </FadeInOnScroll>
 
         <div className="surface-panel rounded-[2.5rem] p-6 md:p-8 lg:p-10">
-          <div className="mb-12 md:mb-16">
-            <FadeInOnScroll className="mb-6 md:mb-8">
-              <div className="text-center md:text-left">
-                <p className="section-tag">Career Pathways</p>
-                <h3 className="mt-4 font-headline text-2xl font-bold tracking-tight text-on-surface md:text-3xl">
-                  Find Your Path
-                </h3>
-                <p className="mt-2 max-w-2xl text-sm text-on-surface-variant md:text-base">
-                  Whether you&apos;re starting fresh or looking for a flexible income stream, we have a pathway for you.
-                </p>
-              </div>
-            </FadeInOnScroll>
-
-            <motion.div
-              variants={containerVar}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-              className="grid gap-6 md:grid-cols-2"
-            >
-              {pathways.map((pathway) => {
-                const IconComponent = pathway.icon;
-                return (
-                  <motion.div
-                    key={pathway.title}
-                    variants={itemVariants}
-                  >
-                    <PremiumCard
-                      hover
-                      className="group h-full rounded-[1.75rem] bg-white/85 p-8 cursor-default"
-                    >
-                      <div className="flex h-full flex-col gap-5">
-                        <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${pathway.iconBg} transition-transform duration-300 group-hover:scale-110`}>
-                          <IconComponent className={`h-5 w-5 ${pathway.iconColor}`} />
-                        </div>
-
-                        <div className={`h-1.5 w-12 rounded-full ${pathway.barColor}`} />
-
-                        <div className="flex-1">
-                          <h4 className="mb-2 font-headline text-xl font-bold text-on-surface">
-                            {pathway.title}
-                          </h4>
-                          <p className="text-sm leading-relaxed text-on-surface-variant md:text-base">
-                            {pathway.copy}
-                          </p>
-                        </div>
-                      </div>
-                    </PremiumCard>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </div>
-
           <div>
             <FadeInOnScroll className="mb-6 md:mb-8">
               <div className="text-center md:text-left">

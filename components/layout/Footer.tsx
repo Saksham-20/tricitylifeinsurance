@@ -4,9 +4,10 @@ import { Shield } from 'lucide-react';
 const quickLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Training', href: '/training' },
+  { label: 'Career in LIC', href: '/career-in-lic' },
   { label: 'Bima Sakhi', href: '/bima-sakhi' },
   { label: 'Apply Now', href: '/apply' },
+  { label: 'MDRT', href: '/mdrt' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -56,7 +57,9 @@ export default function Footer() {
             <div className="space-y-3">
               <div>
                 <p className="text-sm font-semibold text-white/80">Phone</p>
-                <p className="text-sm text-white/50">+91 88723 64673</p>
+                <a href="tel:+918872364673" className="text-sm text-white/50 hover:text-white">
+                  +91 88723 64673
+                </a>
               </div>
               <div>
                 <p className="text-sm font-semibold text-white/80">Locations</p>
@@ -66,6 +69,16 @@ export default function Footer() {
               <div>
                 <p className="text-sm font-semibold text-white/80">Office Hours</p>
                 <p className="text-sm text-white/50">Mon–Sat, 10:00 AM – 6:00 PM</p>
+              </div>
+              <div>
+                <a
+                  href="https://wa.me/918872364673?text=Hi%2C%20I%20want%20to%20know%20about%20LIC%20career%20opportunities."
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex rounded-full border border-white/20 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white/80 transition-colors hover:border-white/40 hover:text-white"
+                >
+                  WhatsApp Support
+                </a>
               </div>
             </div>
           </div>

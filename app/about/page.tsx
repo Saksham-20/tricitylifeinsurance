@@ -1,62 +1,79 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { CheckCircle, ArrowRight } from 'lucide-react';
+import { ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react';
+import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
+import PremiumButton from '@/components/ui/PremiumButton';
 
 const principles = [
-  'Ethical advisory with client-first recommendations',
-  'Mentor-led professional development and field readiness',
-  'Clear process orientation for long-term career stability',
-  'Performance discipline supported by collaborative teamwork',
+  'Client-first, ethics-led advisory conversations',
+  'Weekly mentoring and practical field review',
+  'Structured onboarding for beginners',
+  'Long-term consistency over short-term hype',
+];
+
+const credibilityStats = [
+  { value: '28+ Years', label: 'LIC domain experience' },
+  { value: '300+', label: 'Advisors guided' },
+  { value: '60+', label: 'Active team members' },
+  { value: 'Tricity Focus', label: 'Chandigarh, Mohali, Panchkula' },
 ];
 
 export default function AboutPage() {
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
+  const whatsappHref = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hi, I want to discuss LIC mentorship and recruitment support.')}`;
+
   return (
-    <main className="pt-20 md:pt-28 lg:pt-32 pb-28 lg:pb-0">
+    <main className="pb-28 pt-20 lg:pb-0 lg:pt-32">
       <section className="px-6 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr]">
-          <div className="space-y-5">
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary">About The Leadership</p>
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <FadeInOnScroll className="space-y-5">
+            <p className="section-tag">About Leadership</p>
             <h1 className="font-headline text-4xl font-extrabold tracking-tight text-on-surface md:text-6xl">
-              Built on Trust, Trained for Professional Excellence.
+              Trust-led mentorship for sustainable LIC careers.
             </h1>
             <p className="text-base leading-relaxed text-on-surface-variant md:text-lg">
-              This platform is led by Subhash Panjla, with over 28 years of practical advisory experience and a long-standing
-              focus on disciplined, ethical career growth. As a Development Officer with LIC since 1997, he has personally trained 300+ insurance professionals and built a thriving team of 60+ active members across Chandigarh Tricity.
+              This recruitment platform is led by Subhash Panjla, LIC Development Officer, supporting candidates across Chandigarh Tricity with practical onboarding and career guidance.
             </p>
-
-            <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white/70 backdrop-blur-sm p-4 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
+            <div className="grid gap-3 sm:grid-cols-2">
+              {credibilityStats.map((item) => (
+                <div key={item.label} className="rounded-2xl border border-outline-variant/30 bg-white p-4">
+                  <p className="font-headline text-xl font-bold text-on-surface">{item.value}</p>
+                  <p className="text-sm text-on-surface-variant">{item.label}</p>
+                </div>
+              ))}
+            </div>
+            <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white p-4 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
               <Image
                 src="/images/home/mentor-portrait-1.jpg"
-                alt="Subhash Panjla — Founder & Lead Mentor with 25+ years LIC advisory experience"
+                alt="Subhash Panjla, LIC Development Officer and mentor"
                 width={800}
                 height={1000}
                 priority
-                className="h-80 md:h-96 lg:h-[600px] w-full rounded-[1.5rem] object-cover object-top"
+                className="h-80 w-full rounded-[1.5rem] object-cover object-top md:h-96 lg:h-[540px]"
                 sizes="(max-width: 1024px) 100vw, 45vw"
               />
               <div className="mt-4 text-center space-y-1">
-                <p className="font-headline text-lg font-bold text-on-surface">Subhash  Panjla</p>
-                <p className="text-sm text-primary font-semibold">Development Officer & Lead Mentor</p>
-                <p className="text-xs text-on-surface-variant">28+ Years LIC Advisory Experience (Since 1997)</p>
+                <p className="font-headline text-lg font-bold text-on-surface">Subhash Panjla</p>
+                <p className="text-sm font-semibold text-primary">Development Officer & Lead Mentor</p>
+                <p className="text-xs text-on-surface-variant">Mentoring advisors across Chandigarh, Mohali, and Panchkula</p>
               </div>
             </div>
-          </div>
+          </FadeInOnScroll>
 
-          <div className="space-y-6">
+          <FadeInOnScroll className="space-y-6" direction="left">
             <article className="rounded-[2rem] border border-primary/15 bg-gradient-to-br from-[#f7fbff] to-white p-7 md:p-9">
-              <h2 className="font-headline text-3xl font-bold text-on-surface">Our Mission</h2>
+              <h2 className="font-headline text-3xl font-bold text-on-surface">Our mission</h2>
               <p className="mt-4 leading-relaxed text-on-surface-variant">
-                To build a high-quality network of insurance professionals who combine product expertise, clear communication,
-                and trust-led client relationships.
+                Build a disciplined network of insurance professionals who combine product clarity, responsible advice, and long-term client trust.
               </p>
             </article>
 
             <article className="rounded-[2rem] border border-outline-variant/35 bg-white p-7 md:p-9">
-              <h3 className="font-headline text-3xl font-bold text-on-surface">Professional Principles</h3>
+              <h3 className="font-headline text-3xl font-bold text-on-surface">Professional principles</h3>
               <ul className="mt-5 space-y-4">
                 {principles.map((item) => (
                   <li key={item} className="flex gap-3 text-on-surface-variant">
-                    <CheckCircle className="w-5 h-5 mt-0.5 text-primary flex-shrink-0" />
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -64,17 +81,17 @@ export default function AboutPage() {
             </article>
 
             <article className="rounded-[2rem] bg-gradient-to-br from-[#0f1829] to-[#1a2744] p-7 text-white md:p-9">
-              <h3 className="font-headline text-3xl font-bold">Mentor-Led Team Ecosystem</h3>
+              <h3 className="font-headline text-3xl font-bold">Mentor-led support system</h3>
               <p className="mt-4 text-white/75">
-                You gain access to practical reviews, objection handling guidance, and structured performance feedback.
+                Applicants receive practical review support, objection-handling guidance, and structured activity follow-up after onboarding.
               </p>
               <div className="mt-7 grid grid-cols-2 gap-4">
                 <Image
                   src="/images/training/event-audience.jpg"
-                  alt="Team collaboration and group mentoring session"
+                  alt="Team collaboration and mentoring session"
                   width={420}
                   height={420}
-                  className="h-48 md:h-56 w-full rounded-xl object-cover"
+                  className="h-48 w-full rounded-xl object-cover md:h-56"
                   sizes="(max-width: 768px) 50vw, 20vw"
                 />
                 <Image
@@ -82,75 +99,33 @@ export default function AboutPage() {
                   alt="Team members in professional achievement celebration"
                   width={420}
                   height={420}
-                  className="h-48 md:h-56 w-full rounded-xl object-cover"
+                  className="h-48 w-full rounded-xl object-cover md:h-56"
                   sizes="(max-width: 768px) 50vw, 20vw"
                 />
               </div>
             </article>
-
-            <article className="rounded-[2rem] border border-primary/20 bg-gradient-to-br from-blue-50 to-indigo-50 p-7 md:p-9">
-              <h3 className="font-headline text-3xl font-bold text-on-surface">LIC Club Membership Progression</h3>
-              <p className="mt-3 text-on-surface-variant">
-                As you grow with us, unlock exclusive tiers and premium benefits:
-              </p>
-              <div className="mt-6 space-y-3">
-                <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
-                  <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">1</div>
-                  <div>
-                    <p className="font-semibold text-on-surface">Distinguished Club</p>
-                    <p className="text-xs text-on-surface-variant">Entry-level achievement milestone</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
-                  <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">2</div>
-                  <div>
-                    <p className="font-semibold text-on-surface">Branch Manager Club</p>
-                    <p className="text-xs text-on-surface-variant">Housing loan @5.5%, office allowance, foreign tours</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
-                  <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">3</div>
-                  <div>
-                    <p className="font-semibold text-on-surface">Divisional Manager Club</p>
-                    <p className="text-xs text-on-surface-variant">Enhanced commission, recognition, leadership opportunities</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
-                  <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">4</div>
-                  <div>
-                    <p className="font-semibold text-on-surface">Zonal Manager Club</p>
-                    <p className="text-xs text-on-surface-variant">Premium benefits, hereditary commission, gratuity</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 rounded-xl bg-white p-3 border border-primary/10">
-                  <div className="text-sm font-bold text-primary bg-primary/10 rounded-lg px-2 py-1 flex-shrink-0">5</div>
-                  <div>
-                    <p className="font-semibold text-on-surface">Chairman&apos;s Club</p>
-                    <p className="text-xs text-on-surface-variant">Highest tier with maximum benefits and recognition</p>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-6 p-4 rounded-xl bg-white border-l-4 border-primary">
-                <p className="text-xs text-primary font-bold uppercase tracking-widest mb-1">Our Motto</p>
-                <p className="font-headline text-xl font-bold text-on-surface">&ldquo;Performance Today… Prestige Tomorrow&rdquo;</p>
-              </div>
-            </article>
-          </div>
+          </FadeInOnScroll>
         </div>
       </section>
 
       <section className="mt-14 px-6 md:px-10">
-        <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/10 p-8 md:p-12">
-          <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface md:text-4xl">Ready to Join This Professional Network?</h2>
+        <div className="mx-auto max-w-7xl rounded-[2.5rem] border border-primary/10 bg-gradient-to-br from-primary/5 to-primary/10 p-8 md:p-12">
+          <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface md:text-4xl">Ready to speak with the mentor team?</h2>
           <p className="mt-3 max-w-2xl text-on-surface-variant">
-            Start your application and receive role-fit guidance from our recruitment support team.
+            Start with WhatsApp for a quick profile discussion or submit your application for a callback.
           </p>
-          <Link href="/apply" className="inline-block">
-            <button className="mt-6 rounded-2xl bg-gradient-to-r from-primary to-[#1a6fff] px-8 py-4 font-headline font-bold text-white shadow-[0_4px_20px_rgba(2,83,205,0.3)] hover:shadow-[0_6px_30px_rgba(2,83,205,0.45)] transition-all duration-200 flex items-center gap-2">
-              Apply Now
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </Link>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex">
+              <PremiumButton variant="primary" showArrow icon={<MessageCircle className="h-4 w-4" />}>
+                WhatsApp Discussion
+              </PremiumButton>
+            </a>
+            <Link href="/apply" className="inline-flex">
+              <PremiumButton variant="secondary" showArrow icon={<ArrowRight className="h-4 w-4" />}>
+                Apply Now
+              </PremiumButton>
+            </Link>
+          </div>
         </div>
       </section>
     </main>

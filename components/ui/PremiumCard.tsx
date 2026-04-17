@@ -32,8 +32,9 @@ export default function PremiumCard({
   return (
     <motion.div
       initial={{ scale: 1 }}
-      whileHover={hover ? { scale: 1.02, boxShadow: '0 16px 24px rgba(0, 0, 0, 0.16)' } : { scale: 1 }}
-      transition={{ duration: 0.2 }}
+      whileHover={hover ? { scale: 1.01, boxShadow: '0 12px 22px rgba(15, 24, 41, 0.12)' } : { scale: 1 }}
+      whileTap={hover ? { scale: 0.995 } : { scale: 1 }}
+      transition={{ duration: 0.25 }}
       onClick={onClick}
       className={`${baseClasses} ${className}`}
     >

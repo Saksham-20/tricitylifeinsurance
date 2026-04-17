@@ -9,8 +9,9 @@ import { Shield, MessageCircle, Menu, X, MapPin, Sparkles } from 'lucide-react';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Training', href: '/training' },
+  { label: 'Career in LIC', href: '/career-in-lic' },
   { label: 'Bima Sakhi', href: '/bima-sakhi' },
+  { label: 'MDRT', href: '/mdrt' },
   { label: 'Contact', href: '/contact' },
 ];
 

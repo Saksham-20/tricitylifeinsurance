@@ -22,7 +22,7 @@ const benefits = [
   },
   {
     icon: BookOpen,
-    title: 'Free IRDAI Training',
+    title: 'Training for IRDAI Exam',
     description: 'Complete your certification at zero cost. All study materials and mentoring included.',
     iconBg: 'bg-blue-500/10',
     iconColor: 'text-blue-600',

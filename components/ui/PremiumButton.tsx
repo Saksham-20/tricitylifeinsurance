@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { ArrowRight, Loader2 } from 'lucide-react';
 
 interface PremiumButtonProps {
@@ -15,6 +15,8 @@ interface PremiumButtonProps {
   className?: string;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  attentionOnce?: boolean;
+  attentionKey?: string;
 }
 
 export default function PremiumButton({
@@ -28,7 +30,32 @@ export default function PremiumButton({
   className = '',
   type = 'button',
   disabled = false,
+  attentionOnce = false,
+  attentionKey = 'primary-cta',
 }: PremiumButtonProps) {
+  const [showAttention, setShowAttention] = useState(() => {
+    if (!attentionOnce || typeof window === 'undefined') {
+      return false;
+    }
+
+    const storageKey = `cta-attention-${attentionKey}`;
+    if (window.sessionStorage.getItem(storageKey)) {
+      return false;
+    }
+
+    window.sessionStorage.setItem(storageKey, 'shown');
+    return true;
+  });
+
+  useEffect(() => {
+    if (!showAttention) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => setShowAttention(false), 1800);
+    return () => window.clearTimeout(timer);
+  }, [showAttention]);
+
   const baseClasses =
     'group relative inline-flex items-center justify-center rounded-2xl font-headline font-bold transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50';
 
@@ -51,7 +78,8 @@ export default function PremiumButton({
       initial={{ scale: 1 }}
       whileHover={{ scale: disabled ? 1 : 1.02 }}
       whileTap={{ scale: disabled ? 1 : 0.98 }}
-      transition={{ duration: 0.2 }}
+      animate={showAttention && !disabled ? { scale: [1, 1.015, 1] } : undefined}
+      transition={showAttention ? { duration: 0.6, repeat: 2, ease: 'easeInOut' } : { duration: 0.2 }}
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
     >
       {loading ? (
