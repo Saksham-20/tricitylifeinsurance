@@ -4,12 +4,10 @@ import { z } from 'zod';
 import { InterestType } from '@prisma/client';
 
 const interestMap: Record<string, InterestType> = {
-  'agent': InterestType.agent,
+  agent: InterestType.agent,
   'lic agent': InterestType.agent,
   'bima-sakhi': InterestType.bima_sakhi,
   'bima sakhi': InterestType.bima_sakhi,
-  'development-officer': InterestType.development_officer,
-  'development officer': InterestType.development_officer,
 };
 
 const LeadSchema = z.object({
@@ -17,7 +15,7 @@ const LeadSchema = z.object({
   phone: z.string().regex(/^\d{10}$/, 'Phone must be 10 digits'),
   city: z.string().min(2, 'City must be at least 2 characters'),
   qualification: z.string().min(1, 'Please select a qualification'),
-  interest: z.enum(['agent', 'bima-sakhi', 'development-officer']),
+  interest: z.enum(['agent', 'bima-sakhi']),
 });
 
 export async function POST(request: NextRequest) {

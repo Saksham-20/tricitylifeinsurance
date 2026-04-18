@@ -12,7 +12,6 @@ const navLinks = [
   { label: 'Career in LIC', href: '/career-in-lic' },
   { label: 'Bima Sakhi', href: '/bima-sakhi' },
   { label: 'MDRT', href: '/mdrt' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 export default function Header() {

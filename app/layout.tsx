@@ -39,7 +39,9 @@ export default function RootLayout({
         <LenisProvider>
           <GoogleAnalytics />
           <Header />
-          {children}
+          <div className="flex min-h-0 flex-1 flex-col pt-[var(--site-header-offset)]">
+            {children}
+          </div>
           <Footer />
           <BottomNav />
           <WhatsAppButton />

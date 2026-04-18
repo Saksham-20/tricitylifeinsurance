@@ -12,7 +12,7 @@ export default function MdrtPage() {
   };
 
   return (
-    <main className="pb-28 pt-20 lg:pb-0 lg:pt-32">
+    <main className="pb-28 lg:pb-0">
       <section className="px-6 md:px-10">
         <div className="mx-auto max-w-7xl rounded-[2.5rem] border border-primary/15 bg-gradient-to-br from-[#f7fbff] to-white p-8 shadow-[0_24px_65px_rgba(15,24,41,0.08)] md:p-12">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Contact</p>

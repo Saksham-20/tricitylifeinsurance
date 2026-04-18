@@ -1,15 +1,30 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { trackEvent } from '@/lib/analytics';
-import { Rocket, Phone, GraduationCap, BadgeCheck, CheckCircle, ArrowRight, Lock, ShieldCheck } from 'lucide-react';
+import {
+  Rocket,
+  Phone,
+  GraduationCap,
+  BadgeCheck,
+  CheckCircle,
+  ArrowRight,
+  Lock,
+  ShieldCheck,
+  MessageCircle,
+  PhoneCall,
+  MapPin,
+  Clock3,
+  ListOrdered,
+} from 'lucide-react';
 
 type FormData = {
   name: string;
   phone: string;
   city: string;
   qualification: string;
-  interest: 'agent' | 'bima-sakhi' | 'development-officer' | '';
+  interest: 'agent' | 'bima-sakhi' | '';
   currentRole: string;
   preferredTime: string;
 };
@@ -29,13 +44,24 @@ const initialData: FormData = {
 const interestLabelMap: Record<Exclude<FormData['interest'], ''>, string> = {
   agent: 'LIC Agent',
   'bima-sakhi': 'Bima Sakhi',
-  'development-officer': 'Development Officer Track',
 };
 
-const steps = [
-  { icon: Phone, title: 'Profile Review Call', copy: 'Get a callback with initial guidance.' },
-  { icon: GraduationCap, title: 'Training Roadmap', copy: 'Understand certification and role expectations.' },
-  { icon: BadgeCheck, title: 'Structured Start', copy: 'Launch with practical mentoring support.' },
+const mentorSupportSteps = [
+  {
+    icon: Phone,
+    title: 'Discussion & document clarity',
+    copy: 'We review your profile, explain the LIC agent path, and help you prepare the right paperwork.',
+  },
+  {
+    icon: GraduationCap,
+    title: 'IRDAI training & IC38 guidance',
+    copy: 'Support for mandatory training slots, study approach, and what to expect in the certification exam.',
+  },
+  {
+    icon: BadgeCheck,
+    title: 'Licensed onboarding rhythm',
+    copy: 'After you pass IC38, practical mentoring for field activity, reviews, and steady habit building.',
+  },
 ];
 
 export default function ApplyPage() {
@@ -45,6 +71,11 @@ export default function ApplyPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [leadId, setLeadId] = useState<string>('');
   const [hasStartedForm, setHasStartedForm] = useState(false);
+
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
+  const whatsappHref = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent(
+    'Hi, I want to discuss becoming an LIC agent and the pre-recruitment process.'
+  )}`;
 
   useEffect(() => {
     trackEvent('form_view', {
@@ -137,7 +168,6 @@ export default function ApplyPage() {
       location: 'apply_success',
       cta_type: 'whatsapp',
     });
-    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
     const message = encodeURIComponent(
       `Hi, I submitted my application (${leadId || 'pending ID'}) for ${formData.interest ? interestLabelMap[formData.interest] : 'LIC opportunity'}. Please guide me for next steps.`
     );
@@ -191,32 +221,86 @@ export default function ApplyPage() {
     }
   };
 
-  const inputClasses = "w-full rounded-2xl border border-outline-variant/50 bg-white px-5 py-4 text-base outline-none transition-all duration-200 focus:border-primary/60 focus:bg-primary/[0.01] focus:shadow-[0_0_0_4px_rgba(2,83,205,0.08)]";
-  const labelClasses = "mb-2 block text-sm font-semibold text-on-surface";
+  const inputClasses =
+    'w-full rounded-2xl border border-outline-variant/50 bg-white px-5 py-4 text-base outline-none transition-all duration-200 focus:border-primary/60 focus:bg-primary/[0.01] focus:shadow-[0_0_0_4px_rgba(2,83,205,0.08)]';
+  const labelClasses = 'mb-2 block text-sm font-semibold text-on-surface';
 
   return (
-    <main className="pt-20 md:pt-28 lg:pt-32 pb-28 lg:pb-0">
+    <main className="pb-28 lg:pb-0">
+      <h1 className="sr-only">Apply for LIC career mentorship and callback</h1>
       <section className="px-6 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-8 md:gap-10 grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
-          <aside className="w-full lg:sticky lg:top-28 lg:self-start">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)] lg:items-start">
+          <aside className="flex w-full flex-col gap-6 lg:sticky lg:top-[calc(var(--site-header-offset)+1rem)] lg:self-start">
             <div className="rounded-[2rem] border border-primary/15 bg-gradient-to-br from-[#f8fbff] via-white to-[#ecf2ff] p-6 md:p-8 shadow-[0_20px_70px_rgba(2,83,205,0.08)]">
-              <p className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary/10 to-primary/5 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary border border-primary/15">
+              <p className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-gradient-to-r from-primary/10 to-primary/5 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
                 <Rocket className="w-3.5 h-3.5" />
-                Application Desk
+                Your mentor
               </p>
-              <h1 className="mt-5 font-headline text-3xl md:text-4xl lg:text-4xl font-extrabold leading-tight tracking-tight text-on-surface">
-                Start Your LIC Career Application.
-              </h1>
-              <p className="mt-4 text-sm md:text-base leading-relaxed text-on-surface-variant">
-                Submit your profile and our team will connect with you for role alignment, training guidance, and next steps.
+              <h2 className="mt-5 font-headline text-2xl font-extrabold leading-tight tracking-tight text-on-surface md:text-3xl">
+                Subhash Panjla
+              </h2>
+              <p className="mt-2 text-sm font-semibold text-primary">LIC Development Officer &amp; Lead Mentor</p>
+              <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">
+                Recruitment and onboarding support for LIC careers across Chandigarh Tricity—with clear guidance on documents, IRDAI training, and IC38.
               </p>
 
+              <div className="mt-6 rounded-2xl border border-primary/20 bg-white p-5 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Contact</p>
+                <p className="mt-2 font-headline text-lg font-bold text-on-surface">Reach the mentor</p>
+                <p className="text-sm text-on-surface-variant">WhatsApp, phone, or submit the form on the right.</p>
+                <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#25D366] px-4 py-3 text-center font-headline text-sm font-bold text-white transition-all hover:brightness-105"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    WhatsApp
+                  </a>
+                  <a
+                    href="tel:+918872364673"
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl border border-primary/25 px-4 py-3 font-headline text-sm font-bold text-primary transition-colors hover:bg-primary/5"
+                  >
+                    <PhoneCall className="h-4 w-4" />
+                    Call now
+                  </a>
+                </div>
+                <Link
+                  href="/#lic-agent-procedure"
+                  className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wide text-white shadow-sm transition-all hover:brightness-105"
+                >
+                  <ListOrdered className="h-3.5 w-3.5 text-white" aria-hidden />
+                  Procedure
+                </Link>
+                <p className="mt-4 flex items-start gap-2 text-sm text-on-surface-variant">
+                  <Phone className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                  <a href="tel:+918872364673" className="font-semibold text-on-surface hover:underline">
+                    +91 88723 64673
+                  </a>
+                </p>
+                <p className="mt-3 flex items-start gap-2 text-sm text-on-surface-variant">
+                  <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                  <span>
+                    Chandigarh, Sector 7 · Mohali, Sector 68 · Active support across Chandigarh Tricity (Chandigarh, Mohali, Panchkula)
+                  </span>
+                </p>
+                <p className="mt-3 flex items-start gap-2 text-sm text-on-surface-variant">
+                  <Clock3 className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                  <span>Mon–Sat, 10:00 AM – 6:00 PM · Most queries answered within one business day</span>
+                </p>
+                <p className="mt-4 rounded-xl bg-primary/5 p-3 text-xs leading-relaxed text-on-surface-variant">
+                  Your details are used only for recruitment communication and role guidance — not for unrelated marketing.
+                </p>
+              </div>
+
               <div className="mt-8 space-y-4">
-                {steps.map((item) => {
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">How we support you</p>
+                {mentorSupportSteps.map((item) => {
                   const IconComponent = item.icon;
                   return (
-                    <div key={item.title} className="flex gap-4 rounded-2xl bg-white p-4 border border-surface-variant/20">
-                      <div className="mt-0.5 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary flex-shrink-0">
+                    <div key={item.title} className="flex gap-4 rounded-2xl border border-surface-variant/20 bg-white p-4">
+                      <div className="mt-0.5 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <IconComponent className="w-5 h-5" />
                       </div>
                       <div>
@@ -229,7 +313,7 @@ export default function ApplyPage() {
               </div>
 
               <div className="mt-8 rounded-2xl border border-primary/15 bg-white p-5">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Application Confidence</p>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Application confidence</p>
                 <ul className="mt-3 space-y-2 text-sm text-on-surface-variant">
                   <li className="flex items-start gap-2">
                     <ShieldCheck className="mt-0.5 h-4 w-4 text-primary" />
@@ -241,25 +325,23 @@ export default function ApplyPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <ShieldCheck className="mt-0.5 h-4 w-4 text-primary" />
-                    <span>You can choose WhatsApp or phone support after submission.</span>
+                    <span>You can continue on WhatsApp or phone after submission.</span>
                   </li>
                 </ul>
-              </div>
-              <div className="mt-4 rounded-2xl bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20 p-4 text-center">
-                <p className="text-xs font-bold uppercase tracking-widest text-primary">Application Reviewed By</p>
-                <p className="font-headline text-lg font-bold text-on-surface mt-2">Subhash  Panjla</p>
-                <p className="text-sm text-on-surface-variant mt-1">Founder & Lead Mentor</p>
               </div>
             </div>
           </aside>
 
-          <section className="rounded-[2rem] border border-outline-variant/30 bg-white p-6 md:p-8 shadow-elevation-2">
+          <section
+            id="application-form"
+            className="rounded-[2rem] border border-outline-variant/30 bg-white p-6 shadow-elevation-2 md:p-8"
+          >
             {submitStatus === 'success' ? (
               <div className="rounded-3xl border border-green-200 bg-green-50 p-8">
                 <div className="flex items-start gap-4">
-                  <CheckCircle className="w-8 h-8 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="mt-0.5 h-8 w-8 flex-shrink-0 text-green-600" />
                   <div>
-                    <h2 className="font-headline text-3xl font-bold text-green-900">Application Received</h2>
+                    <h2 className="font-headline text-3xl font-bold text-green-900">Application received</h2>
                     <p className="mt-2 text-green-800">
                       Thank you. Your profile has been submitted successfully.
                       {leadId ? ` Reference ID: ${leadId}` : ''}
@@ -270,13 +352,15 @@ export default function ApplyPage() {
 
                 <div className="mt-8 flex flex-wrap gap-3">
                   <button
+                    type="button"
                     onClick={openWhatsApp}
-                    className="rounded-2xl bg-[#25D366] px-6 py-3 font-headline font-bold text-white flex items-center gap-2"
+                    className="flex items-center gap-2 rounded-2xl bg-[#25D366] px-6 py-3 font-headline font-bold text-white"
                   >
                     Continue on WhatsApp
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="h-4 w-4" />
                   </button>
                   <button
+                    type="button"
                     onClick={() => {
                       setFormData(initialData);
                       setErrors({});
@@ -285,20 +369,16 @@ export default function ApplyPage() {
                     }}
                     className="rounded-2xl border border-green-300 px-6 py-3 font-headline font-bold text-green-900"
                   >
-                    Submit Another Response
+                    Submit another response
                   </button>
                 </div>
               </div>
             ) : (
               <>
-                <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">Application form</h2>
+                <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">Pre-recruitment form</h2>
                 <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">
-                  This takes around 2-3 minutes. Required fields help us match the right role; optional fields help us call at a convenient time.
+                  This takes around two to three minutes. Required fields help us match the right role; optional fields help us call at a convenient time.
                 </p>
-                <div className="mt-4 rounded-2xl border border-primary/15 bg-primary/5 p-4 text-sm text-on-surface-variant">
-                  <p className="font-semibold text-on-surface">What happens next:</p>
-                  <p>1) Profile review, 2) role-fit discussion, 3) guidance on onboarding and training timeline.</p>
-                </div>
 
                 <form onSubmit={handleSubmit} className="mt-8 space-y-6" noValidate>
                   <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-low p-4">
@@ -307,7 +387,7 @@ export default function ApplyPage() {
                   <div className="grid gap-6 md:grid-cols-2">
                     <div>
                       <label htmlFor="name" className={labelClasses}>
-                        Full Name
+                        Full name
                       </label>
                       <input
                         id="name"
@@ -323,7 +403,7 @@ export default function ApplyPage() {
 
                     <div>
                       <label htmlFor="phone" className={labelClasses}>
-                        Phone Number
+                        Phone number
                       </label>
                       <input
                         id="phone"
@@ -357,7 +437,7 @@ export default function ApplyPage() {
                     </div>
                     <div>
                       <label htmlFor="currentRole" className={labelClasses}>
-                        Current Occupation (Optional)
+                        Current occupation (optional)
                       </label>
                       <input
                         id="currentRole"
@@ -399,7 +479,7 @@ export default function ApplyPage() {
 
                     <div className="md:col-span-2">
                       <label htmlFor="interest" className={labelClasses}>
-                        Role Interest
+                        Role interest
                       </label>
                       <select
                         id="interest"
@@ -412,14 +492,13 @@ export default function ApplyPage() {
                         <option value="">Select your preferred role</option>
                         <option value="agent">LIC Agent</option>
                         <option value="bima-sakhi">Bima Sakhi</option>
-                        <option value="development-officer">Development Officer Track</option>
                       </select>
                       <p className="mt-2 text-xs text-on-surface-variant">Not sure? Pick your best fit now. Final role can be discussed on call.</p>
                       {errors.interest ? <p className="mt-2 text-sm text-error">{errors.interest}</p> : null}
                     </div>
                     <div className="md:col-span-2">
                       <label htmlFor="preferredTime" className={labelClasses}>
-                        Preferred Callback Time (Optional)
+                        Preferred callback time (optional)
                       </label>
                       <select
                         id="preferredTime"
@@ -447,13 +526,13 @@ export default function ApplyPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting || !canSubmit}
-                      className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-primary to-[#1a6fff] px-10 py-5 font-headline text-lg font-bold text-white shadow-[0_6px_24px_rgba(2,83,205,0.35)] hover:shadow-[0_8px_36px_rgba(2,83,205,0.5)] hover:brightness-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-[#1a6fff] px-10 py-5 font-headline text-lg font-bold text-white shadow-[0_6px_24px_rgba(2,83,205,0.35)] transition-all duration-200 hover:shadow-[0_8px_36px_rgba(2,83,205,0.5)] hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                     >
-                      {isSubmitting ? 'Submitting...' : 'Submit Application'}
-                      {!isSubmitting && <ArrowRight className="w-4 h-4" />}
+                      {isSubmitting ? 'Submitting...' : 'Submit application'}
+                      {!isSubmitting && <ArrowRight className="h-4 w-4" />}
                     </button>
                     <div className="flex items-center gap-2 text-xs text-on-surface-variant">
-                      <Lock className="w-3 h-3" />
+                      <Lock className="h-3 w-3" />
                       <span>Your data is secure and used only for recruitment purposes.</span>
                     </div>
                   </div>

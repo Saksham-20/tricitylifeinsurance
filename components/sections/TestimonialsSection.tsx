@@ -127,10 +127,10 @@ export default function TestimonialsSection() {
                   </PremiumButton>
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/apply"
                   className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] px-6 py-4 font-headline text-base font-bold text-white transition-colors hover:bg-white/10"
                 >
-                  Contact the Team
+                  {'Mentor contact & apply'}
                 </Link>
               </div>
             </div>

@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { CheckCircle2, ArrowRight, MessageCircle, PhoneCall, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, ArrowRight, MessageCircle, PhoneCall, ShieldCheck, ListOrdered } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
 import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
 import PremiumButton from '@/components/ui/PremiumButton';
 import PulseDot from '@/components/ui/PulseDot';
+import LicAgentProcedureSection from '@/components/sections/LicAgentProcedureSection';
 
 const trustStats = [
   { value: '28+', label: 'Years of mentoring experience' },
@@ -74,7 +75,7 @@ export default function Home() {
   const whatsappHref = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hi, I want to discuss LIC career opportunities in Chandigarh Tricity.')}`;
 
   return (
-    <main className="relative overflow-hidden pb-24 pt-20 md:pt-24 lg:pb-0 lg:pt-28">
+    <main className="relative overflow-hidden pb-24 lg:pb-0">
       <section className="px-6 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-8 rounded-[2.25rem] border border-primary/10 bg-white p-6 shadow-[0_20px_70px_rgba(15,24,41,0.08)] md:p-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
           <FadeInOnScroll className="space-y-6">
@@ -128,7 +129,7 @@ export default function Home() {
                 <div className="px-3 pb-3">
                   <div className="relative h-[360px] w-full overflow-hidden rounded-[1rem] md:h-[420px] lg:h-[480px]">
                     <Image
-                      src="/images/home/mentor-portrait-1.jpg"
+                      src="/images/home/hero-mentor-portrait.jpg"
                       alt="Subhash Panjla, LIC Development Officer and mentor"
                       fill
                       priority
@@ -156,6 +157,10 @@ export default function Home() {
           </FadeInOnScroll>
         </div>
       </section>
+
+      <div className="mt-12">
+        <LicAgentProcedureSection />
+      </div>
 
       <section className="mt-12 px-6 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -288,7 +293,7 @@ export default function Home() {
             <p className="mt-3 max-w-3xl text-white/75">
               Choose the channel that feels easiest. Our team shares role clarity first, then guides you through the process.
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] px-6 py-3 font-headline font-bold text-white transition-all duration-200 hover:scale-[1.01]">
                 <MessageCircle className="h-4 w-4" />
                 WhatsApp Now
@@ -300,6 +305,13 @@ export default function Home() {
                 <PhoneCall className="h-4 w-4" />
                 Call Now
               </a>
+              <Link
+                href="/#lic-agent-procedure"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-3 font-headline font-bold text-white transition-all duration-200 hover:scale-[1.01]"
+              >
+                <ListOrdered className="h-4 w-4 text-white" aria-hidden />
+                Procedure
+              </Link>
             </div>
           </FadeInOnScroll>
         </div>

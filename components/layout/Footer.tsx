@@ -8,7 +8,6 @@ const quickLinks = [
   { label: 'Bima Sakhi', href: '/bima-sakhi' },
   { label: 'Apply Now', href: '/apply' },
   { label: 'MDRT', href: '/mdrt' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 export default function Footer() {

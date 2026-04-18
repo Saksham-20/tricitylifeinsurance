@@ -27,17 +27,33 @@ const eligibilityDetails = [
   'Self-employed individuals diversifying income',
 ];
 
+const photosRecognitionGallery: { src: string; alt: string }[] = [
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-01.jpg', alt: 'Professional recognition moment' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-02.jpg', alt: 'Individual achievement recognition' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-03.jpg', alt: 'Community recognition celebration' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-04.jpg', alt: 'Success celebration event' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-05.jpg', alt: 'LIC celebration event with team members' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-06.jpg', alt: 'Individual achievement award presentation' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-07.jpg', alt: 'Recognition moment with team' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-08.jpg', alt: 'Achievement award ceremony' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-09.jpg', alt: 'Success milestone celebration' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-10.jpg', alt: 'Women achiever recognition moment' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-11.jpg', alt: 'Team member success celebration' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-12.jpg', alt: 'Achievement recognition event' },
+  { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-13.jpg', alt: 'Bima Sakhi success milestone' },
+];
+
 export default function BimaSakhiPage() {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
   const whatsappHref = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hi, I want details about the Bima Sakhi opportunity.')}`;
 
   return (
-    <main className="pt-20 md:pt-28 lg:pt-32 pb-28 lg:pb-0">
+    <main className="pb-28 lg:pb-0">
       {/* Hero Section */}
       <section className="px-6 md:px-10">
-        <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-gradient-to-br from-[#0f234f] to-[#1b3674] p-8 text-white md:p-12 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="relative">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#0f234f] to-[#1b3674] p-8 text-white md:p-12 relative">
+          <div className="pointer-events-none absolute top-0 right-0 h-80 w-80 rounded-full bg-white/5 blur-3xl" />
+          <div className="relative grid items-center gap-8 lg:grid-cols-2 lg:gap-10">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-400">Bima Sakhi – Tricity</p>
               <h1 className="mt-4 font-headline text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
@@ -58,6 +74,16 @@ export default function BimaSakhiPage() {
                   </PremiumButton>
                 </Link>
               </div>
+            </div>
+            <div className="relative aspect-[4/3] w-full min-h-[200px] overflow-hidden rounded-2xl border border-white/15 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
+              <Image
+                src="/images/bima-sakhi/bima-sakhi-photos-recognition-14.png"
+                alt="Women-focused training and seminar session"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                priority
+              />
             </div>
           </div>
         </div>
@@ -211,19 +237,17 @@ export default function BimaSakhiPage() {
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <Image src="/images/bima-sakhi/event-award-4.jpg" alt="Professional recognition moment" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/bima-sakhi/recognition-award-individual.jpg" alt="Individual achievement recognition" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/bima-sakhi/recognition-7.jpg" alt="Community recognition celebration" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/bima-sakhi/recognition-1.jpg" alt="Success celebration event" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/bima-sakhi/recognition-2.jpg" alt="LIC celebration event with team members" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/bima-sakhi/recognition-3.jpg" alt="Individual achievement award presentation" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/bima-sakhi/recognition-4.jpg" alt="Recognition moment with team" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/bima-sakhi/recognition-5.jpg" alt="Achievement award ceremony" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/bima-sakhi/recognition-6.jpg" alt="Success milestone celebration" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/about/recognition-8.jpg" alt="Women achiever recognition moment" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/about/recognition-9.jpg" alt="Team member success celebration" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/about/recognition-10.jpg" alt="Achievement recognition event" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
-              <Image src="/images/about/recognition-11.jpg" alt="Bima Sakhi success milestone" width={700} height={520} className="h-48 w-full rounded-2xl object-cover md:h-56" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+              {photosRecognitionGallery.map((photo) => (
+                <Image
+                  key={photo.src}
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={700}
+                  height={520}
+                  className="h-48 w-full rounded-2xl object-cover md:h-56"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              ))}
             </div>
 
             <div className="mt-8 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 p-5 text-center">

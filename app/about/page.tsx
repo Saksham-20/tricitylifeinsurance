@@ -23,7 +23,7 @@ export default function AboutPage() {
   const whatsappHref = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hi, I want to discuss LIC mentorship and recruitment support.')}`;
 
   return (
-    <main className="pb-28 pt-20 lg:pb-0 lg:pt-32">
+    <main className="pb-28 lg:pb-0">
       <section className="px-6 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <FadeInOnScroll className="space-y-5">
@@ -44,7 +44,7 @@ export default function AboutPage() {
             </div>
             <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white p-4 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
               <Image
-                src="/images/home/mentor-portrait-1.jpg"
+                src="/images/home/hero-mentor-portrait.jpg"
                 alt="Subhash Panjla, LIC Development Officer and mentor"
                 width={800}
                 height={1000}
@@ -85,9 +85,19 @@ export default function AboutPage() {
               <p className="mt-4 text-white/75">
                 Applicants receive practical review support, objection-handling guidance, and structured activity follow-up after onboarding.
               </p>
-              <div className="mt-7 grid grid-cols-2 gap-4">
+              <div className="mt-7">
                 <Image
-                  src="/images/training/event-audience.jpg"
+                  src="/images/about/about-team-recognition-medals-celebration.png"
+                  alt="Team recognition with medals and celebration"
+                  width={900}
+                  height={420}
+                  className="h-auto w-full max-h-64 rounded-xl object-cover object-center md:max-h-72"
+                  sizes="(max-width: 1024px) 100vw, 55vw"
+                />
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                <Image
+                  src="/images/about/about-mentor-led-support-audience.jpg"
                   alt="Team collaboration and mentoring session"
                   width={420}
                   height={420}
@@ -95,8 +105,24 @@ export default function AboutPage() {
                   sizes="(max-width: 768px) 50vw, 20vw"
                 />
                 <Image
-                  src="/images/about/about-team-group.jpg"
+                  src="/images/about/about-leadership-team-celebration.jpg"
                   alt="Team members in professional achievement celebration"
+                  width={420}
+                  height={420}
+                  className="h-48 w-full rounded-xl object-cover md:h-56"
+                  sizes="(max-width: 768px) 50vw, 20vw"
+                />
+                <Image
+                  src="/images/about/about-lic-trophy-with-mentor.png"
+                  alt="LIC recognition trophy with mentors in office"
+                  width={420}
+                  height={420}
+                  className="h-48 w-full rounded-xl object-cover md:h-56"
+                  sizes="(max-width: 768px) 50vw, 20vw"
+                />
+                <Image
+                  src="/images/about/about-team-outdoors-five.png"
+                  alt="Mentor team outdoors"
                   width={420}
                   height={420}
                   className="h-48 w-full rounded-xl object-cover md:h-56"
