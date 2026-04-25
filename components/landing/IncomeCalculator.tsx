@@ -76,28 +76,28 @@ export default function IncomeCalculator() {
   return (
     <section
       id="income-planner"
-      className="scroll-mt-[var(--site-header-offset)] bg-[#08192f] px-6 py-10 text-white md:px-10 md:py-14"
+      className="scroll-mt-[var(--site-header-offset)] bg-[#08192f] px-6 py-16 text-white md:px-10 md:py-24"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-16">
           <div>
-            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase text-sky-200">
-              <Calculator className="h-4 w-4" />
+            <p className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-sky-200">
+              <Calculator className="h-5 w-5" />
               Income planning tool
             </p>
-            <h2 className="mt-2 font-headline text-2xl font-extrabold leading-[1.1] tracking-tight md:text-3xl">
+            <h2 className="mt-6 font-headline text-3xl font-extrabold leading-[1.12] tracking-tight md:text-4xl lg:text-5xl">
               Explore a realistic earning path.
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/70">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
               This is a planning tool, not a guarantee. Income is performance-linked, and actual results depend on activity, suitability, persistence, and LIC rules.
             </p>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-white/[0.07] p-4 shadow-[0_20px_54px_rgba(0,0,0,0.22)] backdrop-blur-md md:p-5">
-            <div className="grid gap-4 lg:grid-cols-[1fr_0.72fr]">
-              <div className="space-y-4">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.07] p-5 shadow-[0_20px_54px_rgba(0,0,0,0.22)] backdrop-blur-md md:p-6 lg:p-8">
+            <div className="grid gap-6 lg:grid-cols-[1fr_0.72fr] lg:gap-8">
+              <div className="flex flex-col justify-center space-y-6">
                 <div>
-                  <p className="text-sm font-bold text-white">Choose pathway</p>
+                  <p className="text-[13px] font-bold text-white md:text-sm">Choose pathway</p>
                   <div className="mt-3 grid grid-cols-2 gap-2">
                     {[
                       { id: 'agent' as Path, label: 'LIC Agent' },
@@ -109,7 +109,7 @@ export default function IncomeCalculator() {
                         onClick={() => choosePath(item.id)}
                         className={`rounded-xl border px-3 py-2.5 text-sm font-bold transition-all ${
                           path === item.id
-                            ? 'border-sky-300 bg-sky-300 text-[#061326]'
+                            ? 'border-sky-300 bg-sky-300 text-[#061326] shadow-[0_0_16px_rgba(125,211,252,0.25)]'
                             : 'border-white/[0.12] bg-white/[0.06] text-white hover:bg-white/10'
                         }`}
                       >
@@ -120,9 +120,9 @@ export default function IncomeCalculator() {
                 </div>
 
                 <label className="block">
-                  <span className="flex items-center justify-between gap-3 text-sm font-bold text-white">
+                  <span className="flex items-center justify-between gap-3 text-[13px] font-bold text-white md:text-sm">
                     Weekly time available
-                    <span className="text-sky-300 text-lg">{weeklyHours}h</span>
+                    <span className="text-sky-300 text-lg md:text-xl">{weeklyHours}h</span>
                   </span>
                   <input
                     type="range"
@@ -131,20 +131,20 @@ export default function IncomeCalculator() {
                     step="1"
                     value={weeklyHours}
                     onChange={(event) => handleHoursChange(Number(event.target.value))}
-                    className="mt-4 w-full accent-sky-300 cursor-pointer"
+                    className="mt-4 w-full cursor-pointer accent-sky-300"
                   />
-                  <p className="mt-2 text-xs text-white/50">Slide to see how your earnings grow →</p>
+                  <p className="mt-2 text-xs text-white/50">Slide to see how your earnings grow &rarr;</p>
                 </label>
 
                 {path === 'bima-sakhi' ? (
-                  <div className="rounded-xl border border-amber-200/25 bg-amber-200/10 p-3 text-sm leading-relaxed text-amber-50">
+                  <div className="rounded-xl border border-amber-200/25 bg-amber-200/10 p-4 text-[13px] leading-relaxed text-amber-50 md:text-sm">
                     <p className="font-bold text-amber-100">Bima Sakhi Advantage:</p>
-                    <p className="mt-2">₹7,000/month stipend (year 1) + commission + bonus, subject to LIC norms and performance conditions.</p>
+                    <p className="mt-1.5">₹7,000/month stipend (year 1) + commission + bonus, subject to LIC norms.</p>
                   </div>
                 ) : (
-                  <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3 text-sm leading-relaxed text-white/70">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.06] p-4 text-[13px] leading-relaxed text-white/70 md:text-sm">
                     <p className="font-bold text-white">LIC Agent Model:</p>
-                    <p className="mt-2">Commission-based. Earnings depend on your activity, client relationships, policy quality, and LIC rules.</p>
+                    <p className="mt-1.5">Commission-based. Earnings depend on your activity, client relationships, and LIC rules.</p>
                   </div>
                 )}
               </div>
@@ -154,50 +154,44 @@ export default function IncomeCalculator() {
                 initial={{ opacity: 0.7, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.22 }}
-                className="rounded-3xl border border-white/10 bg-[#061326] p-4"
+                className="flex flex-col justify-center rounded-3xl border border-white/10 bg-[#061326] p-5 md:p-6"
               >
-                <div className="mx-auto flex aspect-square max-w-[176px] items-center justify-center rounded-full p-3"
+                <div className="mx-auto flex aspect-square w-full max-w-[180px] items-center justify-center rounded-full p-3"
                   style={{
                     background: `conic-gradient(#7dd3fc ${snapshot.progress * 3.6}deg, rgba(255,255,255,0.1) 0deg)`,
                   }}
                 >
                   <div className="flex h-full w-full flex-col items-center justify-center rounded-full bg-[#061326] text-center">
-                    <p className="text-xs font-bold uppercase text-white/50">Est. monthly</p>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-white/60 md:text-[11px]">Est. monthly</p>
                     <motion.div
                       key={`${snapshot.monthlyLow}-${snapshot.monthlyHigh}`}
                       initial={{ opacity: 0.5 }}
                       animate={{ opacity: 1 }}
                       className="mt-2 text-center"
                     >
-                      <p className="font-headline text-sm font-extrabold tracking-[0] text-sky-300">
+                      <p className="font-headline text-[1.1rem] font-extrabold tracking-tight text-sky-300 md:text-xl">
                         ₹{formatCurrency(snapshot.monthlyLow)}
                       </p>
-                      <p className="text-xs text-white/50 my-1">to</p>
-                      <p className="font-headline text-sm font-extrabold tracking-[0] text-sky-300">
+                      <p className="my-0.5 text-[10px] text-white/50 md:my-1 md:text-xs">to</p>
+                      <p className="font-headline text-[1.1rem] font-extrabold tracking-tight text-sky-300 md:text-xl">
                         ₹{formatCurrency(snapshot.monthlyHigh)}
                       </p>
                     </motion.div>
-                    <p className="mt-2 text-xs text-white/50">{snapshot.progress}% time selected</p>
+                    <p className="mt-2 text-[10px] text-white/50 md:text-xs">{snapshot.progress}% time</p>
                   </div>
                 </div>
 
-                <div className="mt-4 space-y-3">
+                <div className="mt-6 space-y-3.5">
                   <div className="flex items-start gap-3">
-                    <Clock3 className="mt-0.5 h-5 w-5 text-sky-200" />
-                    <p className="text-sm text-white/70">
-                      Plan for around <span className="font-bold text-sky-300">{snapshot.conversations}</span> meaningful conversations per month.
+                    <Clock3 className="mt-[3px] h-4 w-4 flex-shrink-0 text-sky-200" />
+                    <p className="text-[13px] leading-snug text-white/70">
+                      ~<span className="font-bold text-sky-300">{snapshot.conversations}</span> meaningful conversations/month
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <TrendingUp className="mt-0.5 h-5 w-5 text-sky-200" />
-                    <p className="text-sm text-white/70">
-                      Keep <span className="font-bold text-sky-300">{snapshot.reviews}</span> mentor review sessions on the calendar.
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <ShieldCheck className="mt-0.5 h-5 w-5 text-sky-200" />
-                    <p className="text-sm text-white/70">
-                      Use this as a discussion starter, not an income promise.
+                    <TrendingUp className="mt-[3px] h-4 w-4 flex-shrink-0 text-sky-200" />
+                    <p className="text-[13px] leading-snug text-white/70">
+                      <span className="font-bold text-sky-300">{snapshot.reviews}</span> mentor reviews on calendar
                     </p>
                   </div>
                 </div>
@@ -205,12 +199,12 @@ export default function IncomeCalculator() {
             </div>
 
             {/* Legal Disclaimer */}
-            <div className="mt-4 rounded-xl border border-orange-200/30 bg-orange-50/10 p-3 text-xs leading-relaxed text-orange-100/90">
+            <div className="mt-5 rounded-xl border border-orange-200/30 bg-orange-50/10 p-3 text-[11px] leading-relaxed text-orange-100/90 md:p-4 md:text-xs">
               <div className="flex gap-2">
                 <ShieldCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-orange-100" />
                 <div>
-                  <p className="font-bold text-orange-100 mb-1">Earnings Disclaimer</p>
-                  <p>Ranges shown are <strong>illustrative only</strong> based on activity scenarios. Actual income depends on consistency, client suitability, market conditions, policy completion rates, and LIC performance rules. Discuss realistic targets with your mentor before committing.</p>
+                  <p className="mb-1 font-bold text-orange-100">Illustrative Only</p>
+                  <p>Not an income promise. Actual earnings depend on activity, suitability, conditions, and LIC rules.</p>
                 </div>
               </div>
             </div>
