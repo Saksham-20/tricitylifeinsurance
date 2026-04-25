@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
+import { Volume2, VolumeX } from 'lucide-react';
 
 interface AutoPlayVideoProps {
   videoId: string;
@@ -13,7 +14,9 @@ interface AutoPlayVideoProps {
 
 export default function AutoPlayVideo({ videoId, title, description, showIntro = true }: AutoPlayVideoProps) {
   const videoRef = useRef<HTMLDivElement | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const isInView = useInView(videoRef, { once: true, amount: 0.45 });
+  const [isMuted, setIsMuted] = useState(true);
   const [isMobileView, setIsMobileView] = useState(() => {
     if (typeof window === 'undefined') {
       return false;
@@ -38,7 +41,19 @@ export default function AutoPlayVideo({ videoId, title, description, showIntro =
 
   const shouldLoadVideo = isMobileView || isInView;
 
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0&controls=1&fs=1`;
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0&controls=1&fs=1&enablejsapi=1`;
+
+  const toggleMute = () => {
+    if (iframeRef.current && iframeRef.current.contentWindow) {
+      if (isMuted) {
+        iframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
+        setIsMuted(false);
+      } else {
+        iframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
+        setIsMuted(true);
+      }
+    }
+  };
 
   return (
     <motion.div
@@ -62,14 +77,37 @@ export default function AutoPlayVideo({ videoId, title, description, showIntro =
       <div ref={videoRef} className="relative w-full overflow-hidden rounded-xl bg-black/5">
         <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
           {shouldLoadVideo ? (
-            <iframe
-              src={embedUrl}
-              title={title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              loading={isMobileView ? 'eager' : 'lazy'}
-              className="absolute inset-0 h-full w-full border-0"
-            />
+            <>
+              <iframe
+                ref={iframeRef}
+                src={embedUrl}
+                title={title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading={isMobileView ? 'eager' : 'lazy'}
+                className="absolute inset-0 h-full w-full border-0"
+              />
+              {/* Mobile Mute/Unmute Button */}
+              <div className="md:hidden absolute top-4 right-4 z-10">
+                <button
+                  onClick={toggleMute}
+                  className="flex items-center gap-2 rounded-full bg-black/60 px-3 py-2 text-xs font-medium text-white shadow-sm backdrop-blur-md transition-all hover:bg-black/80"
+                  aria-label={isMuted ? "Unmute video" : "Mute video"}
+                >
+                  {isMuted ? (
+                    <>
+                      <VolumeX className="h-4 w-4" />
+                      <span>Unmute</span>
+                    </>
+                  ) : (
+                    <>
+                      <Volume2 className="h-4 w-4" />
+                      <span>Mute</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </>
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200" />
           )}
