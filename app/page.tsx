@@ -166,11 +166,15 @@ export default function Home() {
 
   return (
     <main className="relative overflow-hidden bg-[#f6f8fc] pb-24 lg:pb-0">
+      <div className="lg:hidden">
+        <BimaSakhiHeroSection />
+      </div>
+
       <section className="relative isolate overflow-hidden bg-[#071730] px-4 text-white md:px-10 lg:min-h-[calc(100svh_-_var(--site-header-offset)_-_1rem)]">
         <div className="landing-gradient-drift absolute inset-0 bg-[linear-gradient(125deg,#071730_0%,#0d2a55_42%,#f8fbff_120%)] opacity-95" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent_28%,rgba(0,0,0,0.18))]" />
 
-        <div className="relative z-10 mx-auto grid max-w-7xl gap-5 py-5 md:gap-8 md:py-10 lg:min-h-[calc(100svh_-_var(--site-header-offset)_-_1rem)] lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-7 py-7 md:gap-8 md:py-10 lg:min-h-[calc(100svh_-_var(--site-header-offset)_-_1rem)] lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
           <div className="order-2 max-w-4xl lg:order-1">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/10 px-3 py-1.5 text-[11px] font-bold uppercase text-sky-100 backdrop-blur-md md:px-4 md:py-2 md:text-xs">
               <BadgeCheck className="h-4 w-4" />
@@ -184,7 +188,7 @@ export default function Home() {
               <span className="block lg:hidden">Pick the situation closest to you, then see the first step without pressure.</span>
               <span className="hidden lg:block">Become an LIC advisor or Bima Sakhi in Chandigarh Tricity with clear guidance from Subhash Panjla.</span>
             </p>
-            <div className="mt-5 flex flex-col gap-2 sm:flex-row md:gap-3 lg:hidden">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row md:gap-3 lg:hidden">
               <LandingCta href="#journey" location="home_hero" ctaType="journey" variant="primary" className="w-full">
                 Find My Starting Point
               </LandingCta>
@@ -352,7 +356,9 @@ export default function Home() {
         </div>
       </section>
 
-      <BimaSakhiHeroSection />
+      <div className="hidden lg:block">
+        <BimaSakhiHeroSection />
+      </div>
 
       <IncomeCalculator />
 
