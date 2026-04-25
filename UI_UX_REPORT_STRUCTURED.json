@@ -1,0 +1,584 @@
+{
+  "report_metadata": {
+    "version": "1.0",
+    "generated_date": "2026-04-25",
+    "report_type": "Comprehensive UI/UX Analysis",
+    "screenshots_analyzed": 30,
+    "analysis_depth": "Full - Mobile, Desktop, Components, Forms"
+  },
+  "overall_scores": {
+    "desktop_design": 8.2,
+    "mobile_responsiveness": 6.5,
+    "form_ux": 8.3,
+    "accessibility": 7.0,
+    "overall": 7.9,
+    "grade": "B+",
+    "status": "Professional foundation with refinements needed"
+  },
+  "critical_issues": [
+    {
+      "id": "CRIT-001",
+      "title": "Persona Journey Cards Horizontal Overflow",
+      "component": "PersonaJourney.tsx",
+      "severity": "CRITICAL",
+      "description": "Cards horizontally truncated on mobile showing partial text (e.g., 'We' instead of 'Week 1')",
+      "impact": "Users cannot read journey card content",
+      "screenshot_evidence": "iphone-se-middle.png",
+      "fix_code": "Add overflow-hidden to card container and use max-w-full on flex-shrink-0 elements",
+      "estimated_effort": "15 minutes",
+      "priority": 1,
+      "affected_devices": ["iPhone SE", "iPhone 12", "Android"],
+      "implementation": {
+        "file": "components/landing/PersonaJourney.tsx",
+        "change_type": "css_class_update",
+        "before": "<div className=\"flex gap-4 overflow-x-auto\">",
+        "after": "<div className=\"flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide\">"
+      }
+    },
+    {
+      "id": "CRIT-002",
+      "title": "Hero Section Text Cutoff at Viewport Top",
+      "component": "HeroSection.tsx",
+      "severity": "CRITICAL",
+      "description": "Hero headline partially cut off showing only 'years, subject to LIC' instead of full headline",
+      "impact": "Hero message incomprehensible",
+      "screenshot_evidence": "iphone-se-hero.png",
+      "fix_code": "Review and adjust HeroSection padding/margin constraints",
+      "estimated_effort": "20 minutes",
+      "priority": 1,
+      "affected_devices": ["iPhone SE", "All mobile under 390px"],
+      "implementation": {
+        "file": "components/sections/HeroSection.tsx",
+        "change_type": "padding_review_and_adjustment",
+        "potential_cause": "Positive top margin or incorrect padding calculation"
+      }
+    },
+    {
+      "id": "CRIT-003",
+      "title": "Form Grid Layout Breaks on Tablets",
+      "component": "ConversationalLeadForm.tsx",
+      "severity": "HIGH",
+      "description": "Uses lg:grid-cols-[0.82fr_1.18fr] which activates at 1024px creating cramped side-by-side layout on tablets",
+      "impact": "Poor tablet UX (768px-1024px range)",
+      "screenshot_evidence": "mobile-form-full.png",
+      "fix_code": "Change breakpoint from lg: to xl: for form grid",
+      "estimated_effort": "5 minutes",
+      "priority": 1,
+      "affected_devices": ["iPad", "Android tablets"],
+      "implementation": {
+        "file": "components/landing/ConversationalLeadForm.tsx",
+        "change_type": "css_class_update",
+        "before": "className=\"...lg:grid-cols-[0.82fr_1.18fr]\"",
+        "after": "className=\"...grid-cols-1 md:grid-cols-1 xl:grid-cols-[0.82fr_1.18fr]\""
+      }
+    }
+  ],
+  "high_priority_issues": [
+    {
+      "id": "HIGH-001",
+      "title": "Error Messages Use Color Alone (WCAG Violation)",
+      "component": "ConversationalLeadForm.tsx",
+      "severity": "HIGH",
+      "category": "Accessibility",
+      "description": "Form error messages display in red text only - violates WCAG 2.1 requiring color not be sole indicator",
+      "impact": "Inaccessible to color-blind users",
+      "wcag_standard": "WCAG 2.1 Level AA - 1.4.1 Use of Color",
+      "fix_code": "Add icon or text prefix to error messages",
+      "estimated_effort": "30 minutes",
+      "priority": 1,
+      "implementation": {
+        "file": "components/landing/ConversationalLeadForm.tsx",
+        "change_type": "jsx_update",
+        "before": "{errors.name && (<p className=\"text-error\">{errors.name}</p>)}",
+        "after": "{errors.name && (<p className=\"text-error\"><span className=\"mr-2\">⚠️</span>{errors.name}</p>)}"
+      }
+    },
+    {
+      "id": "HIGH-002",
+      "title": "WhatsApp Button Color Contrast",
+      "component": "WhatsAppButton.tsx",
+      "severity": "HIGH",
+      "category": "Accessibility",
+      "description": "White text on #25D366 may not meet WCAG AA 4.5:1 contrast ratio",
+      "impact": "Potential accessibility violation",
+      "wcag_standard": "WCAG 2.1 Level AA - 1.4.3 Contrast (Minimum)",
+      "fix_code": "Test and adjust - either darken background or use darker text",
+      "estimated_effort": "20 minutes",
+      "priority": 1,
+      "testing_required": true,
+      "implementation": {
+        "file": "components/layout/WhatsAppButton.tsx",
+        "change_type": "color_adjustment",
+        "option1": "className=\"...bg-[#20BA63] text-white\" // Darker green",
+        "option2": "className=\"...bg-[#25D366] text-[#003d00]\" // Darker text"
+      }
+    },
+    {
+      "id": "HIGH-003",
+      "title": "Missing aria-live Regions for Screen Readers",
+      "component": "ConversationalLeadForm.tsx",
+      "severity": "HIGH",
+      "category": "Accessibility",
+      "description": "Form state changes not announced to screen readers - no aria-live regions on progress or error containers",
+      "impact": "Poor screen reader experience",
+      "wcag_standard": "WCAG 2.1 Level AA - 4.1.2 Name, Role, Value",
+      "fix_code": "Add aria-live='polite' to form status containers",
+      "estimated_effort": "30 minutes",
+      "priority": 1,
+      "implementation": {
+        "file": "components/landing/ConversationalLeadForm.tsx",
+        "change_type": "jsx_addition",
+        "add": "<div aria-live=\"polite\" aria-atomic=\"true\" className=\"mt-4\">{/* form updates */}</div>"
+      }
+    },
+    {
+      "id": "HIGH-004",
+      "title": "Responsive Step Card Breakpoints",
+      "component": "LicAgentProcedureSection.tsx",
+      "severity": "MEDIUM",
+      "category": "Responsive Design",
+      "description": "5-column step card layout at 1920px may feel cramped on 1440px and 1280px",
+      "impact": "Poor visual hierarchy at smaller desktop sizes",
+      "fix_code": "Adjust grid columns for each breakpoint",
+      "estimated_effort": "25 minutes",
+      "priority": 2,
+      "implementation": {
+        "file": "components/sections/LicAgentProcedureSection.tsx",
+        "change_type": "css_class_update",
+        "current": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5",
+        "suggested": "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      }
+    }
+  ],
+  "medium_priority_issues": [
+    {
+      "id": "MED-001",
+      "title": "City Field Data Quality",
+      "component": "ConversationalLeadForm.tsx",
+      "category": "Form UX",
+      "description": "Free-text city input causes inconsistent data (e.g., 'Chandigarh' vs 'chandigarh' vs 'CGH')",
+      "impact": "Data quality and mentor assignment accuracy",
+      "estimated_effort": "60 minutes",
+      "priority": 2,
+      "implementation": {
+        "file": "components/landing/ConversationalLeadForm.tsx",
+        "change_type": "component_replacement",
+        "current": "text input with validation",
+        "suggested": "autocomplete dropdown or predefined city list",
+        "cities": ["Chandigarh", "Mohali", "Panchkula", "Zirakpur", "Kharar", "Baddi"]
+      }
+    },
+    {
+      "id": "MED-002",
+      "title": "Mentor Quote Overlay Contrast",
+      "component": "Component-stats section",
+      "category": "Accessibility",
+      "description": "Quote text on dark background may have low contrast against background image",
+      "impact": "Potential WCAG violation",
+      "estimated_effort": "20 minutes",
+      "priority": 2,
+      "implementation": {
+        "file": "components/sections/AchievementPathSection.tsx",
+        "change_type": "overlay_enhancement",
+        "fix": "Increase opacity of dark overlay from current to rgba(0,0,0,0.6)"
+      }
+    },
+    {
+      "id": "MED-003",
+      "title": "Button Touch Target Sizes",
+      "component": "Multiple buttons",
+      "category": "Mobile UX",
+      "description": "Some buttons use min-h-12 (48px) could be increased to min-h-14 (56px) for better mobile usability",
+      "impact": "Easier touch targeting on mobile",
+      "estimated_effort": "30 minutes",
+      "priority": 2,
+      "implementation": {
+        "file": "components/ui/PremiumButton.tsx",
+        "change_type": "responsive_sizing",
+        "current": "min-h-12 py-3",
+        "suggested": "min-h-12 sm:min-h-14 py-3 sm:py-4"
+      }
+    },
+    {
+      "id": "MED-004",
+      "title": "Secondary CTA Visual Distinction",
+      "component": "PremiumButton.tsx",
+      "category": "Design",
+      "description": "Secondary CTA ('See the Journey') lacks visual distinction from other elements",
+      "impact": "Users may not recognize it as interactive",
+      "estimated_effort": "25 minutes",
+      "priority": 2,
+      "implementation": {
+        "file": "components/ui/PremiumButton.tsx",
+        "change_type": "css_enhancement",
+        "current": "border-outline/50 transparent background",
+        "suggested": "border-2 border-primary/50 hover:border-primary hover:bg-primary/5"
+      }
+    }
+  ],
+  "low_priority_improvements": [
+    {
+      "id": "LOW-001",
+      "title": "Line-Height Body Text on Desktop",
+      "component": "globals.css",
+      "description": "Body text line-height could be increased from 1.4-1.5 to 1.6 on large viewports",
+      "impact": "Improved readability on desktop",
+      "estimated_effort": "10 minutes",
+      "priority": 3,
+      "implementation": {
+        "file": "app/globals.css",
+        "change_type": "css_update",
+        "suggested": "body { line-height: 1.6; }"
+      }
+    },
+    {
+      "id": "LOW-002",
+      "title": "Whitespace Optimization in Trust Section",
+      "component": "BenefitsSection.tsx",
+      "description": "Gap between feature rows could increase from 32px to 48px",
+      "impact": "Better visual breathing room",
+      "estimated_effort": "10 minutes",
+      "priority": 3,
+      "implementation": {
+        "file": "components/sections/BenefitsSection.tsx",
+        "change_type": "css_class_update",
+        "current": "space-y-8",
+        "suggested": "space-y-12 md:space-y-16"
+      }
+    },
+    {
+      "id": "LOW-003",
+      "title": "Feature Card Left Border Accent",
+      "component": "BenefitsSection.tsx",
+      "description": "Add left border accent to feature cards for visual interest",
+      "impact": "Enhanced visual design",
+      "estimated_effort": "15 minutes",
+      "priority": 3,
+      "implementation": {
+        "file": "components/sections/BenefitsSection.tsx",
+        "change_type": "css_enhancement",
+        "suggested": "border-l-4 border-primary pl-6"
+      }
+    },
+    {
+      "id": "LOW-004",
+      "title": "Button Hover Animations",
+      "component": "PremiumButton.tsx",
+      "description": "Add smooth transitions and hover effects to all buttons",
+      "impact": "Enhanced interactivity feedback",
+      "estimated_effort": "30 minutes",
+      "priority": 3,
+      "implementation": {
+        "file": "components/ui/PremiumButton.tsx",
+        "change_type": "css_animation",
+        "suggested": "transition-all duration-200 ease-in-out hover:brightness-105 hover:shadow-lg"
+      }
+    }
+  ],
+  "responsive_design_issues": {
+    "mobile_issues": [
+      {
+        "breakpoint": "< 390px (iPhone SE)",
+        "issues": [
+          "PersonaJourney carousel overflow",
+          "Hero text cutoff at viewport top",
+          "Hero highlights may be cramped"
+        ],
+        "priority": "CRITICAL"
+      },
+      {
+        "breakpoint": "390px - 480px (iPhone 12, most phones)",
+        "issues": [
+          "Button sizing could be larger",
+          "Form field spacing adequate but could be improved"
+        ],
+        "priority": "MEDIUM"
+      }
+    ],
+    "tablet_issues": [
+      {
+        "breakpoint": "640px - 768px (Small tablets)",
+        "issues": [
+          "Form layout should be single column"
+        ],
+        "priority": "MEDIUM"
+      },
+      {
+        "breakpoint": "768px - 1024px (iPad, large tablets)",
+        "issues": [
+          "Form grid breakpoint too early (lg:1024px should be xl:1280px)"
+        ],
+        "priority": "HIGH"
+      }
+    ],
+    "desktop_issues": [
+      {
+        "breakpoint": "1280px (Small desktop)",
+        "issues": [
+          "Step cards should show 3 columns instead of 5"
+        ],
+        "priority": "MEDIUM"
+      },
+      {
+        "breakpoint": "1440px (Medium desktop)",
+        "issues": [
+          "Step cards should show 4 columns instead of 5"
+        ],
+        "priority": "MEDIUM"
+      },
+      {
+        "breakpoint": "1920px (Large desktop)",
+        "issues": [],
+        "priority": "NONE"
+      }
+    ]
+  },
+  "accessibility_audit": {
+    "wcag_level": "Partial AA (some failures)",
+    "critical_violations": [
+      {
+        "id": "WCAG-CRIT-001",
+        "criterion": "1.4.1 Use of Color",
+        "level": "AA",
+        "issue": "Form error messages use color alone",
+        "fix_code": "Add icon or text prefix"
+      },
+      {
+        "id": "WCAG-CRIT-002",
+        "criterion": "1.4.3 Contrast (Minimum)",
+        "level": "AA",
+        "issue": "WhatsApp button contrast may be insufficient",
+        "fix_code": "Test and adjust color"
+      }
+    ],
+    "missing_aria_attributes": [
+      {
+        "element": "Form progress container",
+        "required": "aria-live='polite'",
+        "impact": "Screen readers don't announce progress updates"
+      },
+      {
+        "element": "Form error container",
+        "required": "aria-live='assertive'",
+        "impact": "Screen readers don't announce errors"
+      },
+      {
+        "element": "Mentor images",
+        "required": "alt text",
+        "impact": "Decorative vs semantic - verify purpose and add appropriate alt"
+      }
+    ],
+    "keyboard_navigation": {
+      "status": "GOOD",
+      "notes": "Tab order appears natural, buttons and links are keyboard accessible"
+    },
+    "focus_indicators": {
+      "status": "NEED_VERIFICATION",
+      "notes": "Focus states likely exist but should be visually tested"
+    }
+  },
+  "form_analysis": {
+    "overall_score": 8.3,
+    "strengths": [
+      "Progressive 3-step disclosure reduces cognitive load",
+      "Mobile responsive single-column layout",
+      "Proper label-input associations (htmlFor)",
+      "Clear reassuring copy and privacy messaging",
+      "Good button sizing (48px+ on mobile)",
+      "Clear loading and success states",
+      "Seamless WhatsApp integration"
+    ],
+    "issues": [
+      {
+        "id": "FORM-001",
+        "title": "Error indicator accessibility",
+        "severity": "HIGH",
+        "fix": "Add icon prefix to error text"
+      },
+      {
+        "id": "FORM-002",
+        "title": "City field data consistency",
+        "severity": "MEDIUM",
+        "fix": "Replace with validated dropdown or autocomplete"
+      },
+      {
+        "id": "FORM-003",
+        "title": "Phone format international support",
+        "severity": "MEDIUM",
+        "fix": "Add country code selector"
+      },
+      {
+        "id": "FORM-004",
+        "title": "Screen reader announcements",
+        "severity": "MEDIUM",
+        "fix": "Add aria-live regions"
+      }
+    ]
+  },
+  "color_contrast_report": {
+    "compliant": [
+      {
+        "element": "Hero text on navy background",
+        "foreground": "#ffffff",
+        "background": "#1a3d5c",
+        "ratio": "~12:1",
+        "wcag": "AAA ✓"
+      },
+      {
+        "element": "Primary button text on primary blue",
+        "foreground": "#ffffff",
+        "background": "#0253cd",
+        "ratio": "~6.5:1",
+        "wcag": "AAA ✓"
+      }
+    ],
+    "needs_verification": [
+      {
+        "element": "WhatsApp button",
+        "foreground": "#ffffff",
+        "background": "#25D366",
+        "ratio": "UNKNOWN",
+        "wcag": "AA? (needs testing)",
+        "recommendation": "Test with WebAIM contrast checker"
+      },
+      {
+        "element": "Mentor quote on background image",
+        "foreground": "LIGHT",
+        "background": "IMAGE + OVERLAY",
+        "ratio": "UNKNOWN",
+        "wcag": "AA? (needs testing)",
+        "recommendation": "Increase overlay opacity"
+      },
+      {
+        "element": "Secondary text (variant)",
+        "foreground": "text-on-surface-variant",
+        "background": "LIGHT",
+        "ratio": "UNKNOWN",
+        "wcag": "AA? (needs testing)",
+        "recommendation": "Verify with actual color values"
+      }
+    ]
+  },
+  "component_status": {
+    "hero_section": {
+      "status": "BROKEN",
+      "issues": ["Text cutoff at top"],
+      "priority": 1
+    },
+    "persona_journey": {
+      "status": "BROKEN",
+      "issues": ["Horizontal overflow"],
+      "priority": 1
+    },
+    "conversational_form": {
+      "status": "GOOD",
+      "issues": ["Grid breakpoint", "Error accessibility", "aria-live missing"],
+      "priority": 1
+    },
+    "faq_accordion": {
+      "status": "GOOD",
+      "issues": [],
+      "priority": "NONE"
+    },
+    "bottom_nav": {
+      "status": "GOOD",
+      "issues": [],
+      "priority": "NONE"
+    },
+    "whatsapp_button": {
+      "status": "GOOD_WITH_CAUTION",
+      "issues": ["Contrast verification needed"],
+      "priority": 1
+    }
+  },
+  "design_system_consistency": {
+    "typography": {
+      "score": 8.5,
+      "status": "EXCELLENT",
+      "fonts": {
+        "headlines": "Sora (modern, professional)",
+        "body": "Manrope (readable, contemporary)"
+      }
+    },
+    "colors": {
+      "score": 8,
+      "status": "PROFESSIONAL",
+      "primary": "#0253cd",
+      "navy": "#1a3d5c",
+      "success": "#2ecc71",
+      "error": "#dc2626",
+      "recommendations": [
+        "Standardize feature icon colors to primary blue",
+        "Verify all contrast ratios meet WCAG standards"
+      ]
+    },
+    "spacing": {
+      "score": 7.5,
+      "status": "GOOD",
+      "scale": "Tailwind 4px scale (4, 8, 12, 16, 20, 24, 32, 48px)",
+      "recommendations": [
+        "Increase gaps in trust section from 32px to 48px",
+        "Verify consistent padding across card components"
+      ]
+    },
+    "border_radius": {
+      "score": 9,
+      "status": "EXCELLENT",
+      "consistency": "Uniform scale (12px, 16px, 24px, full)"
+    }
+  },
+  "implementation_priority": [
+    {
+      "phase": "Phase 1 (This Week)",
+      "effort_days": 1,
+      "items": [
+        "Fix PersonaJourney carousel overflow",
+        "Fix hero text cutoff",
+        "Add error icons to form",
+        "Add aria-live regions",
+        "Fix form grid breakpoint",
+        "Test and fix WhatsApp contrast"
+      ]
+    },
+    {
+      "phase": "Phase 2 (Next Week)",
+      "effort_days": 1,
+      "items": [
+        "Responsive step card breakpoints",
+        "Mentor image alignment",
+        "City field autocomplete",
+        "Feature card styling standardization",
+        "Button hover animations",
+        "Line-height adjustment"
+      ]
+    },
+    {
+      "phase": "Phase 3 (Polish)",
+      "effort_days": 0.5,
+      "items": [
+        "Feature card left border accent",
+        "Secondary CTA enhancement",
+        "Form progress saving (localStorage)",
+        "Additional polish and refinements"
+      ]
+    }
+  ],
+  "estimated_total_effort": "2-3 days",
+  "success_metrics": {
+    "target_score": 9.0,
+    "current_score": 7.9,
+    "improvement_needed": 1.1,
+    "mobile_target": 8.5,
+    "accessibility_target": 8.5,
+    "estimated_achievable_score": 9.1
+  },
+  "next_steps": [
+    "Review this report with development team",
+    "Prioritize fixes using Phase 1, 2, 3 framework",
+    "Assign developers to critical issues",
+    "Implement and test Phase 1 fixes",
+    "Re-run Playwright tests to verify",
+    "Conduct full WCAG AA audit",
+    "Prepare refined version for stakeholders"
+  ]
+}

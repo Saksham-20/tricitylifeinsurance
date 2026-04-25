@@ -12,7 +12,7 @@ const benefits = [
   {
     icon: CircleDollarSign,
     title: 'Unlimited Commission',
-    description: 'Earn based on your performance with no cap. Top advisors earn ₹50K–₹2L+ monthly.',
+    description: 'Earn through performance-linked commission, with higher potential as your client base and policy quality grow.',
     iconBg: 'bg-emerald-500/10',
     iconColor: 'text-emerald-600',
     type: 'benefit',
@@ -36,7 +36,7 @@ const benefits = [
   {
     icon: Shield,
     title: 'Career Growth Tiers',
-    description: 'Advance from Agent to Distinguished Club, Branch Manager & beyond. Housing loans, bonuses, and premium benefits await.',
+    description: 'Progress toward club levels where housing loans, bonuses, and other benefits may apply under LIC rules.',
     iconBg: 'bg-amber-500/10',
     iconColor: 'text-amber-600',
     type: 'benefit',
@@ -50,11 +50,11 @@ export default function WhatYouGetSection() {
   return (
     <section className="page-section">
       <div className="mx-auto max-w-7xl">
-        <FadeInOnScroll className="mb-10 md:mb-14">
+        <FadeInOnScroll className="mb-8 md:mb-10">
           <SectionHeading
             eyebrow="Why Join Us"
             title="Support That Feels Practical From Day One"
-            description="Everything you need to build a successful insurance career, with systems that help you learn faster and move forward with confidence."
+            description="Practical support for learning the role, preparing for the exam, and building steady field confidence."
           />
         </FadeInOnScroll>
 

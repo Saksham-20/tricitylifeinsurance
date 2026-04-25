@@ -3,13 +3,13 @@
 import { motion } from 'framer-motion';
 import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
 import SectionHeading from '@/components/ui/SectionHeading';
-import { Award, TrendingUp, Crown } from 'lucide-react';
+import { Award, CheckCircle2, TrendingUp, Crown } from 'lucide-react';
 
 const achievementMilestones = [
   {
     tier: 'Starting Out',
     role: 'LIC Agent / Bima Sakhi',
-    earnings: 'Variable + Stipend',
+    earnings: 'Variable + stipend where eligible',
     benefits: ['Training & mentorship', 'IRDAI certification', 'Solo clients'],
     color: 'from-blue-500 to-indigo-500',
     bgLight: 'bg-blue-50',
@@ -37,7 +37,7 @@ const achievementMilestones = [
     tier: 'Zonal Manager Club',
     role: 'Agent - Level 3+',
     earnings: '₹1.25L–₹2L+/month',
-    benefits: ['Premium benefits', 'Hereditary commission', 'Leadership roles'],
+    benefits: ['Higher-tier benefits', 'Renewal income potential', 'Leadership roles'],
     color: 'from-slate-700 to-slate-900',
     bgLight: 'bg-slate-50',
     icon: Crown,
@@ -52,7 +52,7 @@ export default function AchievementPathSection() {
           <SectionHeading
             eyebrow="Growth Path"
             title="What Progress Can Look Like"
-            description="Performance today leads to prestige tomorrow. Each stage unlocks greater income potential, recognition, and practical career advantages."
+            description="Consistent activity can open higher levels of recognition, income potential, and practical career advantages."
           />
         </FadeInOnScroll>
 
@@ -90,7 +90,7 @@ export default function AchievementPathSection() {
                     <ul className="space-y-2">
                       {milestone.benefits.map((benefit) => (
                         <li key={benefit} className="flex items-start gap-2 text-sm leading-relaxed text-slate-600">
-                          <span className="mt-0.5 font-bold text-primary">✓</span>
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
                           <span>{benefit}</span>
                         </li>
                       ))}

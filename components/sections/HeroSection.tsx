@@ -34,9 +34,9 @@ export default function HeroSection() {
   const variants = intensity === 'full' ? containerVariants : containerVariantsMobile;
 
   return (
-    <section className="relative overflow-hidden px-6 pb-10 pt-8 md:px-10 md:pb-14 md:pt-16">
+    <section className="relative overflow-hidden px-6 pb-6 pt-4 md:px-10 md:pb-6 md:pt-8">
       <div className="mx-auto max-w-7xl">
-        <div className="surface-panel relative overflow-hidden rounded-[2.5rem] px-7 py-8 md:px-10 md:py-10 lg:px-14 lg:py-14">
+        <div className="surface-panel relative overflow-hidden rounded-[2rem] px-6 py-4 md:px-8 md:py-6 lg:px-8 lg:py-8">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
           <div className="absolute -left-20 top-10 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
           <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-secondary-container/20 blur-3xl" />
@@ -46,7 +46,7 @@ export default function HeroSection() {
               variants={variants}
               initial="hidden"
               animate="visible"
-              className="relative z-10 space-y-7"
+              className="relative z-10 space-y-6"
             >
               <motion.div
                 variants={itemVariants}
@@ -58,7 +58,7 @@ export default function HeroSection() {
 
               <motion.h1
                 variants={itemVariants}
-                className="max-w-3xl font-headline text-4xl font-extrabold leading-[1.02] tracking-tight text-on-surface md:text-5xl lg:text-[4.25rem]"
+                className="max-w-3xl font-headline text-2xl font-extrabold leading-[1.1] tracking-tight text-on-surface md:text-3xl lg:text-3xl"
               >
                 Build a career in life insurance with
                 <span className="mt-2 block gradient-text">clarity, confidence, and mentorship.</span>
@@ -66,9 +66,9 @@ export default function HeroSection() {
 
               <motion.p
                 variants={itemVariants}
-                className="max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-xl"
+                className="max-w-2xl text-sm leading-relaxed text-on-surface-variant md:text-base"
               >
-                Join a mentorship-driven LIC team in Chandigarh Tricity. From IRDAI preparation to field support, every step is structured so you can start strong and grow with purpose.
+                Join a practical LIC mentoring team in Chandigarh Tricity. From IRDAI preparation to field support, every step is structured so you can start with clarity.
               </motion.p>
 
               <motion.div

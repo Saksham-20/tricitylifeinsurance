@@ -143,12 +143,12 @@ export default function AboutPage() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex">
               <PremiumButton variant="primary" showArrow icon={<MessageCircle className="h-4 w-4" />}>
-                WhatsApp Discussion
+                Talk on WhatsApp
               </PremiumButton>
             </a>
             <Link href="/apply" className="inline-flex">
               <PremiumButton variant="secondary" showArrow icon={<ArrowRight className="h-4 w-4" />}>
-                Apply Now
+                Apply for Callback
               </PremiumButton>
             </Link>
           </div>

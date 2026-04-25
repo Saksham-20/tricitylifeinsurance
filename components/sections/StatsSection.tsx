@@ -32,7 +32,7 @@ const stats = [
 
 export default function StatsSection() {
   return (
-    <section className="px-6 py-4 md:px-10 md:py-6">
+    <section className="px-6 py-3 md:px-8 md:py-4">
       <div className="mx-auto max-w-7xl">
         <FadeInOnScroll>
           <div className="surface-panel rounded-[2rem] px-5 py-6 md:px-6 md:py-6">

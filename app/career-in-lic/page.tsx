@@ -6,7 +6,7 @@ const achievementMilestones = [
   {
     tier: 'Starting Out',
     role: 'LIC Agent / Bima Sakhi',
-    earnings: 'Variable + Stipend',
+    earnings: 'Variable + stipend where eligible',
     benefits: ['Training & mentorship', 'IRDAI certification', 'Solo clients'],
     color: 'from-blue-500 to-indigo-500',
     bgLight: 'bg-blue-50',
@@ -34,7 +34,7 @@ const achievementMilestones = [
     tier: 'Zonal Manager Club',
     role: 'Agent - Level 3+',
     earnings: 'Rs1.25L-Rs2L+/month',
-    benefits: ['Premium benefits', 'Hereditary commission', 'Leadership roles'],
+    benefits: ['Higher-tier benefits', 'Renewal income potential', 'Leadership roles'],
     color: 'from-slate-700 to-slate-900',
     bgLight: 'bg-slate-50',
     icon: Crown,
@@ -42,17 +42,17 @@ const achievementMilestones = [
 ];
 
 const completeBenefits = [
-  'Attractive commission plus performance bonus',
+  'Commission plus performance bonus where applicable',
   'Housing Loan @5.5% interest rate',
   'Festival Advance (additional funds during festivals)',
   'Mediclaim Insurance coverage',
   'Group Insurance protection',
   'Interest-free Two Wheeler / Car Advance',
   'Office Allowance support',
-  'Hereditary Commission (income continuity)',
+  'Renewal and continuity benefits as per rules',
   'Recognition & awards for achievers',
   'Gratuity benefits',
-  'Lifetime mentorship and ongoing guidance',
+  'Ongoing mentorship and review support',
 ];
 
 export default function CareerInLicPage() {
@@ -89,7 +89,7 @@ export default function CareerInLicPage() {
             <ul className="mt-3 list-disc space-y-1 pl-5 leading-relaxed text-on-surface-variant">
               <li>Low entry barrier: 10th/12th pass candidates can begin.</li>
               <li>Flexible schedule: You decide your working hours.</li>
-              <li>Unlimited earning potential: Income depends on how much you sell.</li>
+              <li>Performance-linked income: Results depend on consistent, suitable advisory work.</li>
               <li>No investment needed: LIC provides training and support.</li>
             </ul>
           </article>
@@ -97,7 +97,7 @@ export default function CareerInLicPage() {
             <h2 className="font-headline text-2xl font-bold text-on-surface">Challenges (don&apos;t ignore these)</h2>
             <ul className="mt-3 list-disc space-y-1 pl-5 leading-relaxed text-on-surface-variant">
               <li>Income is unstable at first: First 6-12 months can be slow.</li>
-              <li>Sales pressure: You must convince people to buy policies.</li>
+              <li>Sales responsibility: You need to explain plans clearly and handle questions professionally.</li>
               <li>Rejection is common: in sales, consistency matters.</li>
               <li>Self-discipline required: No boss means no one pushing you daily.</li>
             </ul>
@@ -182,8 +182,8 @@ export default function CareerInLicPage() {
             <p className="mt-3 leading-relaxed text-on-surface-variant">If you perform well, you can:</p>
             <ul className="mt-2 list-disc space-y-1 pl-5 leading-relaxed text-on-surface-variant">
               <li>Become a Development Officer (after 4/5 years experience)</li>
-              <li>Earn bonuses, foreign trips, awards</li>
-              <li>Build a long-term passive income stream</li>
+              <li>Qualify for bonuses, recognition, and travel benefits as per performance rules</li>
+              <li>Build long-term renewal income through sustained client service</li>
             </ul>
           </article>
           <article className="rounded-3xl border border-outline-variant/30 bg-white p-6 shadow-elevation-1">
@@ -209,7 +209,7 @@ export default function CareerInLicPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/apply" className="inline-flex items-center gap-2 rounded-2xl bg-white px-7 py-3 font-headline text-sm font-bold text-primary">
-              Apply Now
+              Apply for Callback
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/mdrt" className="inline-flex items-center gap-2 rounded-2xl border border-white/35 px-7 py-3 font-headline text-sm font-bold text-white">

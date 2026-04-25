@@ -6,7 +6,7 @@ const quickLinks = [
   { label: 'About', href: '/about' },
   { label: 'Career in LIC', href: '/career-in-lic' },
   { label: 'Bima Sakhi', href: '/bima-sakhi' },
-  { label: 'Apply Now', href: '/apply' },
+  { label: 'Apply for Callback', href: '/apply' },
   { label: 'MDRT', href: '/mdrt' },
 ];
 
@@ -28,10 +28,10 @@ export default function Footer() {
               </div>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/45">
-              Building a network of insurance professionals through structured mentorship since 2001.
+              Practical LIC career guidance for candidates across Chandigarh, Mohali, and Panchkula.
             </p>
             <div className="mt-6 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-secondary-container">
-              Performance Today · Prestige Tomorrow
+              Clear Steps · Steady Support
             </div>
           </div>
 
@@ -76,7 +76,7 @@ export default function Footer() {
                   rel="noreferrer"
                   className="inline-flex rounded-full border border-white/20 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white/80 transition-colors hover:border-white/40 hover:text-white"
                 >
-                  WhatsApp Support
+                  Talk on WhatsApp
                 </a>
               </div>
             </div>

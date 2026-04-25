@@ -1,321 +1,467 @@
-'use client';
-
 import Image from 'next/image';
-import Link from 'next/link';
-import { CheckCircle2, ArrowRight, MessageCircle, PhoneCall, ShieldCheck, ListOrdered } from 'lucide-react';
-import { trackEvent } from '@/lib/analytics';
-import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
-import PremiumButton from '@/components/ui/PremiumButton';
-import PulseDot from '@/components/ui/PulseDot';
-import LicAgentProcedureSection from '@/components/sections/LicAgentProcedureSection';
+import {
+  ArrowDown,
+  BadgeCheck,
+  BookOpenCheck,
+  ClipboardCheck,
+  Compass,
+  FileText,
+  HeartHandshake,
+  MapPin,
+  MessageCircle,
+  PhoneCall,
+  ShieldCheck,
+  Users,
+} from 'lucide-react';
+import LandingCta from '@/components/landing/LandingCta';
+import PersonaJourney, { Persona } from '@/components/landing/PersonaJourney';
+import BimaSakhiHeroSection from '@/components/landing/BimaSakhiHeroSection';
+import IncomeCalculator from '@/components/landing/IncomeCalculator';
+import TransformationJourney from '@/components/landing/TransformationJourney';
+import FAQAccordion from '@/components/landing/FAQAccordion';
+import ConversationalLeadForm from '@/components/landing/ConversationalLeadForm';
 
-const trustStats = [
-  { value: '28+', label: 'Years of mentoring experience' },
-  { value: '300+', label: 'Advisors guided across Tricity' },
-  { value: '60+', label: 'Active advisors in team network' },
-  { value: 'Since 1997', label: 'LIC leadership journey' },
-];
-
-const audienceSegments = [
-  { title: 'Working Professionals', copy: 'Build a second income with weekend and evening support.' },
-  { title: 'Homemakers', copy: 'Start through Bima Sakhi with guided onboarding and flexibility.' },
-  { title: 'Fresh Graduates', copy: 'Learn practical selling and advisory skills from day one.' },
-  { title: 'Sales-Oriented Individuals', copy: 'Grow with a structured path from agent to advanced clubs.' },
-];
-
-const processSteps = [
-  { title: '1. Quick Discussion', copy: 'Call or WhatsApp to discuss your profile and availability.' },
-  { title: '2. Eligibility & Role Fit', copy: 'Get clarity on LIC Agent or Bima Sakhi pathway.' },
-  { title: '3. Training Roadmap', copy: 'Receive exam guidance, onboarding checklist, and mentor support.' },
-  { title: '4. Guided Launch', copy: 'Begin with field assistance and regular review sessions.' },
-];
-
-const testimonials = [
+const personas: Persona[] = [
   {
-    quote: 'The support system gave me confidence in client meetings. I started part-time and built steady renewals within months.',
-    name: 'R. K.',
-    role: 'Part-time Advisor',
-    city: 'Mohali',
+    id: 'professional',
+    title: 'Working Professional',
+    label: 'You want a second income, but your time is limited.',
+    doubt: 'I already have a job. Will I really have time for this?',
+    path: 'Start with evenings, weekends, and a clear weekly activity rhythm.',
+    firstStep:
+      'The first discussion maps your available hours, comfort level, and realistic role fit before you commit to anything.',
+    ctaMessage: 'Hi, I am a working professional and want to understand the LIC career path with part-time support.',
   },
   {
-    quote: 'As a homemaker, I wanted respectful guidance and flexibility. The Bima Sakhi route was clear and practical.',
-    name: 'S. D.',
-    role: 'Bima Sakhi Advisor',
-    city: 'Panchkula',
+    id: 'homemaker',
+    title: 'Homemaker',
+    label: 'You want respectful work that fits around family life.',
+    doubt: 'I have been away from formal work. Will I feel confident?',
+    path: 'Begin with a supportive Bima Sakhi conversation and confidence-first guidance.',
+    firstStep:
+      'You get clarity on eligibility, stipend conditions, documents, and how the first month can feel manageable.',
+    ctaMessage: 'Hi, I am interested in the Bima Sakhi pathway and want guidance from Subhash Panjla.',
   },
   {
-    quote: 'The mentor review process helped me avoid beginner mistakes. I knew exactly what to do each week.',
-    name: 'A. V.',
-    role: 'LIC Agent',
-    city: 'Chandigarh',
+    id: 'graduate',
+    title: 'Fresh Graduate',
+    label: 'You want skills, income, and a career direction.',
+    doubt: 'I am new. What if I do not know how to talk to clients?',
+    path: 'Learn the basics, prepare for IC38, and build your first conversations slowly.',
+    firstStep:
+      'Mentoring starts with product basics, exam preparation, and practical communication habits for beginners.',
+    ctaMessage: 'Hi, I am a fresh graduate and want to explore LIC career mentorship in Chandigarh Tricity.',
   },
+  {
+    id: 'sales',
+    title: 'Sales-Minded',
+    label: 'You like people, persuasion, and performance-based growth.',
+    doubt: 'Can this become a serious long-term career?',
+    path: 'Use your people skills inside a structured growth and review system.',
+    firstStep:
+      'The first call helps you understand activity targets, client conversations, and the long-term advisor path.',
+    ctaMessage: 'Hi, I have sales interest and want to understand growth as an LIC advisor.',
+  },
+  {
+    id: 'self-employed',
+    title: 'Self-Employed',
+    label: 'You already know your local market and relationships.',
+    doubt: 'Can I add this without disturbing my existing work?',
+    path: 'Turn your network into a disciplined advisory opportunity.',
+    firstStep:
+      'You can discuss how LIC advisory fits around your current business, city network, and weekly schedule.',
+    ctaMessage: 'Hi, I am self-employed and want to explore LIC advisory as an additional income path.',
+  },
+];
+
+const howItWorksSteps = [
+  {
+    title: 'Discuss fit',
+    copy: 'A short WhatsApp or call to understand your background, available time, and preferred path.',
+    icon: MessageCircle,
+  },
+  {
+    title: 'Check eligibility',
+    copy: 'LIC agent path starts at 18+ and 10th pass+. Bima Sakhi is women-only, 18-70, 10th pass+.',
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Prepare documents',
+    copy: 'Get practical clarity on education proof, PAN, address proof, photos, and bank details as advised.',
+    icon: FileText,
+  },
+  {
+    title: 'Training + IC38',
+    copy: 'Move through 25 hours of life insurance pre-recruitment training and exam preparation.',
+    icon: BookOpenCheck,
+  },
+  {
+    title: 'Guided launch',
+    copy: 'Start with field confidence, weekly review, and simple activity habits instead of solo guessing.',
+    icon: Compass,
+  },
+];
+
+const trustPoints = [
+  { title: 'Local mentor', copy: 'Guidance for Chandigarh, Mohali, and Panchkula.', icon: MapPin },
+  { title: 'Clear eligibility', copy: 'Role fit explained before paperwork.', icon: ClipboardCheck },
+  { title: 'Exam guidance', copy: 'Support for IC38 preparation and onboarding.', icon: BookOpenCheck },
+  { title: 'WhatsApp support', copy: 'Start with the channel that feels easiest.', icon: MessageCircle },
+  { title: 'Privacy-first form', copy: 'Your details are used only for recruitment guidance.', icon: ShieldCheck },
+  { title: 'Comfortable first discussion', copy: 'Understand the role first, then decide at your pace.', icon: HeartHandshake },
 ];
 
 const faqs = [
   {
-    q: 'Can I start part-time while working another job?',
-    a: 'Yes. Many candidates begin part-time and scale gradually with planned weekly activity targets.',
+    q: 'Can I start part-time while working?',
+    a: 'Yes. Many candidates begin with evenings or weekends. The first discussion should clarify your available time and a realistic activity rhythm.',
   },
   {
     q: 'Is income fixed or variable?',
-    a: 'Income is performance linked. Training is provided to help you build a predictable pipeline over time.',
+    a: 'LIC agent income is performance-linked. Bima Sakhi stipend support is available for three years subject to LIC norms and performance conditions.',
   },
   {
     q: 'Do I need prior insurance experience?',
-    a: 'No. You receive guidance for the certification process, product basics, and client conversations.',
+    a: 'No. The path includes training, IC38 preparation, product basics, and practical guidance for client conversations.',
   },
   {
-    q: 'How soon will someone contact me after applying?',
-    a: 'Most profiles are reviewed within one business day, and callback support is provided in your preferred time window.',
+    q: 'Who can apply for Bima Sakhi?',
+    a: 'As per LIC guidance, Bima Sakhi is a women-only path for candidates aged 18 to 70 with 10th pass or higher qualification, subject to LIC conditions.',
+  },
+  {
+    q: 'What documents are usually needed?',
+    a: 'Typical documents include education proof, PAN, address proof, passport-size photos, and bank details. The exact checklist is shared during onboarding.',
+  },
+  {
+    q: 'How soon will someone contact me?',
+    a: 'Most submitted profiles are reviewed within one business day. You can also continue immediately on WhatsApp.',
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'I did not need pressure. I needed someone to tell me what to do next.',
+    name: 'R. K.',
+    role: 'Part-time Advisor, Mohali',
+    detail:
+      'Started with limited hours and used weekly reviews to build confidence in client conversations.',
+  },
+  {
+    quote: 'The Bima Sakhi path felt respectful because everything was explained simply.',
+    name: 'S. D.',
+    role: 'Bima Sakhi Advisor, Panchkula',
+  },
+  {
+    quote: 'I knew the exam, documents, and first activity plan before I started.',
+    name: 'A. V.',
+    role: 'LIC Agent, Chandigarh',
   },
 ];
 
 export default function Home() {
   const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
-  const whatsappHref = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hi, I want to discuss LIC career opportunities in Chandigarh Tricity.')}`;
+  const whatsappHref = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent(
+    'Hi, I want to discuss LIC career opportunities in Chandigarh Tricity with Subhash Panjla.'
+  )}`;
 
   return (
-    <main className="relative overflow-hidden pb-24 lg:pb-0">
-      <section className="px-6 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-8 rounded-[2.25rem] border border-primary/10 bg-white p-6 shadow-[0_20px_70px_rgba(15,24,41,0.08)] md:p-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
-          <FadeInOnScroll className="space-y-6">
-            <p className="section-tag">
-              <ShieldCheck className="h-4 w-4 text-primary" />
-              LIC Career Recruitment Desk - Chandigarh Tricity
+    <main className="relative overflow-hidden bg-[#f6f8fc] pb-24 lg:pb-0">
+      <section className="relative isolate overflow-hidden bg-[#071730] px-4 text-white md:px-10 lg:min-h-[calc(100svh_-_var(--site-header-offset)_-_1rem)]">
+        <div className="landing-gradient-drift absolute inset-0 bg-[linear-gradient(125deg,#071730_0%,#0d2a55_42%,#f8fbff_120%)] opacity-95" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent_28%,rgba(0,0,0,0.18))]" />
+
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-5 py-5 md:gap-8 md:py-10 lg:min-h-[calc(100svh_-_var(--site-header-offset)_-_1rem)] lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+          <div className="order-2 max-w-4xl lg:order-1">
+            <p className="inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/10 px-3 py-1.5 text-[11px] font-bold uppercase text-sky-100 backdrop-blur-md md:px-4 md:py-2 md:text-xs">
+              <BadgeCheck className="h-4 w-4" />
+              LIC Career Mentor - Chandigarh Tricity
             </p>
-            <h1 className="font-headline text-4xl font-extrabold leading-tight text-on-surface md:text-5xl">
-              Build a reliable second income and long-term insurance career with mentor-led support.
+            <h1 className="mt-3 font-headline text-[1.75rem] font-extrabold leading-[1.05] tracking-[0] text-white sm:text-4xl md:text-5xl lg:mt-4 lg:text-[3.85rem]">
+              <span className="block lg:hidden">Not sure where your LIC path starts?</span>
+              <span className="hidden lg:block">A career feels easier when someone walks the first steps with you.</span>
             </h1>
-            <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg">
-              For professionals, homemakers, fresh graduates, and sales-oriented individuals who want a structured LIC opportunity.
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base">
+              <span className="block lg:hidden">Pick the situation closest to you, then see the first step without pressure.</span>
+              <span className="hidden lg:block">Become an LIC advisor or Bima Sakhi in Chandigarh Tricity with clear guidance from Subhash Panjla.</span>
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <a href={whatsappHref} target="_blank" rel="noreferrer">
-                <PremiumButton
-                  variant="primary"
-                  size="md"
-                  showArrow
-                  attentionOnce
-                  attentionKey="home-whatsapp"
-                  onClick={() => trackEvent('cta_click', { location: 'home_hero', cta_type: 'whatsapp' })}
-                >
-                  Talk on WhatsApp
-                </PremiumButton>
-              </a>
-              <Link href="/apply" onClick={() => trackEvent('cta_click', { location: 'home_hero', cta_type: 'apply' })}>
-                <PremiumButton variant="secondary" size="md" showArrow>
-                  Apply Now
-                </PremiumButton>
-              </Link>
+            <div className="mt-5 flex flex-col gap-2 sm:flex-row md:gap-3 lg:hidden">
+              <LandingCta href="#journey" location="home_hero" ctaType="journey" variant="primary" className="w-full">
+                Find My Starting Point
+              </LandingCta>
+              <LandingCta href={whatsappHref} location="home_hero" ctaType="whatsapp" variant="dark" className="w-full">
+                WhatsApp the Mentor
+              </LandingCta>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {trustStats.map((stat) => (
-                <div key={stat.label} className="rounded-2xl border border-outline-variant/35 bg-surface-container-low p-4">
-                  <p className="font-headline text-2xl font-extrabold text-on-surface">{stat.value}</p>
-                  <p className="text-sm text-on-surface-variant">{stat.label}</p>
+            <div className="mt-5 hidden flex-col gap-2 sm:flex-row md:gap-3 lg:flex">
+              <LandingCta href={whatsappHref} location="home_hero" ctaType="whatsapp" variant="whatsapp">
+                Start with WhatsApp
+              </LandingCta>
+              <LandingCta href="#journey" location="home_hero" ctaType="journey" variant="dark">
+                See the Journey
+              </LandingCta>
+            </div>
+            <a
+              href="#journey"
+              className="mt-4 flex items-center justify-between gap-3 rounded-2xl border border-white/[0.14] bg-white/[0.08] p-3 text-left backdrop-blur-md transition-colors hover:bg-white/[0.12] lg:hidden"
+            >
+              <span>
+                <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-sky-200">Start where you are</span>
+                <span className="mt-1 block text-sm font-semibold text-white">Job · home · college · business</span>
+              </span>
+              <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white text-[#071730]">
+                <ArrowDown className="h-4 w-4" />
+              </span>
+            </a>
+          </div>
+
+          <div className="relative order-1 mx-auto w-full max-w-[420px] lg:order-2 lg:ml-auto lg:max-w-[500px]">
+            <div className="relative aspect-[16/10] max-h-[215px] overflow-hidden rounded-3xl border border-white/[0.16] bg-white/[0.08] shadow-[0_28px_72px_rgba(0,0,0,0.28)] md:aspect-[4/5] md:max-h-none">
+              <Image
+                src="/images/home/hero-mentor-portrait.jpg"
+                alt="Subhash Panjla, LIC career mentor"
+                fill
+                priority
+                className="object-cover object-center md:object-top"
+                sizes="(max-width: 1024px) 90vw, 42vw"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(7,23,48,0.86))]" />
+              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7">
+                <p className="text-sm font-bold uppercase text-sky-100">Subhash Panjla</p>
+                <p className="mt-2 font-headline text-lg font-bold tracking-[0] text-white md:text-2xl">
+                  Mentor-led LIC career guidance
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-3 hidden gap-2 sm:grid sm:grid-cols-3 lg:block">
+              {[
+                { value: 'Since 1997', label: 'LIC journey', className: 'lg:absolute lg:-left-16 lg:top-12' },
+                { value: '300+', label: 'Advisors guided', className: 'lg:absolute lg:-right-10 lg:top-1/2' },
+                { value: 'Tricity', label: 'Local support', className: 'lg:absolute lg:-left-10 lg:bottom-16' },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className={`rounded-xl border border-white/[0.18] bg-white/[0.12] px-3 py-2 text-white shadow-[0_14px_30px_rgba(0,0,0,0.16)] backdrop-blur-xl md:px-4 md:py-3 ${stat.className}`}
+                >
+                  <p className="font-headline text-lg font-extrabold tracking-[0]">{stat.value}</p>
+                  <p className="mt-1 text-xs text-white/[0.65]">{stat.label}</p>
                 </div>
               ))}
             </div>
-          </FadeInOnScroll>
-          <FadeInOnScroll direction="left">
-            <div className="rounded-[1.75rem] border border-primary/10 bg-surface-container-low p-3">
-              <div className="overflow-hidden rounded-[1.25rem] border border-primary/15 bg-[#0f1829]">
-                <div className="flex items-start p-4">
-                  <div className="inline-flex items-center rounded-full border border-white/20 bg-black/45 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm">
-                    Mentorship Since 1997
-                  </div>
-                </div>
+          </div>
+        </div>
+      </section>
 
-                <div className="px-3 pb-3">
-                  <div className="relative h-[360px] w-full overflow-hidden rounded-[1rem] md:h-[420px] lg:h-[480px]">
-                    <Image
-                      src="/images/home/hero-mentor-portrait.jpg"
-                      alt="Subhash Panjla, LIC Development Officer and mentor"
-                      fill
-                      priority
-                      className="object-cover object-top"
-                      sizes="(max-width: 1024px) 100vw, 42vw"
-                    />
-                  </div>
-                </div>
+      <section className="bg-white px-6 py-10 md:px-10 md:py-14">
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="text-sm font-bold uppercase text-primary">The quiet truth</p>
+          <h2 className="mt-4 font-headline text-3xl font-extrabold leading-[1.08] tracking-[0] text-on-surface md:text-4xl">
+            You are not confused because you are weak.
+          </h2>
+          <p className="motion-safe:animate-fade-in-up mt-4 font-headline text-xl font-bold leading-[1.16] tracking-[0] text-on-surface md:text-3xl">
+            You are confused because no one has explained the path simply.
+          </p>
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-on-surface-variant">
+            Income, exams, documents, clients, confidence - most people simply need the path explained in the right order.
+          </p>
+        </div>
+      </section>
 
-                <div className="m-3 mt-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_10px_24px_rgba(15,24,41,0.18)]">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-primary">Subhash Panjla</p>
-                      <p className="mt-1 font-headline text-xl font-bold text-on-surface">Founder and Lead Mentor</p>
-                      <p className="mt-1 text-sm text-on-surface-variant">Practical guidance for new advisors and women entering through the Bima Sakhi pathway.</p>
-                    </div>
-                    <div className="rounded-2xl bg-primary/10 px-3 py-2 text-right">
-                      <p className="font-headline text-xl font-bold text-primary">300+</p>
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.13em] text-on-surface-variant">Team Trained</p>
-                    </div>
-                  </div>
-                </div>
+      <PersonaJourney personas={personas} whatsappNumber={whatsappNumber} />
+
+      <section className="bg-white px-6 py-10 md:px-10 md:py-14">
+        <div className="mx-auto grid max-w-7xl gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="relative order-2 lg:order-1">
+            <div className="relative aspect-[5/3.7] overflow-hidden rounded-3xl lg:aspect-[5/4]">
+              <Image
+                src="/images/about/about-leadership-team-celebration.jpg"
+                alt="Subhash Panjla with LIC career team members"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 48vw"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgba(7,23,48,0.72))]" />
+              <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/[0.18] bg-white/[0.12] p-4 text-white backdrop-blur-md">
+                <p className="text-sm font-bold uppercase text-sky-100">Mentor note</p>
+                <p className="mt-2 font-headline text-lg font-bold tracking-[0]">
+                  The first win is not a sale. The first win is knowing what to do next.
+                </p>
               </div>
             </div>
-          </FadeInOnScroll>
-        </div>
-      </section>
-
-      <div className="mt-12">
-        <LicAgentProcedureSection />
-      </div>
-
-      <section className="mt-12 px-6 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {audienceSegments.map((item) => (
-            <FadeInOnScroll key={item.title}>
-              <article className="h-full rounded-2xl border border-outline-variant/30 bg-white p-5 transition-all duration-200 hover:scale-[1.01] hover:shadow-[0_12px_24px_rgba(15,24,41,0.08)]">
-                <h2 className="font-headline text-xl font-bold text-on-surface">{item.title}</h2>
-                <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{item.copy}</p>
-              </article>
-            </FadeInOnScroll>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-12 px-6 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
-          <FadeInOnScroll>
-            <article className="rounded-[2rem] border border-primary/15 bg-white p-7">
-              <h3 className="font-headline text-3xl font-bold text-on-surface">Why join under this mentor</h3>
-              <ul className="mt-5 space-y-3">
-                {[
-                  'Clear weekly action plan and field guidance',
-                  'Practical support for client objections and follow-up',
-                  'Local market knowledge for Chandigarh Tricity',
-                  'Supportive team environment, not solo struggle',
-                ].map((point) => (
-                  <li key={point} className="flex items-start gap-2 text-on-surface-variant">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 text-primary" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </FadeInOnScroll>
-          <FadeInOnScroll direction="left">
-            <article className="rounded-[2rem] border border-primary/15 bg-[#0f1829] p-7 text-white">
-              <h3 className="font-headline text-3xl font-bold">How it works</h3>
-              <div className="mt-5 space-y-3">
-                {processSteps.map((step) => (
-                  <div key={step.title} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <p className="font-semibold">{step.title}</p>
-                    <p className="mt-1 text-sm text-white/75">{step.copy}</p>
-                  </div>
-                ))}
-              </div>
-            </article>
-          </FadeInOnScroll>
-        </div>
-      </section>
-
-      <section className="mt-12 px-6 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
-          <FadeInOnScroll>
-            <article className="rounded-[2rem] border border-amber-200 bg-amber-50/40 p-7">
-              <div className="flex items-center gap-2">
-                <PulseDot />
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Bima Sakhi Opportunity</p>
-              </div>
-              <h3 className="mt-3 font-headline text-3xl font-bold text-on-surface">A supportive route for women re-starting careers</h3>
-              <p className="mt-3 text-on-surface-variant">
-                Flexible schedule, training support, and a confidence-first onboarding experience designed for homemakers and women professionals.
-              </p>
-              <Link href="/bima-sakhi" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
-                Explore Bima Sakhi details <ArrowRight className="h-4 w-4" />
-              </Link>
-            </article>
-          </FadeInOnScroll>
-          <FadeInOnScroll direction="left">
-            <article className="rounded-[2rem] border border-primary/20 bg-primary/5 p-7">
-              <div className="flex items-center gap-2">
-                <PulseDot />
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Growth Path Highlight</p>
-              </div>
-              <h3 className="mt-3 font-headline text-3xl font-bold text-on-surface">From beginner to high-performance advisor</h3>
-              <p className="mt-3 text-on-surface-variant">
-                Follow a realistic progression with ongoing mentoring, performance reviews, and advanced growth pathways including MDRT ambition.
-              </p>
-              <Link href="/mdrt" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">
-                View MDRT pathway <ArrowRight className="h-4 w-4" />
-              </Link>
-            </article>
-          </FadeInOnScroll>
-        </div>
-      </section>
-
-      <section className="mt-12 px-6 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <FadeInOnScroll>
-            <h3 className="font-headline text-3xl font-bold text-on-surface md:text-4xl">Testimonials from local candidates</h3>
-            <p className="mt-2 text-on-surface-variant">Names partially anonymized for privacy. Real outcomes vary by activity, consistency, and compliance.</p>
-          </FadeInOnScroll>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {testimonials.map((item) => (
-              <FadeInOnScroll key={item.quote}>
-                <article className="h-full rounded-2xl border border-outline-variant/30 bg-white p-5">
-                  <p className="text-sm leading-relaxed text-on-surface-variant">&ldquo;{item.quote}&rdquo;</p>
-                  <div className="mt-4 border-t border-outline-variant/20 pt-3">
-                    <p className="font-headline text-base font-bold text-on-surface">{item.name}</p>
-                    <p className="text-xs text-on-surface-variant">{item.role} - {item.city}</p>
-                  </div>
-                </article>
-              </FadeInOnScroll>
-            ))}
           </div>
-        </div>
-      </section>
 
-      <section className="mt-12 px-6 md:px-10">
-        <div className="mx-auto max-w-7xl rounded-[2rem] border border-primary/15 bg-white p-7">
-          <FadeInOnScroll>
-            <h3 className="font-headline text-3xl font-bold text-on-surface">Frequently asked questions</h3>
-          </FadeInOnScroll>
-          <div className="mt-5 space-y-3">
-            {faqs.map((item) => (
-              <FadeInOnScroll key={item.q}>
-                <details className="group rounded-2xl border border-outline-variant/30 bg-surface-container-low p-4">
-                  <summary className="cursor-pointer list-none font-semibold text-on-surface">{item.q}</summary>
-                  <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">{item.a}</p>
-                </details>
-              </FadeInOnScroll>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mt-12 px-6 pb-16 md:px-10">
-        <div className="mx-auto max-w-7xl rounded-[2rem] bg-[#0f1829] p-8 text-white md:p-10">
-          <FadeInOnScroll>
-            <h3 className="font-headline text-3xl font-bold md:text-4xl">Ready to discuss your next step?</h3>
-            <p className="mt-3 max-w-3xl text-white/75">
-              Choose the channel that feels easiest. Our team shares role clarity first, then guides you through the process.
+          <div className="order-1 lg:order-2">
+            <p className="text-sm font-bold uppercase text-primary">Mentor authority</p>
+            <h2 className="mt-3 font-headline text-2xl font-extrabold leading-[1.08] tracking-[0] text-on-surface md:text-4xl">
+              Meet the mentor behind the system.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-on-surface-variant">
+              Subhash Panjla has guided advisors across Chandigarh, Mohali, and Panchkula with practical onboarding, field confidence, and steady review.
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] px-6 py-3 font-headline font-bold text-white transition-all duration-200 hover:scale-[1.01]">
-                <MessageCircle className="h-4 w-4" />
-                WhatsApp Now
-              </a>
-              <Link href="/apply" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/30 px-6 py-3 font-headline font-bold text-white transition-all duration-200 hover:scale-[1.01]">
-                Apply for Callback
-              </Link>
-              <a href="tel:+918872364673" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/30 px-6 py-3 font-headline font-bold text-white transition-all duration-200 hover:scale-[1.01]">
-                <PhoneCall className="h-4 w-4" />
-                Call Now
-              </a>
-              <Link
-                href="/#lic-agent-procedure"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-3 font-headline font-bold text-white transition-all duration-200 hover:scale-[1.01]"
-              >
-                <ListOrdered className="h-4 w-4 text-white" aria-hidden />
-                Procedure
-              </Link>
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              {[
+                { value: '28+', label: 'Years of mentoring experience' },
+                { value: '300+', label: 'Advisors guided' },
+                { value: '60+', label: 'Active team network' },
+              ].map((stat) => (
+                <div key={stat.label} className="border-l-2 border-primary/[0.22] pl-4">
+                  <p className="font-headline text-2xl font-extrabold tracking-[0] text-on-surface">{stat.value}</p>
+                  <p className="mt-1 text-sm text-on-surface-variant">{stat.label}</p>
+                </div>
+              ))}
             </div>
-          </FadeInOnScroll>
+          </div>
         </div>
       </section>
+
+      <section className="bg-[#eef4ff] px-6 py-10 md:px-10 md:py-14">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase text-primary">How it works</p>
+            <h2 className="mt-4 font-headline text-2xl font-extrabold leading-[1.08] tracking-[0] text-on-surface md:text-4xl">
+              A clear path, not a vague promise.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-on-surface-variant md:text-base">
+              Each step is meant to remove uncertainty before asking you to move forward.
+            </p>
+          </div>
+
+          <div className="relative mt-8">
+            <div className="absolute left-6 top-6 hidden h-px w-[calc(100%-3rem)] bg-primary/[0.18] lg:block" />
+            <ol className="grid gap-5 lg:grid-cols-5">
+              {howItWorksSteps.map((step, index) => {
+                const Icon = step.icon;
+
+                return (
+                  <li key={step.title} className="relative rounded-3xl border border-primary/[0.12] bg-white p-4 shadow-[0_14px_34px_rgba(15,24,41,0.06)]">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-white">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <p className="mt-5 text-sm font-bold uppercase text-primary">Step {index + 1}</p>
+                    <h3 className="mt-3 font-headline text-xl font-bold tracking-[0] text-on-surface">{step.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">{step.copy}</p>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+
+          <p className="mt-8 max-w-3xl rounded-2xl border border-primary/[0.12] bg-white/70 p-4 text-xs leading-relaxed text-on-surface-variant md:text-sm">
+            Official context: LIC agent appointment includes eligibility checks and pre-recruitment training. Bima Sakhi stipend and eligibility are subject to LIC rules and performance norms.
+          </p>
+        </div>
+      </section>
+
+      <BimaSakhiHeroSection />
+
+      <IncomeCalculator />
+
+      <TransformationJourney />
+
+
+
+      <section className="bg-white px-6 py-10 md:px-10 md:py-14">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
+            <div>
+              <p className="text-sm font-bold uppercase text-primary">Stories</p>
+              <h2 className="mt-4 font-headline text-2xl font-extrabold leading-[1.08] tracking-[0] text-on-surface md:text-4xl">
+                What changes when guidance is present?
+              </h2>
+            </div>
+            <p className="text-sm leading-relaxed text-on-surface-variant md:text-base">
+              Names are partially anonymized for privacy. Individual results vary by activity, consistency, compliance, and suitability.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-5 lg:grid-cols-[1.08fr_0.92fr]">
+            <article className="rounded-3xl bg-[#071730] p-6 text-white md:p-8">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#071730]">
+                <Users className="h-6 w-6" />
+              </div>
+              <p className="mt-10 max-w-3xl font-headline text-2xl font-bold leading-[1.16] tracking-[0] md:text-3xl">
+                &ldquo;{testimonials[0].quote}&rdquo;
+              </p>
+              <div className="mt-8 border-t border-white/[0.14] pt-5">
+                <p className="font-headline text-lg font-bold tracking-[0]">{testimonials[0].name}</p>
+                <p className="mt-1 text-sm text-white/60">{testimonials[0].role}</p>
+                <p className="mt-4 max-w-xl text-xs leading-relaxed text-white/70 md:text-sm">{testimonials[0].detail}</p>
+              </div>
+            </article>
+
+            <div className="grid gap-5">
+              {testimonials.slice(1).map((item) => (
+                <article key={item.quote} className="rounded-3xl border border-outline-variant/25 bg-[#f7f9fd] p-5">
+                  <p className="font-headline text-lg font-bold leading-snug tracking-[0] text-on-surface md:text-xl">
+                    &ldquo;{item.quote}&rdquo;
+                  </p>
+                  <p className="mt-6 text-sm font-bold text-on-surface">{item.name}</p>
+                  <p className="mt-1 text-sm text-on-surface-variant">{item.role}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#f6f8fc] px-6 py-10 md:px-10 md:py-14">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+            <div>
+              <p className="text-sm font-bold uppercase text-primary">Trust</p>
+              <h2 className="mt-4 font-headline text-2xl font-extrabold leading-[1.08] tracking-[0] text-on-surface md:text-4xl">
+                Simple reasons people feel comfortable starting here.
+              </h2>
+            </div>
+
+            <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+              {trustPoints.map((point) => {
+                const Icon = point.icon;
+
+                return (
+                  <div key={point.title} className="flex gap-4">
+                    <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-primary/[0.08] text-primary">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-headline text-base font-bold tracking-[0] text-on-surface">{point.title}</h3>
+                      <p className="mt-1 text-xs leading-relaxed text-on-surface-variant md:text-sm">{point.copy}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <FAQAccordion items={faqs} />
+
+      <section className="bg-[#071730] px-6 py-10 text-white md:px-10 md:py-14">
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="text-sm font-bold uppercase text-sky-200">Next step</p>
+          <h2 className="mt-4 font-headline text-3xl font-extrabold leading-[1.08] tracking-[0] md:text-5xl">
+            You do not have to decide everything today.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
+            Just start the conversation.
+          </p>
+          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+            <LandingCta href={whatsappHref} location="final_cta" ctaType="whatsapp" variant="whatsapp">
+              WhatsApp Subhash Panjla
+            </LandingCta>
+            <LandingCta href="#application-form" location="final_cta" ctaType="apply" variant="dark">
+              Apply for a Callback
+            </LandingCta>
+            <LandingCta href="tel:+918872364673" location="final_cta" ctaType="call" variant="dark" showArrow={false}>
+              <PhoneCall className="h-4 w-4" />
+              Call Now
+            </LandingCta>
+          </div>
+        </div>
+      </section>
+
+      <ConversationalLeadForm whatsappNumber={whatsappNumber} />
     </main>
   );
 }

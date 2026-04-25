@@ -27,12 +27,12 @@ export default function PremiumCard({
     'elevation-4': 'shadow-elevation-4',
   };
 
-  const baseClasses = `rounded-2xl transition-all duration-200 ${border ? 'border border-primary/10' : ''} ${shadowClasses[shadow]}`;
+  const baseClasses = `rounded-2xl transition-colors duration-200 ${border ? 'border border-primary/10' : ''} ${shadowClasses[shadow]}`;
 
   return (
     <motion.div
       initial={{ scale: 1 }}
-      whileHover={hover ? { scale: 1.01, boxShadow: '0 12px 22px rgba(15, 24, 41, 0.12)' } : { scale: 1 }}
+      whileHover={hover ? { scale: 1.004, boxShadow: '0 12px 22px rgba(15, 24, 41, 0.1)' } : { scale: 1 }}
       whileTap={hover ? { scale: 0.995 } : { scale: 1 }}
       transition={{ duration: 0.25 }}
       onClick={onClick}

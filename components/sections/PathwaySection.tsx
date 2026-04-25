@@ -5,7 +5,7 @@ import PremiumCard from '@/components/ui/PremiumCard';
 import FadeInOnScroll from '@/components/ui/FadeInOnScroll';
 import { useResponsiveMotion } from '@/hooks/useResponsiveMotion';
 import { containerVariants, containerVariantsMobile, itemVariants } from '@/lib/animationVariants';
-import { GraduationCap, Clock, Heart } from 'lucide-react';
+import { Clock, Heart } from 'lucide-react';
 
 const pathways = [
   {
@@ -18,7 +18,7 @@ const pathways = [
   },
   {
     title: 'Homemakers (Bima Sakhi)',
-    copy: 'Exclusively for Women earning independent income with flexible hours and comprehensive support. Min qualification: 10th onwards.',
+    copy: 'For women who want flexible work, stipend support subject to LIC rules, and practical guidance. Minimum qualification: 10th pass.',
     icon: Heart,
     iconBg: 'bg-amber-500/10',
     iconColor: 'text-amber-600',
@@ -31,28 +31,28 @@ export default function PathwaySection() {
   const containerVar = intensity === 'full' ? containerVariants : containerVariantsMobile;
 
   return (
-    <section className="py-16 md:py-24 px-6 md:px-10">
+    <section className="py-10 md:py-16 px-6 md:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
-        <FadeInOnScroll className="mb-10 md:mb-14">
+        <FadeInOnScroll className="mb-8 md:mb-10">
           <div className="text-center">
             <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-3">Career Pathways</p>
-            <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface mb-4">
+            <h2 className="font-headline text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-on-surface mb-4 text-center">
               Find Your Path
             </h2>
-            <p className="text-base md:text-lg text-on-surface-variant max-w-2xl mx-auto">
+            <p className="text-sm md:text-base text-on-surface-variant max-w-2xl mx-auto">
               Whether you&apos;re starting fresh or looking for a flexible income stream, we have a pathway for you.
             </p>
           </div>
         </FadeInOnScroll>
 
-        {/* Pathway Cards Grid — 3 cards */}
+        {/* Pathway Cards Grid */}
         <motion.div
           variants={containerVar}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="grid gap-6 md:grid-cols-3"
+          className="grid gap-5 md:grid-cols-3"
         >
           {pathways.map((pathway) => {
             const IconComponent = pathway.icon;
@@ -63,7 +63,7 @@ export default function PathwaySection() {
               >
                 <PremiumCard
                   hover
-                  className="h-full p-8 md:p-8 bg-white rounded-2xl group cursor-default"
+                  className="h-full p-6 md:p-6 bg-white rounded-2xl group cursor-default"
                 >
                   <div className="flex flex-col gap-5 h-full">
                     {/* Icon */}

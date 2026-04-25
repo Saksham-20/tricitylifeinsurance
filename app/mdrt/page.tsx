@@ -20,14 +20,14 @@ export default function MdrtPage() {
           <h2 className="mt-4 font-headline text-2xl font-bold text-on-surface md:text-3xl">Become an MDRT Achiever with Us</h2>
           <p className="mt-2 text-lg font-semibold text-primary">Build a Career, Not Just Income</p>
           <p className="mt-3 max-w-3xl leading-relaxed text-on-surface-variant">
-            Join a system designed to help you grow from Agent to MDRT Professional
+            Join a practical mentoring system for advisors who want to work toward MDRT-level performance.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <button
               onClick={handleWhatsAppClick}
-              className="inline-flex items-center gap-2 rounded-2xl bg-[#25D366] px-6 py-3 font-headline text-sm font-bold text-white shadow-[0_4px_20px_rgba(37,211,102,0.3)] transition-all duration-200 hover:shadow-[0_6px_30px_rgba(37,211,102,0.45)]"
+              className="inline-flex items-center gap-2 rounded-2xl bg-[#167C3A] px-6 py-3 font-headline text-sm font-bold text-white shadow-[0_4px_18px_rgba(22,124,58,0.3)] transition-colors duration-200 hover:bg-[#126C32]"
             >
-              Contact on WhatsApp
+              Talk on WhatsApp
               <ArrowRight className="h-4 w-4" />
             </button>
             <Link href="/apply" className="inline-flex items-center gap-2 rounded-2xl border border-primary/25 px-6 py-3 font-headline text-sm font-bold text-primary">
@@ -42,8 +42,8 @@ export default function MdrtPage() {
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
           <article className="rounded-3xl border border-outline-variant/35 bg-white p-6">
             <TrendingUp className="h-6 w-6 text-primary" />
-            <h3 className="mt-3 font-headline text-xl font-bold text-on-surface">Unlimited Income Potential</h3>
-            <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">No salary limits - your effort defines your earnings</p>
+            <h3 className="mt-3 font-headline text-xl font-bold text-on-surface">Performance-Linked Income</h3>
+            <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">Your earnings grow with consistent activity, client trust, and policy quality.</p>
           </article>
           <article className="rounded-3xl border border-outline-variant/35 bg-white p-6">
             <Users className="h-6 w-6 text-primary" />
@@ -68,13 +68,13 @@ export default function MdrtPage() {
             <h2 className="font-headline text-2xl font-bold text-on-surface">Start Your Journey in Life Insurance</h2>
             <p className="mt-3 text-on-surface-variant">Are you looking for:</p>
             <ul className="mt-2 list-disc space-y-1 pl-5 leading-relaxed text-on-surface-variant">
-              <li>Unlimited income potential</li>
+              <li>Performance-linked income potential</li>
               <li>Flexible working hours</li>
               <li>Respect & recognition in society</li>
             </ul>
-            <p className="mt-3 leading-relaxed text-on-surface-variant">Then this opportunity is for you.</p>
-            <p className="mt-1 leading-relaxed text-on-surface-variant">We don&apos;t just make agents...</p>
-            <p className="font-semibold text-primary">We create MDRT achievers</p>
+            <p className="mt-3 leading-relaxed text-on-surface-variant">This path may be a strong fit if you are ready to learn and work consistently.</p>
+            <p className="mt-1 leading-relaxed text-on-surface-variant">The focus is not only appointment.</p>
+            <p className="font-semibold text-primary">The focus is building professional advisors.</p>
           </article>
 
           <article className="rounded-3xl border border-outline-variant/35 bg-white p-7">
@@ -97,18 +97,18 @@ export default function MdrtPage() {
             <h2 className="font-headline text-2xl font-bold text-on-surface">MDRT Benefits You Can Achieve</h2>
             <ul className="mt-4 space-y-2 leading-relaxed text-on-surface-variant">
               <li className="flex items-start gap-2"><Globe2 className="mt-0.5 h-4 w-4 text-primary" />Global Recognition: Stand among the top performers worldwide</li>
-              <li className="flex items-start gap-2"><TrendingUp className="mt-0.5 h-4 w-4 text-primary" />High Income Growth: MDRT agents earn significantly more with structured systems</li>
+              <li className="flex items-start gap-2"><TrendingUp className="mt-0.5 h-4 w-4 text-primary" />Income Growth: MDRT-focused advisors work toward stronger performance through structure</li>
               <li className="flex items-start gap-2"><Users className="mt-0.5 h-4 w-4 text-primary" />International Networking: Connect with top advisors across the globe</li>
-              <li className="flex items-start gap-2"><Award className="mt-0.5 h-4 w-4 text-primary" />Proven Sales System: Learn tested strategies that actually work</li>
-              <li className="flex items-start gap-2"><GraduationCap className="mt-0.5 h-4 w-4 text-primary" />Continuous Learning: Training, mentorship & global exposure</li>
+              <li className="flex items-start gap-2"><Award className="mt-0.5 h-4 w-4 text-primary" />Practical Sales System: Learn tested habits for ethical advisory conversations</li>
+              <li className="flex items-start gap-2"><GraduationCap className="mt-0.5 h-4 w-4 text-primary" />Continuous Learning: Training, mentorship, and wider industry exposure</li>
             </ul>
           </article>
 
           <article className="rounded-3xl border border-outline-variant/35 bg-white p-7">
             <h2 className="font-headline text-2xl font-bold text-on-surface">Why Join Our Team?</h2>
             <ul className="mt-4 list-disc space-y-1 pl-5 leading-relaxed text-on-surface-variant">
-              <li>Strong Leadership: Led by an experienced mentor with decades of success</li>
-              <li>Proven MDRT Roadmap: Step-by-step guidance from beginner to MDRT</li>
+              <li>Strong Leadership: Led by an experienced mentor with decades in LIC</li>
+              <li>MDRT Roadmap: Step-by-step guidance for advisors who want to progress</li>
               <li>Personal Mentorship: We work closely with every agent</li>
               <li>Growth-Oriented Environment: Supportive team culture focused on success</li>
             </ul>
@@ -117,8 +117,8 @@ export default function MdrtPage() {
               <li>Students (18+)</li>
               <li>Working professionals</li>
               <li>Business owners</li>
-              <li>Housewives</li>
-              <li>Anyone with big dreams</li>
+              <li>Homemakers</li>
+              <li>People willing to learn, meet clients, and stay consistent</li>
             </ul>
             <p className="mt-3 leading-relaxed text-on-surface-variant">No prior experience required - we train you</p>
           </article>
@@ -128,21 +128,21 @@ export default function MdrtPage() {
       <section className="mt-10 px-6 pb-16 md:px-10">
         <div className="mx-auto max-w-7xl rounded-[2.5rem] border border-primary/20 bg-gradient-to-r from-primary/10 to-primary/5 p-8 md:p-10">
           <h2 className="font-headline text-3xl font-bold text-on-surface">Take the First Step Today</h2>
-          <p className="mt-2 text-on-surface-variant">Start your journey toward financial freedom & recognition</p>
+          <p className="mt-2 text-on-surface-variant">Start with a clear discussion about the work, expectations, and growth path.</p>
           <p className="mt-3 font-semibold text-on-surface">Call / WhatsApp: 8872364673</p>
           <p className="font-semibold text-on-surface">Join Now: TricityLifeInsurance</p>
 
           <div className="mt-6 rounded-2xl border border-primary/20 bg-white/80 p-5">
             <h3 className="font-headline text-xl font-bold text-on-surface">Final Call to Action</h3>
-            <p className="mt-2 leading-relaxed text-on-surface-variant">Don&apos;t just join LIC... Join a Mentor</p>
-            <p className="leading-relaxed text-on-surface-variant">Don&apos;t just earn... Build a Legacy</p>
-            <p className="leading-relaxed text-on-surface-variant">Don&apos;t just work... Become MDRT</p>
+            <p className="mt-2 leading-relaxed text-on-surface-variant">Start with the right mentor.</p>
+            <p className="leading-relaxed text-on-surface-variant">Build the habits behind long-term advisory growth.</p>
+            <p className="leading-relaxed text-on-surface-variant">Work toward MDRT with structure and review.</p>
 
             <button
               onClick={handleWhatsAppClick}
-              className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-[#25D366] px-6 py-3 font-headline text-lg font-bold text-white shadow-[0_4px_20px_rgba(37,211,102,0.3)] transition-all duration-200 hover:shadow-[0_6px_30px_rgba(37,211,102,0.45)]"
+              className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-[#167C3A] px-6 py-3 font-headline text-lg font-bold text-white shadow-[0_4px_18px_rgba(22,124,58,0.3)] transition-colors duration-200 hover:bg-[#126C32]"
             >
-              Contact on WhatsApp
+              Talk on WhatsApp
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>

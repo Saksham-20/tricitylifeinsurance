@@ -17,6 +17,7 @@ import {
   MapPin,
   Clock3,
   ListOrdered,
+  AlertCircle,
 } from 'lucide-react';
 
 type FormData = {
@@ -222,21 +223,27 @@ export default function ApplyPage() {
   };
 
   const inputClasses =
-    'w-full rounded-2xl border border-outline-variant/50 bg-white px-5 py-4 text-base outline-none transition-all duration-200 focus:border-primary/60 focus:bg-primary/[0.01] focus:shadow-[0_0_0_4px_rgba(2,83,205,0.08)]';
-  const labelClasses = 'mb-2 block text-sm font-semibold text-on-surface';
+    'w-full rounded-xl border border-outline-variant/50 bg-white px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-primary/60 focus:bg-primary/[0.01] focus:shadow-[0_0_0_3px_rgba(2,83,205,0.08)]';
+  const labelClasses = 'mb-2 block text-xs font-bold uppercase tracking-[0.08em] text-on-surface-variant';
+  const fieldError = (message: string) => (
+    <p className="mt-2 flex items-start gap-2 text-sm text-error">
+      <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+      <span>{message}</span>
+    </p>
+  );
 
   return (
     <main className="pb-28 lg:pb-0">
       <h1 className="sr-only">Apply for LIC career mentorship and callback</h1>
-      <section className="px-6 md:px-10">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)] lg:items-start">
-          <aside className="flex w-full flex-col gap-6 lg:sticky lg:top-[calc(var(--site-header-offset)+1rem)] lg:self-start">
-            <div className="rounded-[2rem] border border-primary/15 bg-gradient-to-br from-[#f8fbff] via-white to-[#ecf2ff] p-6 md:p-8 shadow-[0_20px_70px_rgba(2,83,205,0.08)]">
-              <p className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-gradient-to-r from-primary/10 to-primary/5 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+      <section className="px-6 pb-10 md:px-10 md:pb-14">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] xl:items-start">
+          <aside className="order-2 flex w-full flex-col gap-5 xl:sticky xl:top-[calc(var(--site-header-offset)+1rem)] xl:order-1 xl:self-start">
+            <div className="rounded-3xl border border-primary/15 bg-gradient-to-br from-[#f8fbff] via-white to-[#ecf2ff] p-5 shadow-[0_18px_54px_rgba(2,83,205,0.07)] md:p-6">
+              <p className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-gradient-to-r from-primary/10 to-primary/5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
                 <Rocket className="w-3.5 h-3.5" />
                 Your mentor
               </p>
-              <h2 className="mt-5 font-headline text-2xl font-extrabold leading-tight tracking-tight text-on-surface md:text-3xl">
+              <h2 className="mt-4 font-headline text-2xl font-extrabold leading-tight tracking-tight text-on-surface md:text-3xl">
                 Subhash Panjla
               </h2>
               <p className="mt-2 text-sm font-semibold text-primary">LIC Development Officer &amp; Lead Mentor</p>
@@ -244,7 +251,7 @@ export default function ApplyPage() {
                 Recruitment and onboarding support for LIC careers across Chandigarh Tricity—with clear guidance on documents, IRDAI training, and IC38.
               </p>
 
-              <div className="mt-6 rounded-2xl border border-primary/20 bg-white p-5 shadow-sm">
+              <div className="mt-5 rounded-2xl border border-primary/20 bg-white p-4 shadow-sm">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Contact</p>
                 <p className="mt-2 font-headline text-lg font-bold text-on-surface">Reach the mentor</p>
                 <p className="text-sm text-on-surface-variant">WhatsApp, phone, or submit the form on the right.</p>
@@ -253,7 +260,7 @@ export default function ApplyPage() {
                     href={whatsappHref}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#25D366] px-4 py-3 text-center font-headline text-sm font-bold text-white transition-all hover:brightness-105"
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-[#167C3A] px-4 py-3 text-center font-headline text-sm font-bold text-white transition-colors hover:bg-[#126C32]"
                   >
                     <MessageCircle className="h-4 w-4" />
                     WhatsApp
@@ -294,17 +301,17 @@ export default function ApplyPage() {
                 </p>
               </div>
 
-              <div className="mt-8 space-y-4">
+              <div className="mt-5 space-y-3">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">How we support you</p>
                 {mentorSupportSteps.map((item) => {
                   const IconComponent = item.icon;
                   return (
-                    <div key={item.title} className="flex gap-4 rounded-2xl border border-surface-variant/20 bg-white p-4">
-                      <div className="mt-0.5 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <div key={item.title} className="flex gap-3 rounded-2xl border border-surface-variant/20 bg-white p-3">
+                      <div className="mt-0.5 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <IconComponent className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="font-headline text-lg font-bold text-on-surface">{item.title}</p>
+                        <p className="font-headline text-base font-bold text-on-surface">{item.title}</p>
                         <p className="text-sm text-on-surface-variant">{item.copy}</p>
                       </div>
                     </div>
@@ -312,7 +319,7 @@ export default function ApplyPage() {
                 })}
               </div>
 
-              <div className="mt-8 rounded-2xl border border-primary/15 bg-white p-5">
+              <div className="mt-5 rounded-2xl border border-primary/15 bg-white p-4">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Application confidence</p>
                 <ul className="mt-3 space-y-2 text-sm text-on-surface-variant">
                   <li className="flex items-start gap-2">
@@ -334,8 +341,11 @@ export default function ApplyPage() {
 
           <section
             id="application-form"
-            className="rounded-[2rem] border border-outline-variant/30 bg-white p-6 shadow-elevation-2 md:p-8"
+            className="order-1 rounded-3xl border border-outline-variant/30 bg-white p-5 shadow-[0_18px_54px_rgba(15,24,41,0.08)] md:p-6 xl:order-2"
           >
+            <div aria-live="polite" aria-atomic="true" className="sr-only">
+              {submitStatus === 'success' ? 'Application received.' : submitStatus === 'error' ? 'Application could not be submitted.' : 'Application form ready.'}
+            </div>
             {submitStatus === 'success' ? (
               <div className="rounded-3xl border border-green-200 bg-green-50 p-8">
                 <div className="flex items-start gap-4">
@@ -343,7 +353,7 @@ export default function ApplyPage() {
                   <div>
                     <h2 className="font-headline text-3xl font-bold text-green-900">Application received</h2>
                     <p className="mt-2 text-green-800">
-                      Thank you. Your profile has been submitted successfully.
+                      Thank you. Your profile has been received.
                       {leadId ? ` Reference ID: ${leadId}` : ''}
                     </p>
                     <p className="mt-1 text-sm text-green-700">A team member should reach out within one business day.</p>
@@ -354,7 +364,7 @@ export default function ApplyPage() {
                   <button
                     type="button"
                     onClick={openWhatsApp}
-                    className="flex items-center gap-2 rounded-2xl bg-[#25D366] px-6 py-3 font-headline font-bold text-white"
+                    className="flex items-center gap-2 rounded-2xl bg-[#167C3A] px-6 py-3 font-headline font-bold text-white transition-colors hover:bg-[#126C32]"
                   >
                     Continue on WhatsApp
                     <ArrowRight className="h-4 w-4" />
@@ -375,16 +385,17 @@ export default function ApplyPage() {
               </div>
             ) : (
               <>
-                <h2 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">Pre-recruitment form</h2>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">Application</p>
+                <h2 className="mt-2 font-headline text-2xl font-extrabold tracking-tight text-on-surface md:text-3xl">Pre-recruitment form</h2>
                 <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">
                   This takes around two to three minutes. Required fields help us match the right role; optional fields help us call at a convenient time.
                 </p>
 
-                <form onSubmit={handleSubmit} className="mt-8 space-y-6" noValidate>
-                  <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-low p-4">
+                <form onSubmit={handleSubmit} className="mt-6 space-y-5" noValidate>
+                  <div className="rounded-xl border border-outline-variant/30 bg-surface-container-low p-3">
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Step 1: Personal basics</p>
                   </div>
-                  <div className="grid gap-6 md:grid-cols-2">
+                  <div className="grid gap-4 md:grid-cols-2">
                     <div>
                       <label htmlFor="name" className={labelClasses}>
                         Full name
@@ -397,8 +408,9 @@ export default function ApplyPage() {
                         onBlur={handleBlur}
                         className={inputClasses}
                         placeholder="Enter your full name"
+                        aria-invalid={Boolean(errors.name)}
                       />
-                      {errors.name ? <p className="mt-2 text-sm text-error">{errors.name}</p> : null}
+                      {errors.name ? fieldError(errors.name) : null}
                     </div>
 
                     <div>
@@ -414,10 +426,11 @@ export default function ApplyPage() {
                         className={inputClasses}
                         placeholder="10 digit mobile number"
                         inputMode="numeric"
+                        aria-invalid={Boolean(errors.phone)}
                       />
                       <p className="mt-2 text-xs text-on-surface-variant">{formData.phone.length}/10 digits</p>
                       <p className="mt-1 text-xs text-on-surface-variant">We use this only for recruitment updates.</p>
-                      {errors.phone ? <p className="mt-1 text-sm text-error">{errors.phone}</p> : null}
+                      {errors.phone ? fieldError(errors.phone) : null}
                     </div>
 
                     <div>
@@ -432,8 +445,9 @@ export default function ApplyPage() {
                         onBlur={handleBlur}
                         className={inputClasses}
                         placeholder="Your current city"
+                        aria-invalid={Boolean(errors.city)}
                       />
-                      {errors.city ? <p className="mt-2 text-sm text-error">{errors.city}</p> : null}
+                      {errors.city ? fieldError(errors.city) : null}
                     </div>
                     <div>
                       <label htmlFor="currentRole" className={labelClasses}>
@@ -451,10 +465,10 @@ export default function ApplyPage() {
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-low p-4">
+                  <div className="rounded-xl border border-outline-variant/30 bg-surface-container-low p-3">
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">Step 2: Qualification and role preference</p>
                   </div>
-                  <div className="grid gap-6 md:grid-cols-2">
+                  <div className="grid gap-4 md:grid-cols-2">
                     <div>
                       <label htmlFor="qualification" className={labelClasses}>
                         Qualification
@@ -466,6 +480,7 @@ export default function ApplyPage() {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         className={`${inputClasses} appearance-none`}
+                        aria-invalid={Boolean(errors.qualification)}
                       >
                         <option value="">Select qualification</option>
                         <option value="10th">10th Pass</option>
@@ -474,7 +489,7 @@ export default function ApplyPage() {
                         <option value="Post Graduate">Post Graduate</option>
                         <option value="Professional">Professional Degree</option>
                       </select>
-                      {errors.qualification ? <p className="mt-2 text-sm text-error">{errors.qualification}</p> : null}
+                      {errors.qualification ? fieldError(errors.qualification) : null}
                     </div>
 
                     <div className="md:col-span-2">
@@ -488,13 +503,14 @@ export default function ApplyPage() {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         className={`${inputClasses} appearance-none`}
+                        aria-invalid={Boolean(errors.interest)}
                       >
                         <option value="">Select your preferred role</option>
                         <option value="agent">LIC Agent</option>
                         <option value="bima-sakhi">Bima Sakhi</option>
                       </select>
                       <p className="mt-2 text-xs text-on-surface-variant">Not sure? Pick your best fit now. Final role can be discussed on call.</p>
-                      {errors.interest ? <p className="mt-2 text-sm text-error">{errors.interest}</p> : null}
+                      {errors.interest ? fieldError(errors.interest) : null}
                     </div>
                     <div className="md:col-span-2">
                       <label htmlFor="preferredTime" className={labelClasses}>
@@ -517,8 +533,11 @@ export default function ApplyPage() {
                   </div>
 
                   {submitStatus === 'error' ? (
-                    <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-                      We could not submit your response right now. Please retry or contact us directly on WhatsApp.
+                    <div aria-live="assertive" className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                      <div className="flex items-start gap-2">
+                        <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                        <span>We could not submit your response right now. Please retry or contact us directly on WhatsApp.</span>
+                      </div>
                     </div>
                   ) : null}
 
@@ -526,7 +545,7 @@ export default function ApplyPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting || !canSubmit}
-                      className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-[#1a6fff] px-10 py-5 font-headline text-lg font-bold text-white shadow-[0_6px_24px_rgba(2,83,205,0.35)] transition-all duration-200 hover:shadow-[0_8px_36px_rgba(2,83,205,0.5)] hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+                      className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-[#1a6fff] px-8 py-4 font-headline text-base font-bold text-white shadow-[0_6px_24px_rgba(2,83,205,0.28)] transition-all duration-200 hover:shadow-[0_8px_30px_rgba(2,83,205,0.42)] hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                     >
                       {isSubmitting ? 'Submitting...' : 'Submit application'}
                       {!isSubmitting && <ArrowRight className="h-4 w-4" />}

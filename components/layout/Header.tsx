@@ -23,7 +23,8 @@ export default function Header() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -96,21 +97,23 @@ export default function Header() {
             className="ml-1 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-[#1a6fff] px-5 py-2.5 font-headline text-sm font-bold text-white shadow-[0_10px_24px_rgba(2,83,205,0.28)] transition-all duration-200 hover:translate-y-[-1px] hover:shadow-[0_14px_30px_rgba(2,83,205,0.38)]"
           >
             <Sparkles className="h-4 w-4" />
-            Apply Now
+            Apply
           </Link>
         </nav>
 
         <button
           onClick={() => setOpen((prev) => !prev)}
           className="rounded-2xl border border-white/70 bg-white/65 p-2.5 text-on-surface shadow-[0_10px_24px_rgba(15,24,41,0.06)] transition-colors hover:bg-surface-container-low lg:hidden"
-          aria-label="Toggle menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {open ? (
-        <div className="border-t border-primary/10 bg-white/94 px-6 py-4 backdrop-blur-xl lg:hidden">
+        <div id="mobile-menu" className="border-t border-primary/10 bg-white/94 px-6 py-4 backdrop-blur-xl lg:hidden">
           <nav className="mx-auto flex max-w-xl flex-col gap-1">
             {navLinks.map((item) => (
               <Link
@@ -134,7 +137,7 @@ export default function Header() {
               className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-primary/20 bg-primary/5 px-5 py-3 text-center font-headline text-sm font-bold text-primary transition-colors hover:border-primary/40"
             >
               <MessageCircle className="w-4 h-4" />
-              WhatsApp Inquiry
+              Talk on WhatsApp
             </button>
             <Link
               href="/apply"
@@ -148,7 +151,7 @@ export default function Header() {
               }}
               className="mt-2 flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-primary to-[#1a6fff] px-5 py-3 font-headline text-sm font-bold text-white transition-all"
             >
-              Apply Now
+              Apply for Callback
             </Link>
           </nav>
         </div>

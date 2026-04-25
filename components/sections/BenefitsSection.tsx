@@ -16,7 +16,7 @@ const benefits = [
   {
     icon: CircleDollarSign,
     title: 'Unlimited Commission',
-    description: 'Earn based on your performance with no cap. Top advisors earn ₹50K–₹2L+ monthly.',
+    description: 'Earn through performance-linked commission, with higher potential as your client base and policy quality grow.',
     iconBg: 'bg-emerald-500/10',
     iconColor: 'text-emerald-600',
   },
@@ -37,7 +37,7 @@ const benefits = [
   {
     icon: Shield,
     title: 'Career Growth Tiers',
-    description: 'Advance from Agent to Distinguished Club, Branch Manager & beyond. Housing loans, bonuses, and premium benefits await.',
+    description: 'Progress toward club levels where housing loans, bonuses, and other benefits may apply under LIC rules.',
     iconBg: 'bg-amber-500/10',
     iconColor: 'text-amber-600',
   },
@@ -48,17 +48,17 @@ export default function BenefitsSection() {
   const containerVar = intensity === 'full' ? containerVariants : containerVariantsMobile;
 
   return (
-    <section className="py-16 md:py-24 px-6 md:px-10">
+    <section className="py-12 md:py-18 px-6 md:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
-        <FadeInOnScroll className="mb-10 md:mb-14">
+        <FadeInOnScroll className="mb-8 md:mb-10">
           <div className="text-center">
             <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-3">Why Join Us</p>
-            <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface mb-4">
+            <h2 className="font-headline text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-on-surface mb-4 text-center">
               What You Get
             </h2>
-            <p className="text-base md:text-lg text-on-surface-variant max-w-2xl mx-auto">
-              Everything you need to build a successful career in insurance — from training to long-term growth.
+            <p className="text-sm md:text-base text-on-surface-variant max-w-2xl mx-auto">
+              Practical support for learning the role, preparing for the exam, and building steady field confidence.
             </p>
           </div>
         </FadeInOnScroll>
@@ -69,7 +69,7 @@ export default function BenefitsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+          className="grid gap-5 md:grid-cols-2 lg:grid-cols-4"
         >
           {benefits.map((benefit) => {
             const IconComponent = benefit.icon;
@@ -77,7 +77,7 @@ export default function BenefitsSection() {
               <motion.div key={benefit.title} variants={itemVariants}>
                 <PremiumCard
                   hover
-                  className="h-full p-8 rounded-2xl bg-white transition-all duration-300 group cursor-default"
+                  className="h-full p-6 rounded-2xl bg-white transition-all duration-300 group cursor-default"
                 >
                   <div className="flex flex-col gap-4 h-full">
                     {/* Icon */}
@@ -86,7 +86,7 @@ export default function BenefitsSection() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="font-headline text-lg font-bold text-on-surface leading-tight">
+                    <h3 className="font-headline text-base font-bold text-on-surface leading-tight">
                       {benefit.title}
                     </h3>
 

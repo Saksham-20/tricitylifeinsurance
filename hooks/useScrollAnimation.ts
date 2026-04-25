@@ -11,6 +11,7 @@ export const useScrollAnimation = (
   
   const isInView = useInView(ref, {
     once: onceOnly,
+    amount: threshold,
   });
 
   return { ref, isInView };

@@ -30,7 +30,7 @@ const testimonials = [
     color: 'from-emerald-500 to-emerald-600',
   },
   {
-    quote: "The Bima Sakhi program gave me confidence and financial independence. The coaching is practical, supportive, and designed for our schedules.",
+    quote: "The Bima Sakhi path helped me understand the work at a pace that fit my schedule.",
     name: 'Sunita Devi',
     role: 'Bima Sakhi',
     tenure: '1.5 years with team',
@@ -107,7 +107,7 @@ export default function TestimonialsSection() {
                 <Sparkles className="h-6 w-6" />
               </div>
               <h3 className="font-headline text-2xl font-bold text-white md:text-4xl">
-                Ready to start your journey with a mentor-led team?
+                Ready to discuss your fit with the mentor team?
               </h3>
               <p className="mx-auto mb-8 mt-4 max-w-2xl text-base leading-relaxed text-white/68">
                 Apply today and take the first step toward a rewarding career in life insurance. We&apos;ll guide you through training, expectations, and the right pathway for your goals.
@@ -123,7 +123,7 @@ export default function TestimonialsSection() {
                   }
                 >
                   <PremiumButton variant="primary" size="lg" showArrow>
-                    Apply Now
+                    Apply for Callback
                   </PremiumButton>
                 </Link>
                 <Link
