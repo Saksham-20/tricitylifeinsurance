@@ -35,10 +35,10 @@ const milestones = [
 
 export default function TransformationJourney() {
   return (
-    <section className="overflow-hidden bg-[#f7f9fd] px-6 py-10 md:px-8 md:py-14">
+    <section className="overflow-hidden bg-[#f6f8fc] px-6 py-16 md:px-10 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
-          <p className="text-sm font-bold uppercase text-primary">Transformation journey</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-primary">Transformation journey</p>
           <h2 className="mt-4 font-headline text-2xl font-extrabold leading-[1.08] tracking-[0] text-on-surface md:text-4xl">
             Your first 180 days can have a rhythm.
           </h2>

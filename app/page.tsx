@@ -170,7 +170,7 @@ export default function Home() {
         <BimaSakhiHeroSection />
       </div>
 
-      <section className="relative isolate overflow-hidden bg-[#071730] px-6 text-white md:px-10 lg:min-h-[calc(100svh_-_var(--site-header-offset)_-_1rem)]">
+      <section className="relative isolate bg-[#071730] px-6 text-white md:px-10 lg:min-h-[calc(100svh_-_var(--site-header-offset)_-_1rem)]">
         <div className="landing-gradient-drift absolute inset-0 bg-[linear-gradient(125deg,#071730_0%,#0d2a55_42%,#f8fbff_120%)] opacity-95" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent_28%,rgba(0,0,0,0.18))]" />
 
@@ -262,7 +262,7 @@ export default function Home() {
           <h2 className="mt-6 font-headline text-3xl font-extrabold leading-[1.15] tracking-tight text-on-surface md:text-5xl">
             You are not confused because you are weak.
           </h2>
-          <p className="motion-safe:animate-fade-in-up mt-6 font-headline text-xl font-bold leading-[1.2] tracking-tight text-on-surface/80 md:text-3xl">
+          <p className="mt-6 font-headline text-xl font-bold leading-[1.2] tracking-tight text-on-surface/80 md:text-3xl">
             You are confused because no one has explained the path simply.
           </p>
           <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg">
@@ -452,14 +452,16 @@ export default function Home() {
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
             Just start the conversation.
           </p>
-          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-            <LandingCta href={whatsappHref} location="final_cta" ctaType="whatsapp" variant="whatsapp">
-              WhatsApp Subhash Panjla
-            </LandingCta>
-            <LandingCta href="#application-form" location="final_cta" ctaType="apply" variant="dark">
-              Apply for a Callback
-            </LandingCta>
-            <LandingCta href="tel:+918872364673" location="final_cta" ctaType="call" variant="dark" showArrow={false}>
+          <div className="mt-10 flex flex-col items-center gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <LandingCta href={whatsappHref} location="final_cta" ctaType="whatsapp" variant="whatsapp">
+                WhatsApp Subhash Panjla
+              </LandingCta>
+              <LandingCta href="#application-form" location="final_cta" ctaType="apply" variant="dark">
+                Apply for a Callback
+              </LandingCta>
+            </div>
+            <LandingCta href="tel:+918872364673" location="final_cta" ctaType="call" variant="dark" showArrow={false} className="text-sm opacity-70">
               <PhoneCall className="h-4 w-4" />
               Call Now
             </LandingCta>

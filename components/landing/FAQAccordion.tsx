@@ -16,10 +16,10 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="px-6 py-10 md:px-8 md:py-14">
+    <section className="bg-[#f6f8fc] px-6 py-16 md:px-10 md:py-24">
       <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.82fr_1.18fr]">
         <div>
-          <p className="text-xs font-bold uppercase text-primary">Questions</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-primary">Questions</p>
           <h2 className="mt-3 font-headline text-xl font-extrabold leading-[1.1] tracking-tight text-on-surface md:text-3xl">
             Clear answers before you decide.
           </h2>

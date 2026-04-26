@@ -75,7 +75,7 @@ export default function PersonaJourney({ personas, whatsappNumber }: PersonaJour
                     persona: persona.id,
                   });
                 }}
-                className={`min-h-[160px] w-[80vw] max-w-[310px] flex-shrink-0 snap-center overflow-hidden rounded-3xl border p-5 text-left transition-colors duration-200 sm:w-[320px] md:min-h-[170px] md:w-auto md:max-w-none md:min-w-0 md:p-6 ${
+                className={`min-h-[160px] w-[80vw] max-w-[310px] flex-shrink-0 snap-center overflow-hidden rounded-3xl border p-5 text-left transition-colors duration-200 sm:w-[320px] md:min-h-[200px] md:w-auto md:max-w-none md:min-w-0 md:p-6 ${
                   active
                     ? 'border-primary/[0.45] bg-white shadow-[0_24px_54px_rgba(2,83,205,0.14)]'
                     : 'border-white/70 bg-white/60 shadow-[0_14px_34px_rgba(15,24,41,0.05)] hover:border-primary/[0.22] hover:bg-white'
@@ -112,8 +112,8 @@ export default function PersonaJourney({ personas, whatsappNumber }: PersonaJour
                   From &ldquo;Can I do this?&rdquo; to &ldquo;I know my first step.&rdquo;
                 </h3>
               </div>
-              <div className="mt-8 rounded-[1.25rem] border border-white/[0.12] bg-white/[0.07] p-5 md:p-8">
-                <p className="text-xs font-medium text-white/70 md:text-sm">The doubt usually sounds like</p>
+              <div className="mt-8 rounded-[1.25rem] border border-white/[0.18] bg-white/[0.10] p-5 md:p-8">
+                <p className="text-xs font-semibold uppercase tracking-wider text-white/50">The doubt usually sounds like</p>
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={selectedPersona.doubt}
@@ -121,7 +121,7 @@ export default function PersonaJourney({ personas, whatsappNumber }: PersonaJour
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -14 }}
                     transition={{ duration: 0.24 }}
-                    className="mt-3 font-headline text-[1.1rem] font-bold leading-normal tracking-tight md:text-xl lg:text-2xl"
+                    className="mt-3 font-headline text-[1.1rem] font-extrabold leading-[1.2] tracking-tight text-white md:text-xl lg:text-2xl"
                   >
                     {selectedPersona.doubt}
                   </motion.p>
