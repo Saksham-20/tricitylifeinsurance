@@ -1,4 +1,7 @@
 import { CalendarCheck, ClipboardList, MessageSquareText, Sparkles } from 'lucide-react';
+import Section from '@/components/ui/Section';
+import SectionHeader from '@/components/ui/SectionHeader';
+import Reveal from '@/components/ui/Reveal';
 
 const milestones = [
   {
@@ -33,56 +36,49 @@ const milestones = [
   },
 ];
 
+/** 180-day timeline. Horizontal snap rail on mobile, connected 5-up row on desktop. */
 export default function TransformationJourney() {
   return (
-    <section className="overflow-hidden bg-[#f6f8fc] px-6 py-16 md:px-10 md:py-24">
-      <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="text-sm font-bold uppercase tracking-widest text-primary">Transformation journey</p>
-          <h2 className="mt-4 font-headline text-2xl font-extrabold leading-[1.08] tracking-[0] text-on-surface md:text-4xl">
-            Your first 180 days can have a rhythm.
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-on-surface-variant md:text-base">
-            The journey should not feel like a jump into the unknown. It should feel like one supported step after another.
-          </p>
-        </div>
+    <Section tone="canvas">
+      <div className="shell">
+        <SectionHeader
+          eyebrow="Transformation journey"
+          title="Your first 180 days can have a rhythm."
+          description="The journey should not feel like a jump into the unknown. It should feel like one supported step after another."
+        />
 
-        <div className="hide-scrollbar mt-8 overflow-x-auto pb-4">
-          <div className="flex min-w-max snap-x snap-mandatory gap-3 lg:grid lg:min-w-0 lg:grid-cols-5 lg:gap-4">
+        <div className="relative mt-12">
+          {/* Connector line sits behind the cards on desktop only. */}
+          <div className="absolute left-0 right-0 top-[3.25rem] hidden h-px bg-line lg:block" aria-hidden />
+          <ol className="snap-rail -mx-5 px-5 pb-2 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-5 lg:overflow-visible lg:px-0">
             {milestones.map((milestone, index) => {
               const Icon = milestone.icon;
-
               return (
-                <article
+                <Reveal
+                  as="li"
                   key={milestone.title}
-                  className="relative min-h-[250px] w-[78vw] max-w-[320px] snap-center rounded-3xl border border-primary/10 bg-white p-5 shadow-[0_12px_30px_rgba(15,24,41,0.055)] sm:w-[320px] lg:w-auto lg:max-w-none"
+                  index={index}
+                  className="w-[74vw] max-w-[19rem] flex-shrink-0 lg:w-auto lg:max-w-none"
                 >
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="rounded-full bg-primary/[0.08] px-4 py-2 text-sm font-bold text-primary">
-                      {milestone.day}
-                    </span>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#071730] text-white">
-                      <Icon className="h-5 w-5" />
-                    </span>
+                  <div className="card card-hover h-full p-6">
+                    <div className="flex items-center justify-between">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 text-primary">
+                        <Icon className="h-5 w-5" aria-hidden />
+                      </span>
+                      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-content-faint">
+                        Step {index + 1}
+                      </span>
+                    </div>
+                    <p className="mt-6 text-sm font-semibold text-primary">{milestone.day}</p>
+                    <h3 className="mt-1.5 font-headline text-lg font-semibold text-content">{milestone.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-content-muted">{milestone.copy}</p>
                   </div>
-                  <p className="mt-8 text-sm font-bold uppercase text-on-surface-variant">
-                    Step {index + 1}
-                  </p>
-                  <h3 className="mt-3 font-headline text-lg font-bold leading-tight tracking-[0] text-on-surface">
-                    {milestone.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-on-surface-variant">
-                    {milestone.copy}
-                  </p>
-                  {index < milestones.length - 1 ? (
-                    <div className="absolute -right-4 top-1/2 hidden h-px w-8 bg-primary/20 lg:block" />
-                  ) : null}
-                </article>
+                </Reveal>
               );
             })}
-          </div>
+          </ol>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

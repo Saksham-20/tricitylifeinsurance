@@ -2,158 +2,162 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Menu, MessageCircle, Phone, ShieldCheck, X } from 'lucide-react';
+import Button from '@/components/ui/Button';
 import { trackEvent } from '@/lib/analytics';
-import { Shield, MessageCircle, Menu, X, MapPin, Sparkles } from 'lucide-react';
+import { site, telLink, waLink } from '@/lib/site';
 
 const navLinks = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
   { label: 'Career in LIC', href: '/career-in-lic' },
   { label: 'Bima Sakhi', href: '/bima-sakhi' },
   { label: 'MDRT', href: '/mdrt' },
+  { label: 'About', href: '/about' },
 ];
+
+const whatsappHref = waLink('Hi, I would like to know more about LIC career opportunities.');
 
 export default function Header() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  // The sheet is "open for" a specific route, so navigating closes it without an effect.
+  const [openFor, setOpenFor] = useState<string | null>(null);
+  const open = openFor === pathname;
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleWhatsAppClick = () => {
-    trackEvent('cta_click', {
-      location: 'header',
-      cta_type: 'whatsapp',
-      page: pathname,
-    });
-    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
-    const message = encodeURIComponent('Hi, I would like to know more about LIC career opportunities.');
-    window.open(`https://wa.me/${whatsappNumber.replace('+', '')}?text=${message}`, '_blank');
-  };
+  // Lock the page behind the open sheet.
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-      scrolled
-        ? 'border-b border-primary/10 bg-white/92 backdrop-blur-xl shadow-[0_8px_40px_rgba(15,24,41,0.08)]'
-        : 'border-b border-transparent bg-white/72 backdrop-blur-lg'
-    }`}>
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5 md:px-10">
-        <Link href="/" className="group flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/70 bg-gradient-to-br from-primary to-primary-dim text-white shadow-[0_14px_24px_rgba(2,83,205,0.22)] transition-transform group-hover:scale-105">
-            <Shield className="h-5 w-5" fill="currentColor" />
-          </div>
-          <div>
-            <p className="font-headline text-lg font-extrabold tracking-tight text-on-surface md:text-xl">Subhash Panjla</p>
-            <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em] text-primary">
-              <span>LIC Career Mentor</span>
-              <span className="hidden h-1 w-1 rounded-full bg-primary/40 md:block" />
-              <span className="hidden items-center gap-1 text-on-surface-variant md:inline-flex">
-                <MapPin className="h-3 w-3" />
-                Chandigarh Tricity
-              </span>
-            </div>
-          </div>
+    <header
+      className={`fixed inset-x-0 top-0 z-nav transition-[background-color,border-color,box-shadow] duration-300 ease-out ${
+        scrolled ? 'border-b border-line bg-surface/90 shadow-sm backdrop-blur-xl' : 'border-b border-transparent bg-canvas/70 backdrop-blur-md'
+      }`}
+    >
+      <div className="shell flex h-[var(--site-header-offset)] items-center justify-between gap-4">
+        <Link href="/" className="group flex items-center gap-3" aria-label={`${site.mentor} — home`}>
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-primary-md transition-colors duration-200 group-hover:bg-primary-700 md:h-11 md:w-11">
+            <ShieldCheck className="h-5 w-5" aria-hidden />
+          </span>
+          <span className="min-w-0">
+            <span className="block truncate font-headline text-[0.98rem] font-semibold leading-tight tracking-tight text-content md:text-lg">
+              {site.mentor}
+            </span>
+            <span className="block truncate text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-primary md:text-[0.72rem]">
+              {site.tagline} · Tricity
+            </span>
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-2 rounded-full border border-white/80 bg-white/72 px-2 py-2 shadow-[0_12px_32px_rgba(15,24,41,0.06)] lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           {navLinks.map((item) => {
             const active = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`rounded-full px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${
-                  active ? 'bg-primary text-white shadow-[0_10px_18px_rgba(2,83,205,0.2)]' : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
+                aria-current={active ? 'page' : undefined}
+                className={`relative rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
+                  active ? 'text-primary' : 'text-content-muted hover:bg-primary-50 hover:text-content'
                 }`}
               >
                 {item.label}
+                {active ? (
+                  <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-primary" aria-hidden />
+                ) : null}
               </Link>
             );
           })}
-          <button
-            onClick={handleWhatsAppClick}
-            className="ml-1 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-4 py-2.5 font-headline text-sm font-bold text-primary transition-all duration-200 hover:border-primary/35 hover:bg-primary/10"
-          >
-            <MessageCircle className="h-4 w-4" />
-            WhatsApp
-          </button>
-          <Link
-            href="/apply"
-            onClick={() =>
-              trackEvent('cta_click', {
-                location: 'header',
-                cta_type: 'apply',
-                page: pathname,
-              })
-            }
-            className="ml-1 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-[#1a6fff] px-5 py-2.5 font-headline text-sm font-bold text-white shadow-[0_10px_24px_rgba(2,83,205,0.28)] transition-all duration-200 hover:translate-y-[-1px] hover:shadow-[0_14px_30px_rgba(2,83,205,0.38)]"
-          >
-            <Sparkles className="h-4 w-4" />
-            Apply
-          </Link>
         </nav>
 
-        <button
-          onClick={() => setOpen((prev) => !prev)}
-          className="rounded-2xl border border-white/70 bg-white/65 p-2.5 text-on-surface shadow-[0_10px_24px_rgba(15,24,41,0.06)] transition-colors hover:bg-surface-container-low lg:hidden"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-        >
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="hidden items-center gap-2 lg:flex">
+          <Button
+            href={whatsappHref}
+            variant="secondary"
+            size="sm"
+            icon={<MessageCircle className="h-4 w-4" />}
+            track={{ location: 'header', ctaType: 'whatsapp' }}
+          >
+            WhatsApp
+          </Button>
+          <Button href="/apply" size="sm" showArrow track={{ location: 'header', ctaType: 'apply' }}>
+            Apply
+          </Button>
+        </div>
+
+        <div className="flex items-center gap-2 lg:hidden">
+          <a
+            href={telLink}
+            onClick={() => trackEvent('cta_click', { location: 'header_mobile', cta_type: 'call' })}
+            aria-label={`Call ${site.phoneDisplay}`}
+            className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface text-primary transition-colors hover:bg-primary-50"
+          >
+            <Phone className="h-5 w-5" aria-hidden />
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpenFor((prev) => (prev === pathname ? null : pathname))}
+            className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface text-content transition-colors hover:bg-primary-50"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+          >
+            {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
+          </button>
+        </div>
       </div>
 
       {open ? (
-        <div id="mobile-menu" className="border-t border-primary/10 bg-white/94 px-6 py-4 backdrop-blur-xl lg:hidden">
-          <nav className="mx-auto flex max-w-xl flex-col gap-1">
-            {navLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className={`rounded-2xl px-4 py-3 text-sm font-semibold transition-colors ${
-                  pathname === item.href
-                    ? 'bg-primary text-white'
-                    : 'text-on-surface hover:bg-surface-container-low'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <button
-              onClick={() => {
-                handleWhatsAppClick();
-                setOpen(false);
-              }}
-              className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-primary/20 bg-primary/5 px-5 py-3 text-center font-headline text-sm font-bold text-primary transition-colors hover:border-primary/40"
-            >
-              <MessageCircle className="w-4 h-4" />
-              Talk on WhatsApp
-            </button>
-            <Link
-              href="/apply"
-              onClick={() => {
-                trackEvent('cta_click', {
-                  location: 'mobile_menu',
-                  cta_type: 'apply',
-                  page: pathname,
-                });
-                setOpen(false);
-              }}
-              className="mt-2 flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-primary to-[#1a6fff] px-5 py-3 font-headline text-sm font-bold text-white transition-all"
-            >
-              Apply for Callback
-            </Link>
+        <div
+          id="mobile-menu"
+          className="max-h-[calc(100svh-var(--site-header-offset))] overflow-y-auto border-t border-line bg-surface px-5 pb-8 pt-4 lg:hidden"
+        >
+          <nav aria-label="Mobile" className="flex flex-col gap-1">
+            {navLinks.map((item) => {
+              const active = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={`rounded-xl px-4 py-3.5 text-[0.95rem] font-medium transition-colors ${
+                    active ? 'bg-primary-50 text-primary' : 'text-content hover:bg-surface-sunken'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
+          <div className="mt-5 flex flex-col gap-3">
+            <Button href="/apply" fullWidth showArrow track={{ location: 'mobile_menu', ctaType: 'apply' }}>
+              Apply for a callback
+            </Button>
+            <Button
+              href={whatsappHref}
+              variant="secondary"
+              fullWidth
+              icon={<MessageCircle className="h-4 w-4" />}
+              track={{ location: 'mobile_menu', ctaType: 'whatsapp' }}
+            >
+              Talk on WhatsApp
+            </Button>
+          </div>
+          <p className="mt-5 text-center text-sm text-content-muted">
+            {site.hours} · <a href={telLink} className="font-semibold text-primary">{site.phoneDisplay}</a>
+          </p>
         </div>
       ) : null}
     </header>

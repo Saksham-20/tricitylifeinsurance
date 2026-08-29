@@ -1,16 +1,14 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import {
-  BriefcaseBusiness,
-  GraduationCap,
-  HandCoins,
-  Home,
-  MessageCircle,
-  Store,
-} from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { BriefcaseBusiness, GraduationCap, HandCoins, Home, MessageCircle, Store } from 'lucide-react';
+import Section from '@/components/ui/Section';
+import SectionHeader from '@/components/ui/SectionHeader';
+import Reveal from '@/components/ui/Reveal';
+import Button from '@/components/ui/Button';
 import { trackEvent } from '@/lib/analytics';
+import { waLink } from '@/lib/site';
 
 export type Persona = {
   id: 'professional' | 'homemaker' | 'graduate' | 'sales' | 'self-employed';
@@ -22,11 +20,6 @@ export type Persona = {
   ctaMessage: string;
 };
 
-type PersonaJourneyProps = {
-  personas: Persona[];
-  whatsappNumber: string;
-};
-
 const iconMap = {
   professional: BriefcaseBusiness,
   homemaker: Home,
@@ -35,161 +28,138 @@ const iconMap = {
   'self-employed': Store,
 };
 
-export default function PersonaJourney({ personas, whatsappNumber }: PersonaJourneyProps) {
+/**
+ * Self-qualification step: the visitor picks the situation closest to them and the
+ * panel below swaps to that path. Implemented as an ARIA tablist.
+ */
+export default function PersonaJourney({ personas, whatsappNumber }: { personas: Persona[]; whatsappNumber: string }) {
   const [selectedId, setSelectedId] = useState<Persona['id']>(personas[0].id);
+  const reduced = useReducedMotion();
 
-  const selectedPersona = useMemo(
-    () => personas.find((persona) => persona.id === selectedId) || personas[0],
+  const persona = useMemo(
+    () => personas.find((item) => item.id === selectedId) || personas[0],
     [personas, selectedId]
   );
 
-  const whatsappHref = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent(
-    selectedPersona.ctaMessage
-  )}`;
+  const whatsappHref = waLink(persona.ctaMessage, whatsappNumber);
+  const transition = { duration: reduced ? 0.15 : 0.3, ease: [0.22, 1, 0.36, 1] as const };
 
   return (
-    <section id="journey" className="relative scroll-mt-[var(--site-header-offset)]">
-      <div className="mx-auto max-w-7xl px-6 py-12 md:px-10 md:py-16">
-        <div className="max-w-3xl">
-          <p className="text-sm font-bold uppercase tracking-widest text-primary">Start where you are</p>
-          <h2 className="mt-4 font-headline text-2xl font-extrabold leading-[1.12] tracking-tight text-on-surface md:text-4xl lg:text-5xl">
-            Which starting point feels closest to you?
-          </h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg">
-            Not sure which role fits? Choose the closest option. The next scene changes to your path.
-          </p>
-        </div>
+    <Section id="journey" tone="surface">
+      <div className="shell">
+        <SectionHeader
+          eyebrow="Start where you are"
+          title="Which starting point feels closest to you?"
+          description="Not sure which role fits? Choose the closest option — the panel below changes to your path."
+        />
 
-        <div className="hide-scrollbar mt-10 flex max-w-full snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-6 md:grid md:grid-cols-5 md:gap-5 md:overflow-visible md:pb-0">
-          {personas.map((persona) => {
-            const Icon = iconMap[persona.id];
-            const active = persona.id === selectedId;
+        <div
+          role="tablist"
+          aria-label="Choose your starting point"
+          className="snap-rail -mx-5 mt-10 px-5 pb-2 md:mx-0 md:grid md:grid-cols-5 md:gap-4 md:overflow-visible md:px-0"
+        >
+          {personas.map((item, index) => {
+            const Icon = iconMap[item.id];
+            const active = item.id === selectedId;
 
             return (
-              <button
-                key={persona.id}
-                type="button"
-                onClick={() => {
-                  setSelectedId(persona.id);
-                  trackEvent('persona_select', {
-                    persona: persona.id,
-                  });
-                }}
-                className={`min-h-[160px] w-[80vw] max-w-[310px] flex-shrink-0 snap-center overflow-hidden rounded-3xl border p-5 text-left transition-colors duration-200 sm:w-[320px] md:min-h-[200px] md:w-auto md:max-w-none md:min-w-0 md:p-6 ${
-                  active
-                    ? 'border-primary/[0.45] bg-white shadow-[0_24px_54px_rgba(2,83,205,0.14)]'
-                    : 'border-white/70 bg-white/60 shadow-[0_14px_34px_rgba(15,24,41,0.05)] hover:border-primary/[0.22] hover:bg-white'
-                }`}
-              >
-                <span
-                  className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
-                    active ? 'bg-primary text-white shadow-md' : 'bg-primary/[0.08] text-primary'
+              <Reveal key={item.id} index={index} className="w-[72vw] max-w-[18rem] flex-shrink-0 md:w-auto md:max-w-none">
+                <button
+                  type="button"
+                  role="tab"
+                  id={`persona-tab-${item.id}`}
+                  aria-selected={active}
+                  aria-controls="persona-panel"
+                  onClick={() => {
+                    setSelectedId(item.id);
+                    trackEvent('persona_select', { persona: item.id });
+                  }}
+                  className={`h-full w-full cursor-pointer rounded-2xl border p-5 text-left transition-[border-color,background-color,box-shadow] duration-200 ease-out ${
+                    active
+                      ? 'border-primary bg-primary-50 shadow-md'
+                      : 'border-line bg-surface hover:border-primary-200 hover:bg-primary-50/50'
                   }`}
                 >
-                  <Icon className="h-6 w-6" />
-                </span>
-                <span className="mt-5 block font-headline text-lg font-bold tracking-tight text-on-surface md:text-base lg:text-lg">
-                  {persona.title}
-                </span>
-                <span className="mt-2 block text-wrap text-sm leading-relaxed text-on-surface-variant md:text-xs lg:text-sm">
-                  {persona.label}
-                </span>
-              </button>
+                  <span
+                    className={`flex h-11 w-11 items-center justify-center rounded-xl transition-colors duration-200 ${
+                      active ? 'bg-primary text-white' : 'bg-primary-50 text-primary'
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" aria-hidden />
+                  </span>
+                  <span className="mt-4 block font-headline text-base font-semibold text-content">{item.title}</span>
+                  <span className="mt-1.5 block text-sm leading-relaxed text-content-muted">{item.label}</span>
+                </button>
+              </Reveal>
             );
           })}
         </div>
-      </div>
 
-      <div className="mx-auto max-w-7xl px-6 pb-16 md:px-10 md:pb-24">
-        <div className="overflow-hidden rounded-[2rem] bg-[#071730] text-white shadow-[0_24px_56px_rgba(7,23,48,0.22)]">
-          <div className="grid lg:grid-cols-[0.88fr_1.12fr]">
-            <div className="relative flex flex-col justify-between border-b border-white/10 p-6 md:p-10 lg:border-b-0 lg:border-r lg:p-12">
-              <div>
-                <p className="text-[11px] font-bold uppercase tracking-widest text-sky-200 md:text-xs">
-                  Possibility shift
-                </p>
-                <h3 className="mt-5 font-headline text-[1.35rem] font-extrabold leading-snug tracking-tight md:text-3xl lg:text-4xl">
-                  From &ldquo;Can I do this?&rdquo; to &ldquo;I know my first step.&rdquo;
-                </h3>
-              </div>
-              <div className="mt-8 rounded-[1.25rem] border border-white/[0.18] bg-white/[0.10] p-5 md:p-8">
-                <p className="text-xs font-semibold uppercase tracking-wider text-white/50">The doubt usually sounds like</p>
+        <Reveal delay={0.05}>
+          <div
+            id="persona-panel"
+            role="tabpanel"
+            aria-labelledby={`persona-tab-${persona.id}`}
+            className="relative mt-8 overflow-hidden rounded-3xl bg-ink text-white shadow-xl"
+          >
+            <div className="pointer-events-none absolute inset-0 ink-grid" aria-hidden />
+            <div className="relative grid lg:grid-cols-[0.85fr_1.15fr]">
+              <div className="border-b border-white/10 p-7 md:p-10 lg:border-b-0 lg:border-r">
+                <p className="eyebrow-invert">The doubt usually sounds like</p>
                 <AnimatePresence mode="wait">
-                  <motion.p
-                    key={selectedPersona.doubt}
-                    initial={{ opacity: 0, y: 14 }}
+                  <motion.blockquote
+                    key={persona.doubt}
+                    initial={{ opacity: 0, y: reduced ? 0 : 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -14 }}
-                    transition={{ duration: 0.24 }}
-                    className="mt-3 font-headline text-[1.1rem] font-extrabold leading-[1.2] tracking-tight text-white md:text-xl lg:text-2xl"
+                    exit={{ opacity: 0, y: reduced ? 0 : -10 }}
+                    transition={transition}
+                    className="mt-5 font-headline text-h3 font-semibold leading-snug text-white"
                   >
-                    {selectedPersona.doubt}
-                  </motion.p>
+                    “{persona.doubt}”
+                  </motion.blockquote>
                 </AnimatePresence>
+                <p className="mt-8 border-t border-white/10 pt-6 text-sm leading-relaxed text-white/55">
+                  From “Can I do this?” to “I know my first step.”
+                </p>
               </div>
-            </div>
 
-            <div className="relative overflow-hidden p-6 md:p-10 lg:p-12">
-              <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(2,83,205,0.34),transparent_45%,rgba(255,255,255,0.08))]" />
-              <div className="relative z-10 flex h-full flex-col justify-between">
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-sky-100 md:text-xs">
-                    Your path becomes practical
-                  </p>
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={selectedPersona.id}
-                      initial={{ opacity: 0, x: 28 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -28 }}
-                      transition={{ duration: 0.28 }}
-                    >
-                      <h4 className="mt-5 max-w-2xl font-headline text-[1.25rem] font-extrabold leading-snug tracking-tight md:text-2xl lg:text-3xl">
-                        {selectedPersona.path}
-                      </h4>
-                      <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80 md:text-base">
-                        {selectedPersona.firstStep}
-                      </p>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
+              <div className="p-7 md:p-10">
+                <p className="eyebrow-invert">Your path becomes practical</p>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={persona.id}
+                    initial={{ opacity: 0, y: reduced ? 0 : 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: reduced ? 0 : -12 }}
+                    transition={transition}
+                  >
+                    <h3 className="mt-5 max-w-xl font-headline text-h3 font-semibold text-white">{persona.path}</h3>
+                    <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-white/70">{persona.firstStep}</p>
+                  </motion.div>
+                </AnimatePresence>
 
-                <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                  <a
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <Button
                     href={whatsappHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() =>
-                      trackEvent('cta_click', {
-                        location: 'persona_shift',
-                        cta_type: 'whatsapp',
-                        persona: selectedPersona.id,
-                      })
-                    }
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#167C3A] px-5 py-3 font-headline text-sm font-bold text-white transition-colors hover:bg-[#126C32]"
+                    variant="whatsapp"
+                    icon={<MessageCircle className="h-4 w-4" />}
+                    track={{ location: 'persona_shift', ctaType: 'whatsapp', persona: persona.id }}
                   >
-                    <MessageCircle className="h-4 w-4" />
-                    See My Path
-                  </a>
-                  <a
+                    See my path
+                  </Button>
+                  <Button
                     href="#income-planner"
-                    onClick={() =>
-                      trackEvent('cta_click', {
-                        location: 'persona_shift',
-                        cta_type: 'calculator',
-                        persona: selectedPersona.id,
-                      })
-                    }
-                    className="inline-flex min-h-12 items-center justify-center rounded-2xl border border-white/[0.18] bg-white/10 px-5 py-3 font-headline text-sm font-bold text-white transition-all hover:bg-white/[0.16]"
+                    variant="onInk"
+                    track={{ location: 'persona_shift', ctaType: 'calculator', persona: persona.id }}
                   >
-                    Calculate My Plan
-                  </a>
+                    Calculate my plan
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }

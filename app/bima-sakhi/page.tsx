@@ -1,8 +1,21 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { CheckCircle, MessageCircle, PhoneCall } from 'lucide-react';
-import PulseDot from '@/components/ui/PulseDot';
-import PremiumButton from '@/components/ui/PremiumButton';
+import type { Metadata } from 'next';
+import { CheckCircle2, MessageCircle, PhoneCall, Sparkles } from 'lucide-react';
+import Section from '@/components/ui/Section';
+import SectionHeader from '@/components/ui/SectionHeader';
+import Reveal from '@/components/ui/Reveal';
+import Button from '@/components/ui/Button';
+import Pill from '@/components/ui/Pill';
+import { JsonLd, breadcrumbSchema } from '@/components/seo/JsonLd';
+import { site, telLink, waLink } from '@/lib/site';
+
+export const metadata: Metadata = {
+  title: 'Bima Sakhi Yojana in Chandigarh Tricity — Eligibility & Stipend',
+  description:
+    'Bima Sakhi is a women-only LIC programme: ₹7,000/month stipend support in year 1, three years of structured training, and flexible hours. Check eligibility and apply in Chandigarh, Mohali, or Panchkula.',
+  alternates: { canonical: '/bima-sakhi' },
+  openGraph: { url: '/bima-sakhi', title: 'Bima Sakhi Yojana in Chandigarh Tricity — Eligibility & Stipend' },
+};
 
 const benefits = [
   'Flexible schedule with part-time and full-time options',
@@ -27,7 +40,26 @@ const eligibilityDetails = [
   'Self-employed individuals diversifying income',
 ];
 
-const photosRecognitionGallery: { src: string; alt: string }[] = [
+const programRequirements = [
+  {
+    title: 'Policy Coverage Target',
+    copy: 'Complete and cover minimum 24+ lives (policies) during the 3-year program to ensure quality and client relationships.',
+  },
+  {
+    title: 'Commission Milestone',
+    copy: 'Achieve minimum ₹48,000 in commission per calendar year to unlock full benefits and career advancement path.',
+  },
+  {
+    title: 'Training & Certification',
+    copy: 'Attend the required IRDAI-approved training and complete certification steps before advisory work begins.',
+  },
+  {
+    title: 'Program Duration',
+    copy: 'A 3-year structured program with stipend support. After completion, eligible candidates may continue on the full agent model.',
+  },
+];
+
+const photosRecognitionGallery = [
   { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-01.jpg', alt: 'Professional recognition moment' },
   { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-02.jpg', alt: 'Individual achievement recognition' },
   { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-03.jpg', alt: 'Community recognition celebration' },
@@ -38,236 +70,265 @@ const photosRecognitionGallery: { src: string; alt: string }[] = [
   { src: '/images/bima-sakhi/bima-sakhi-photos-recognition-09.jpg', alt: 'Success milestone celebration' },
 ];
 
-export default function BimaSakhiPage() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+918872364673';
-  const whatsappHref = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hi, I want details about the Bima Sakhi opportunity.')}`;
+const whatsappHref = waLink('Hi, I want details about the Bima Sakhi opportunity.');
 
+export default function BimaSakhiPage() {
   return (
-    <main className="pb-28 lg:pb-0">
-      {/* Hero Section */}
-      <section className="px-6 md:px-10">
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-[#0f234f] to-[#1b3674] p-5 text-white md:p-8">
-          <div className="pointer-events-none absolute top-0 right-0 h-80 w-80 rounded-full bg-white/5 blur-3xl" />
-          <div className="relative grid items-center gap-6 lg:grid-cols-2 lg:gap-8">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-amber-400">Bima Sakhi – Tricity</p>
-              <h1 className="mt-3 font-headline text-[1.9rem] font-extrabold leading-tight tracking-tight md:mt-4 md:text-5xl">
-                Build a respectful, flexible income path with Bima Sakhi.
-              </h1>
-              <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg">
-                Designed for women in Chandigarh Tricity who want clarity, support, and a steady introduction to LIC advisory work.
-              </p>
-              <div className="mt-5 flex flex-col gap-2 sm:flex-row md:gap-3">
-                <a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex">
-                  <PremiumButton variant="primary" showArrow attentionOnce attentionKey="bima-hero" icon={<MessageCircle className="h-4 w-4" />}>
-                    Talk on WhatsApp
-                  </PremiumButton>
-                </a>
-                <Link href="/apply" className="inline-flex">
-                  <PremiumButton variant="secondary" showArrow className="border-white/25 bg-white/10 text-white hover:border-white/35 hover:bg-white/15">
-                    Apply for Bima Sakhi
-                  </PremiumButton>
-                </Link>
-              </div>
+    <div className="flex flex-col">
+      <JsonLd data={breadcrumbSchema([{ name: 'Bima Sakhi', path: '/bima-sakhi' }])} />
+
+      {/* ---------- Hero ---------- */}
+      <section className="relative isolate overflow-hidden bg-ink text-white">
+        <div className="pointer-events-none absolute inset-0 ink-grid" aria-hidden />
+        <div className="pointer-events-none absolute -right-32 top-0 h-[28rem] w-[28rem] rounded-full bg-gold-500/15 blur-[120px]" aria-hidden />
+        <div className="shell relative grid gap-12 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+          <Reveal>
+            <Pill tone="invert" icon={<Sparkles className="h-3.5 w-3.5" aria-hidden />}>
+              Bima Sakhi – Tricity
+            </Pill>
+            <h1 className="mt-6 text-h1 font-semibold text-white">
+              Build a respectful, flexible income path with Bima Sakhi.
+            </h1>
+            <p className="mt-5 max-w-prose text-lead text-white/70">
+              Designed for women in Chandigarh Tricity who want clarity, support, and a steady introduction to LIC
+              advisory work.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Button
+                href={whatsappHref}
+                variant="whatsapp"
+                size="lg"
+                icon={<MessageCircle className="h-5 w-5" aria-hidden />}
+                track={{ location: 'bima_hero', ctaType: 'whatsapp' }}
+              >
+                Talk on WhatsApp
+              </Button>
+              <Button
+                href="/apply"
+                variant="onInk"
+                size="lg"
+                showArrow
+                track={{ location: 'bima_hero', ctaType: 'apply' }}
+              >
+                Apply for Bima Sakhi
+              </Button>
             </div>
-            <div className="relative aspect-[16/9] w-full min-h-[170px] overflow-hidden rounded-2xl border border-white/15 shadow-[0_20px_48px_rgba(0,0,0,0.32)] md:aspect-[4/3]">
+            <p className="mt-8 border-t border-white/10 pt-6 text-sm text-white/55">
+              Mentor support led by {site.mentor} · 28+ years LIC experience · Women career specialist
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/12 shadow-xl">
               <Image
                 src="/images/bima-sakhi/bima-sakhi-photos-recognition-14.png"
                 alt="Women-focused training and seminar session"
                 fill
+                priority
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 45vw"
-                priority
               />
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Why Choose Section */}
-      <section className="mt-10 px-6 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <article className="rounded-3xl border border-amber-200/50 bg-gradient-to-br from-amber-50/50 to-white p-5 md:p-7">
-            <div className="flex items-center gap-2">
-              <PulseDot />
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Women-Focused Opportunity</p>
-            </div>
-            <h2 className="mt-3 font-headline text-3xl font-bold text-on-surface">Why choose the Bima Sakhi program</h2>
-            <ul className="mt-5 grid gap-3 md:grid-cols-2">
-              {benefits.map((item) => (
-                <li key={item} className="flex gap-3 text-on-surface-variant">
-                  <CheckCircle className="w-5 h-5 mt-0.5 text-amber-500 flex-shrink-0" />
-                  <span className="text-sm">{item}</span>
-                </li>
+      {/* ---------- Why choose ---------- */}
+      <Section tone="surface">
+        <div className="shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
+          <SectionHeader
+            eyebrow="Women-focused opportunity"
+            title="Why choose the Bima Sakhi program"
+            description="Typical progression: Application → Training → Certification → Advisory Launch."
+          />
+          <div>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              {benefits.map((item, index) => (
+                <Reveal as="li" key={item} index={index}>
+                  <div className="card flex h-full gap-3 p-5">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-gold-600" aria-hidden />
+                    <span className="text-sm leading-relaxed text-content-muted">{item}</span>
+                  </div>
+                </Reveal>
               ))}
             </ul>
-
-            <div className="mt-6 rounded-2xl border border-amber-100 bg-white p-4">
-              <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Typical Progression</p>
-              <p className="mt-2 font-headline text-lg font-bold text-on-surface">Application → Training → Certification → Advisory Launch</p>
-            </div>
-
-            <div className="mt-4 rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50 to-white p-4 text-center">
-              <p className="text-xs font-bold uppercase tracking-widest text-amber-600 mb-2">Mentor Support</p>
-              <p className="font-headline text-sm font-bold text-on-surface">Led by Subhash Panjla</p>
-              <p className="text-xs text-on-surface-variant mt-1">28+ Years LIC Experience | Women Career Specialist</p>
-            </div>
-          </article>
+          </div>
         </div>
-      </section>
+      </Section>
 
-      <section className="mt-10 px-6 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-8">
-          {/* Program Compensation Section */}
-          <article className="rounded-3xl border border-amber-200/50 bg-gradient-to-br from-amber-50 to-white p-5 md:p-7">
-            <h2 className="font-headline text-3xl font-bold text-on-surface">Program Compensation & Support</h2>
-            <p className="mt-3 text-on-surface-variant max-w-2xl">
-              Receive stipend support for three years, along with commission and bonus opportunities, subject to LIC rules and performance conditions.
-            </p>
-            <div className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-              {compensationBreakdown.map((item) => (
-                <div key={item.year} className="rounded-xl border border-amber-100 bg-white p-4">
-                  <p className="text-sm font-bold uppercase tracking-widest text-amber-600">{item.year}</p>
-                  <p className="mt-2 font-headline text-2xl font-bold text-on-surface">{item.amount}</p>
-                  <p className="mt-2 text-xs text-on-surface-variant leading-relaxed">{item.description}</p>
+      {/* ---------- Compensation ---------- */}
+      <Section tone="gold">
+        <div className="shell">
+          <SectionHeader
+            eyebrow="Compensation"
+            title="Program Compensation &amp; Support"
+            description="Receive stipend support for three years, along with commission and bonus opportunities, subject to LIC rules and performance conditions."
+          />
+          <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {compensationBreakdown.map((item, index) => (
+              <Reveal as="li" key={item.year} index={index}>
+                <div className="card h-full border-gold-200 p-6">
+                  <p className="text-eyebrow font-semibold uppercase text-gold-700">{item.year}</p>
+                  <p className="mt-3 font-headline text-2xl font-semibold text-content">{item.amount}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-content-muted">{item.description}</p>
                 </div>
-              ))}
-            </div>
-            <div className="mt-5 rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 p-4">
-              <p className="text-sm font-bold uppercase tracking-widest text-amber-700 mb-2">Key Point</p>
-              <p className="text-on-surface font-semibold">Income potential can grow with consistent activity and policy quality. Actual earnings vary by performance.</p>
-            </div>
-          </article>
-
-          {/* Eligibility Section */}
-          <article className="rounded-3xl border border-blue-200/50 bg-gradient-to-br from-blue-50 to-white p-5 md:p-7">
-            <h2 className="font-headline text-3xl font-bold text-on-surface">Who Can Apply?</h2>
-            <p className="mt-3 text-on-surface-variant max-w-2xl">
-              The Bima Sakhi program is designed for women who want flexible work, practical guidance, and a respectful way to explore LIC advisory.
+              </Reveal>
+            ))}
+          </ol>
+          <Reveal delay={0.1}>
+            <p className="mt-8 rounded-2xl border border-gold-200 bg-surface p-5 text-sm leading-relaxed text-content">
+              <span className="font-semibold">Key point: </span>
+              Income potential can grow with consistent activity and policy quality. Actual earnings vary by
+              performance.
             </p>
-            <div className="mt-6 grid gap-3 md:grid-cols-2">
-              {eligibilityDetails.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-lg border border-blue-100 bg-white p-3">
-                  <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
-                  <span className="text-on-surface-variant text-sm">{item}</span>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* ---------- Eligibility ---------- */}
+      <Section tone="surface">
+        <div className="shell">
+          <SectionHeader
+            eyebrow="Eligibility"
+            title="Who Can Apply?"
+            description="The Bima Sakhi program is designed for women who want flexible work, practical guidance, and a respectful way to explore LIC advisory."
+          />
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {eligibilityDetails.map((item, index) => (
+              <Reveal as="li" key={item} index={index}>
+                <div className="card card-hover flex h-full gap-3 p-5">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" aria-hidden />
+                  <span className="text-sm leading-relaxed text-content-muted">{item}</span>
                 </div>
-              ))}
-            </div>
-            <div className="mt-5 rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-4">
-              <p className="text-sm font-bold uppercase tracking-widest text-blue-700 mb-2">Minimum Requirement</p>
-              <p className="text-on-surface font-semibold">Education: 10th pass or above. A willingness to learn and follow the process matters just as much.</p>
-            </div>
-          </article>
-
-          {/* Program Conditions Section */}
-          <article className="rounded-3xl border border-green-200/50 bg-gradient-to-br from-green-50 to-white p-5 md:p-7">
-            <h2 className="font-headline text-3xl font-bold text-on-surface">Program Requirements & Timeline</h2>
-            <p className="mt-3 text-on-surface-variant max-w-2xl">
-              To succeed in the Bima Sakhi program and transition to a full career, meet these key milestones.
+              </Reveal>
+            ))}
+          </ul>
+          <Reveal delay={0.1}>
+            <p className="mt-8 rounded-2xl border border-primary-100 bg-primary-50 p-5 text-sm leading-relaxed text-primary-900">
+              <span className="font-semibold">Minimum requirement: </span>
+              Education: 10th pass or above. A willingness to learn and follow the process matters just as much.
             </p>
-            <div className="mt-6 grid gap-3 md:grid-cols-2">
-              <div className="rounded-xl border border-green-100 bg-white p-4">
-                <p className="font-semibold text-on-surface flex items-center gap-2">
-                  <span className="text-lg font-bold text-green-600">1</span>
-                  Policy Coverage Target
-                </p>
-                <p className="text-sm text-on-surface-variant mt-2">Complete and cover minimum 24+ lives (policies) during the 3-year program to ensure quality and client relationships.</p>
-              </div>
-              <div className="rounded-xl border border-green-100 bg-white p-4">
-                <p className="font-semibold text-on-surface flex items-center gap-2">
-                  <span className="text-lg font-bold text-green-600">2</span>
-                  Commission Milestone
-                </p>
-                <p className="text-sm text-on-surface-variant mt-2">Achieve minimum ₹48,000 in commission per calendar year to unlock full benefits and career advancement path.</p>
-              </div>
-              <div className="rounded-xl border border-green-100 bg-white p-4">
-                <p className="font-semibold text-on-surface flex items-center gap-2">
-                  <span className="text-lg font-bold text-green-600">3</span>
-                  Training & Certification
-                </p>
-                <p className="text-sm text-on-surface-variant mt-2">Attend the required IRDAI-approved training and complete certification steps before advisory work begins.</p>
-              </div>
-              <div className="rounded-xl border border-green-100 bg-white p-4">
-                <p className="font-semibold text-on-surface flex items-center gap-2">
-                  <span className="text-lg font-bold text-green-600">4</span>
-                  Program Duration
-                </p>
-                <p className="text-sm text-on-surface-variant mt-2">A 3-year structured program with stipend support. After completion, eligible candidates may continue on the full agent model.</p>
-              </div>
-            </div>
-          </article>
-
+          </Reveal>
         </div>
-      </section>
+      </Section>
 
-      {/* CTA Section */}
-      <section className="mt-10 px-6 md:px-10">
-        <div className="mx-auto max-w-7xl rounded-3xl border border-amber-200/30 bg-gradient-to-br from-amber-50 to-white p-6 shadow-[0_16px_44px_rgba(0,0,0,0.04)] md:p-8">
-          <h3 className="font-headline text-3xl font-extrabold text-on-surface md:text-4xl">Take the first step with confidence.</h3>
-          <p className="mt-3 max-w-2xl text-on-surface-variant">
-            Share your details and receive a clear onboarding discussion tailored to your schedule and goals. The first step is simply to understand your fit.
-          </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link href="/apply" className="inline-flex">
-              <PremiumButton variant="primary" showArrow>
-                Apply as Bima Sakhi
-              </PremiumButton>
-            </Link>
-            <a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-primary/20 px-6 py-3 font-headline font-bold text-primary transition-all duration-200 hover:scale-[1.01]">
-              <MessageCircle className="h-4 w-4" />
-              Ask on WhatsApp
-            </a>
+      {/* ---------- Requirements & timeline ---------- */}
+      <Section tone="canvas">
+        <div className="shell">
+          <SectionHeader
+            eyebrow="Milestones"
+            title="Program Requirements &amp; Timeline"
+            description="To succeed in the Bima Sakhi program and transition to a full career, meet these key milestones."
+          />
+          <ol className="mt-12 grid gap-5 md:grid-cols-2">
+            {programRequirements.map((item, index) => (
+              <Reveal as="li" key={item.title} index={index}>
+                <div className="card card-hover flex h-full gap-5 p-6 md:p-7">
+                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-semibold text-white tabular-nums">
+                    {index + 1}
+                  </span>
+                  <div>
+                    <h3 className="font-headline text-lg font-semibold text-content">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-content-muted">{item.copy}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </Section>
+
+      {/* ---------- Apply CTA ---------- */}
+      <Section tone="surface">
+        <div className="shell">
+          <div className="rounded-3xl border border-gold-200 bg-gold-50 p-8 md:p-12">
+            <SectionHeader
+              title="Take the first step with confidence."
+              description="Share your details and receive a clear onboarding discussion tailored to your schedule and goals. The first step is simply to understand your fit."
+            />
+            <Reveal delay={0.08}>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button href="/apply" showArrow track={{ location: 'bima_cta', ctaType: 'apply' }}>
+                  Apply as Bima Sakhi
+                </Button>
+                <Button
+                  href={whatsappHref}
+                  variant="secondary"
+                  icon={<MessageCircle className="h-4 w-4" aria-hidden />}
+                  track={{ location: 'bima_cta', ctaType: 'whatsapp' }}
+                >
+                  Ask on WhatsApp
+                </Button>
+              </div>
+            </Reveal>
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* Photos & Recognition */}
-      <section className="mt-10 px-6 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <div className="rounded-3xl border border-amber-200/50 bg-gradient-to-br from-amber-50/50 to-white p-5 md:p-7">
-            <h2 className="font-headline text-3xl font-bold text-on-surface">Photos & Recognition</h2>
-            <p className="mt-3 text-on-surface-variant max-w-2xl">
-              Meet our community members as they reach milestones and celebrate their achievements in the Bima Sakhi program.
+      {/* ---------- Gallery ---------- */}
+      <Section tone="canvas">
+        <div className="shell">
+          <SectionHeader
+            eyebrow="Photos &amp; recognition"
+            title="Photos &amp; Recognition"
+            description="Meet our community members as they reach milestones and celebrate their achievements in the Bima Sakhi program."
+          />
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {photosRecognitionGallery.map((photo, index) => (
+              <Reveal as="li" key={photo.src} index={index}>
+                <div className="overflow-hidden rounded-2xl border border-line bg-surface">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={700}
+                    height={520}
+                    loading="lazy"
+                    className="h-44 w-full object-cover transition-transform duration-500 ease-out hover:scale-[1.04] motion-reduce:transform-none md:h-52"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </ul>
+          <Reveal delay={0.1}>
+            <p className="mt-8 rounded-2xl border border-gold-200 bg-gold-50 p-5 text-sm leading-relaxed text-content">
+              <span className="font-semibold">Real success stories: </span>
+              These are real event moments from our network. Individual outcomes vary based on activity, consistency,
+              and policy quality.
             </p>
-
-            <div className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-              {photosRecognitionGallery.map((photo) => (
-                <Image
-                  key={photo.src}
-                  src={photo.src}
-                  alt={photo.alt}
-                  width={700}
-                  height={520}
-                  className="h-40 w-full rounded-2xl object-cover md:h-48"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              ))}
-            </div>
-
-            <div className="mt-6 rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 p-4 text-center">
-              <p className="text-sm font-bold uppercase tracking-widest text-amber-700 mb-2">Real Success Stories</p>
-              <p className="text-on-surface font-semibold">These are real event moments from our network. Individual outcomes vary based on activity, consistency, and policy quality.</p>
-            </div>
-          </div>
+          </Reveal>
         </div>
-      </section>
+      </Section>
 
-      <section className="mt-10 px-6 pb-12 md:px-10">
-        <div className="mx-auto max-w-7xl rounded-3xl bg-[#0f1829] p-6 text-white md:p-8">
-          <h3 className="font-headline text-3xl font-bold">Need direct guidance before applying?</h3>
-          <p className="mt-3 text-white/75">Talk to our team and understand eligibility, timing, and how to begin comfortably.</p>
-          <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#167C3A] px-6 py-3 font-headline font-bold text-white transition-colors duration-200 hover:bg-[#126C32]">
-              <MessageCircle className="h-4 w-4" />
-              Talk on WhatsApp
-            </a>
-            <a href="tel:+918872364673" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/30 px-6 py-3 font-headline font-bold text-white transition-all duration-200 hover:scale-[1.01]">
-              <PhoneCall className="h-4 w-4" />
-              Call Support
-            </a>
-          </div>
+      {/* ---------- Direct guidance ---------- */}
+      <Section tone="ink" texture>
+        <div className="shell">
+          <Reveal className="max-w-2xl">
+            <h2 className="text-h2 font-semibold text-white">Need direct guidance before applying?</h2>
+            <p className="mt-4 text-lead text-white/70">
+              Talk to our team and understand eligibility, timing, and how to begin comfortably.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button
+                href={whatsappHref}
+                variant="whatsapp"
+                icon={<MessageCircle className="h-4 w-4" aria-hidden />}
+                track={{ location: 'bima_support', ctaType: 'whatsapp' }}
+              >
+                Talk on WhatsApp
+              </Button>
+              <Button
+                href={telLink}
+                variant="onInk"
+                icon={<PhoneCall className="h-4 w-4" aria-hidden />}
+                track={{ location: 'bima_support', ctaType: 'call' }}
+              >
+                Call support
+              </Button>
+            </div>
+          </Reveal>
         </div>
-      </section>
-    </main>
+      </Section>
+    </div>
   );
 }

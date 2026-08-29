@@ -4,63 +4,41 @@
 
 @layer base {
   :root {
-    --page-bg: #f6f8fc;
-    --page-bg-soft: #edf3ff;
-    --page-line: rgba(11, 34, 71, 0.06);
-    --panel-border: rgba(255, 255, 255, 0.84);
-    --panel-shadow: 0 24px 70px rgba(15, 24, 41, 0.07);
-    /* Fixed header (Header.tsx) — content + py; keeps pages from sitting under the bar */
-    --site-header-offset: 6rem;
+    /* Fixed header height (Header.tsx). Pages offset content by this. */
+    --site-header-offset: 4.75rem;
+    /* Mobile action bar height, so floating UI never overlaps it. */
+    --bottom-nav-offset: 4.5rem;
+    --shell-pad: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --site-header-offset: 5.25rem;
+      --shell-pad: 2.5rem;
+    }
+  }
+
+  * {
+    border-color: theme("colors.line.DEFAULT");
   }
 
   html {
-    scroll-padding-top: var(--site-header-offset);
+    scroll-padding-top: calc(var(--site-header-offset) + 1rem);
+    -webkit-text-size-adjust: 100%;
   }
 
   html,
   body {
-    @apply bg-background text-on-surface antialiased;
+    background-color: theme("colors.canvas");
+    color: theme("colors.content.DEFAULT");
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    font-family: var(--font-manrope), sans-serif;
-    line-height: 1.6;
-    background-color: var(--page-bg);
-    background-image:
-      radial-gradient(circle at 0% 0%, rgba(2, 83, 205, 0.12), transparent 30%),
-      radial-gradient(circle at 100% 20%, rgba(253, 212, 0, 0.16), transparent 24%),
-      linear-gradient(180deg, #fcfdff 0%, #f6f8fc 48%, #eef4ff 100%);
-    position: relative;
-  }
-
-  ::selection {
-    background-color: rgba(2, 83, 205, 0.15);
-  }
-
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(to right, transparent 0, transparent calc(100% - 1px), var(--page-line) calc(100% - 1px)),
-      linear-gradient(to bottom, transparent 0, transparent calc(100% - 1px), var(--page-line) calc(100% - 1px));
-    background-size: 128px 128px;
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent 86%);
-    pointer-events: none;
-    z-index: -2;
-  }
-
-  body::after {
-    content: "";
-    position: fixed;
-    inset: auto auto 12% -8%;
-    width: 32rem;
-    height: 32rem;
-    border-radius: 9999px;
-    background: radial-gradient(circle, rgba(92, 139, 255, 0.18) 0%, rgba(92, 139, 255, 0) 72%);
-    filter: blur(12px);
-    pointer-events: none;
-    z-index: -1;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
   }
 
   h1,
@@ -69,8 +47,19 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-sora), sans-serif;
-    letter-spacing: 0;
+    font-family: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    color: theme("colors.content.DEFAULT");
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: theme("colors.primary.100");
+    color: theme("colors.primary.900");
   }
 
   a,
@@ -82,8 +71,88 @@
   }
 
   :focus-visible {
-    outline: 3px solid rgba(2, 83, 205, 0.34);
+    outline: 2px solid theme("colors.primary.DEFAULT");
     outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Native form controls inherit the type system. */
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+}
+
+@layer components {
+  /* ---- Layout primitives -------------------------------------------- */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 md:px-10;
+  }
+
+  .shell-narrow {
+    @apply mx-auto w-full max-w-4xl px-5 md:px-10;
+  }
+
+  .section {
+    @apply py-14 md:py-20 lg:py-24;
+  }
+
+  .section-tight {
+    @apply py-10 md:py-14;
+  }
+
+  /* ---- Typography helpers ------------------------------------------- */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-eyebrow font-semibold uppercase text-primary;
+  }
+
+  .eyebrow-invert {
+    @apply inline-flex items-center gap-2 text-eyebrow font-semibold uppercase text-primary-300;
+  }
+
+  .lead {
+    @apply text-lead text-content-muted;
+  }
+
+  /* ---- Surfaces ------------------------------------------------------ */
+  .card {
+    @apply rounded-2xl border border-line bg-surface shadow-xs;
+  }
+
+  .card-hover {
+    @apply transition-[border-color,box-shadow,background-color] duration-200 ease-out hover:border-primary-200 hover:shadow-md;
+  }
+
+  .card-ink {
+    @apply rounded-2xl border border-white/10 bg-white/[0.055] backdrop-blur-sm;
+  }
+
+  .divider {
+    @apply h-px w-full bg-line;
+  }
+
+  /* Hairline separators between stacked rows without extra markup. */
+  .rule-list > * + * {
+    @apply border-t border-line pt-5 mt-5;
+  }
+
+  /* ---- Fine grid texture for dark "authority" bands ------------------ */
+  .ink-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+  }
+
+  .tint-grid {
+    background-image:
+      linear-gradient(to right, rgba(11, 76, 203, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 76, 203, 0.05) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(110% 80% at 50% 0%, #000 25%, transparent 80%);
   }
 }
 
@@ -92,104 +161,76 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
 
   .pb-safe {
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
   }
 
-  .section-shell {
-    @apply mx-auto max-w-7xl px-6 md:px-10;
+  .scroll-anchor {
+    scroll-margin-top: calc(var(--site-header-offset) + 1.5rem);
   }
 
-  .page-section {
-    @apply px-6 py-16 md:px-10 md:py-24;
+  /* Horizontal snap rails used by the persona / timeline scrollers. */
+  .snap-rail {
+    @apply hide-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain;
   }
 
-  .glass {
-    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-glass;
+  .snap-rail > * {
+    @apply snap-start;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+  .text-balance {
+    text-wrap: balance;
   }
+}
 
+/* Range input styling for the income planner. */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 5px solid theme("colors.primary.400");
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 5px solid theme("colors.primary.400");
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
-
-  .gradient-text {
-    background: linear-gradient(135deg, #0253cd 0%, #1a6fff 50%, #5c8bff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .surface-panel {
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.92) 100%),
-      linear-gradient(135deg, rgba(2, 83, 205, 0.05) 0%, rgba(255, 255, 255, 0.55) 100%);
-    border: 1px solid var(--panel-border);
-    box-shadow: var(--panel-shadow);
-    backdrop-filter: blur(18px);
-  }
-
-  .surface-panel-strong {
-    background:
-      linear-gradient(150deg, rgba(7, 21, 49, 0.98) 0%, rgba(20, 34, 67, 0.94) 48%, rgba(16, 28, 56, 0.96) 100%),
-      linear-gradient(135deg, rgba(92, 139, 255, 0.12) 0%, rgba(2, 83, 205, 0) 100%);
-    border: 1px solid rgba(137, 172, 255, 0.12);
-    box-shadow: 0 26px 70px rgba(6, 16, 32, 0.3);
-  }
-
-  .section-tag {
-    @apply inline-flex w-fit items-center gap-2 rounded-full border border-primary/10 bg-white/85 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.18em] text-primary;
-  }
-
-  .section-title {
-    @apply font-headline text-3xl font-extrabold leading-[1.05] text-on-surface md:text-4xl lg:text-5xl;
-  }
-
-  .section-copy {
-    @apply max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-[1.05rem];
-  }
-
-  .soft-divider {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-primary/20 to-transparent;
-  }
-
-  @keyframes landing-gradient-drift {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
-  .landing-gradient-drift {
-    background-size: 180% 180%;
-    animation: landing-gradient-drift 22s ease-in-out infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .landing-gradient-drift {
-      animation: none;
-    }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
